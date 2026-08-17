@@ -87,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'Drone4': document.getElementById('fleet-pos-drone4')
     };
 
+    const fleetCols = {
+        'Drone1': document.getElementById('fleet-col-drone1'),
+        'Drone2': document.getElementById('fleet-col-drone2'),
+        'Drone3': document.getElementById('fleet-col-drone3'),
+        'Drone4': document.getElementById('fleet-col-drone4')
+    };
+
     // Simulator Environment Selector Header
     const btnOpenSimModal = document.getElementById('btn-open-sim-modal');
     const simActiveDot = document.getElementById('sim-active-dot');
@@ -111,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hudToggleText = document.getElementById('hud-toggle-text');
     let isHudEnabled = true;
 
+    const collisionBadge = document.getElementById('collision-badge');
     const armedBadge = document.getElementById('armed-badge');
     const apiBadge = document.getElementById('api-badge');
 
@@ -873,13 +881,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Update 4-UAV Fleet Overview Cards
-                ['Drone1', 'Drone2', 'Drone3', 'Drone4'].forEach((dId, idx) => {
+                ['Drone1', 'Drone2', 'Drone3', 'Drone4'].forEach((dId) => {
                     if (allT[dId]) {
                         const td = allT[dId];
                         if (fleetStates[dId]) fleetStates[dId].textContent = td.landed_state || 'Landed';
                         if (fleetAlts[dId]) fleetAlts[dId].textContent = `${Math.abs(td.z || 0).toFixed(1)}m`;
                         if (fleetSpds[dId]) fleetSpds[dId].textContent = `${(td.speed || 0).toFixed(1)}m/s`;
                         if (fleetPoss[dId]) fleetPoss[dId].textContent = `(${td.x.toFixed(1)}, ${td.y.toFixed(1)}, ${td.z.toFixed(1)})`;
+                        if (fleetCols[dId]) {
+                            const colCount = td.collision_count || 0;
+                            const isCol = !!td.collided;
+                            fleetCols[dId].textContent = `충돌: ${colCount}`;
+                            fleetCols[dId].classList.toggle('collided', isCol || colCount > 0);
+                        }
                     }
                 });
 
@@ -919,7 +933,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     connStatusText.textContent = '가상 데모 모드 (맵 미실행)';
                 }
 
-                // Armed & API badges
+                // Collision, Armed & API badges
+                if (collisionBadge) {
+                    const colCount = t.collision_count || 0;
+                    const isCol = !!t.collided;
+                    collisionBadge.textContent = `COL: ${colCount}`;
+                    if (isCol || colCount > 0) {
+                        collisionBadge.className = 'badge-pill pill-critical';
+                    } else {
+                        collisionBadge.className = 'badge-pill pill-neutral';
+                    }
+                }
+
                 if (t.armed) {
                     armedBadge.className = 'badge-pill pill-active';
                     armedBadge.textContent = t.landed_state === 'Flying' ? 'FLYING (ARMED)' : 'ARMED';

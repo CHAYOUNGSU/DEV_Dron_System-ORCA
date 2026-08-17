@@ -15,6 +15,7 @@ import psutil
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+import orca
 
 # UTF-8 Console output
 if sys.platform == 'win32':
@@ -138,7 +139,7 @@ WORKER_RPC_TIMEOUT_SEC = 2
 is_switching_simulator = False
 
 # =========================================================================
-# 🦆 Following Mode (Duckling Chain Autopilot)
+# 🦆 Following Mode & ORCA Collision Avoidance Configuration
 # =========================================================================
 # Bravo follows Alpha, Charlie follows Bravo, Delta follows Charlie - each
 # drone targets its leader's position from FOLLOW_LAG_SECONDS ago (not a fixed
@@ -147,12 +148,18 @@ is_switching_simulator = False
 # organic "mother duck and ducklings" feel instead of a locked formation.
 FOLLOW_CHAIN = {"Drone2": "Drone1", "Drone3": "Drone2", "Drone4": "Drone3"}
 FOLLOW_HISTORY_DRONES = ["Drone1", "Drone2", "Drone3"]  # every drone that is someone's leader
-FOLLOW_TICK_INTERVAL_SEC = 0.3
+FOLLOW_TICK_INTERVAL_SEC = 0.1
 
 following_mode_enabled = False
 following_lag_seconds = 2.0
 following_velocity = 3.0
 position_history = {d_id: deque(maxlen=400) for d_id in FOLLOW_HISTORY_DRONES}  # (t, x, y, z), ~2min @ 25Hz worst case
+
+# ORCA Collision Avoidance Parameters
+ORCA_TIME_HORIZON_SEC = 2.0  # Forward lookahead time for velocity obstacles
+ORCA_AGENT_RADIUS_M = 1.5    # Safety collision radius per drone (Combined safety distance = 3.0m)
+ORCA_MAX_SPEED_MPS = 3.0     # Default maximum horizontal speed
+ORCA_MAX_VZ_MPS = 2.0        # Default maximum climb/descent speed
 
 def record_position_history(d_id, x, y, z):
     if d_id in position_history:
@@ -208,8 +215,14 @@ def create_empty_telemetry(drone_id):
         "lon": -122.140165,
         "alt": 0.0,
         "battery": 98.5,
-        "status_msg": "시뮬레이터 대기 중"
+        "status_msg": "시뮬레이터 대기 중",
+        "collided": False,
+        "collision_count": 0
     }
+
+drone_collision_counts = {"Drone1": 0, "Drone2": 0, "Drone3": 0, "Drone4": 0}
+drone_last_collided = {"Drone1": False, "Drone2": False, "Drone3": False, "Drone4": False}
+drone_last_col_timestamp = {"Drone1": 0, "Drone2": 0, "Drone3": 0, "Drone4": 0}
 
 latest_telemetries = {
     "Drone1": create_empty_telemetry("Drone1"),
@@ -548,6 +561,29 @@ def airsim_worker():
                         is_api = client_telemetry.isApiControlEnabled(vehicle_name=v_name)
                         landed_str = "Flying" if state.landed_state != airsim.LandedState.Landed else "Landed"
 
+                        # Collision Detection & Tracking (Track new collision timestamp changes while airborne)
+                        try:
+                            collision_info = client_telemetry.simGetCollisionInfo(vehicle_name=v_name)
+                            has_collided = bool(collision_info.has_collided)
+                            col_ts = collision_info.time_stamp
+                            last_ts = drone_last_col_timestamp.get(d_id, 0)
+
+                            # Only count new collisions when airborne and timestamp actually advanced
+                            if has_collided and landed_str == "Flying" and col_ts > last_ts and last_ts > 0:
+                                drone_collision_counts[d_id] = drone_collision_counts.get(d_id, 0) + 1
+
+                            drone_last_col_timestamp[d_id] = col_ts
+                            drone_last_collided[d_id] = has_collided and (landed_str == "Flying")
+                            col_cnt = drone_collision_counts.get(d_id, 0)
+                        except Exception:
+                            has_collided = False
+                            col_cnt = drone_collision_counts.get(d_id, 0)
+
+                        sp_offset = DRONES_CONFIG[d_id].get("spawn_offset", (0.0, 0.0, 0.0))
+                        world_x = pos.x_val + sp_offset[0]
+                        world_y = pos.y_val + sp_offset[1]
+                        world_z = pos.z_val + sp_offset[2]
+
                         latest_telemetries[d_id] = {
                             "drone_id": d_id,
                             "drone_name": DRONES_CONFIG[d_id]["name"],
@@ -562,9 +598,9 @@ def airsim_worker():
                             "armed": is_api or (landed_str == "Flying"),
                             "api_control": is_api,
                             "landed_state": landed_str,
-                            "x": round(pos.x_val, 2),
-                            "y": round(pos.y_val, 2),
-                            "z": round(pos.z_val, 2),
+                            "x": round(world_x, 2),
+                            "y": round(world_y, 2),
+                            "z": round(world_z, 2),
                             "vx": round(vel.x_val, 2),
                             "vy": round(vel.y_val, 2),
                             "vz": round(vel.z_val, 2),
@@ -574,11 +610,13 @@ def airsim_worker():
                             "yaw": round(np.degrees(yaw), 1),
                             "lat": 47.641468,
                             "lon": -122.140165,
-                            "alt": round(abs(pos.z_val), 2),
+                            "alt": round(abs(world_z), 2),
                             "battery": 98.0,
-                            "status_msg": f"{sim_icon} {sim_name} 비행 중 ({landed_str})"
+                            "status_msg": f"{sim_icon} {sim_name} 비행 중 ({landed_str})",
+                            "collided": has_collided and (landed_str == "Flying"),
+                            "collision_count": col_cnt
                         }
-                        record_position_history(d_id, pos.x_val, pos.y_val, pos.z_val)
+                        record_position_history(d_id, world_x, world_y, world_z)
 
                         # Camera image for active selected drone (PNG compressed feed)
                         if d_id == selected_drone_id:
@@ -689,9 +727,9 @@ def ensure_api_control(ctrl, vehicle_name: str):
     if not ctrl.isApiControlEnabled(vehicle_name=vehicle_name):
         ctrl.enableApiControl(True, vehicle_name=vehicle_name)
 
-# 🦆 Following Mode background autopilot: Bravo->Alpha, Charlie->Bravo, Delta->Charlie
+# 🦆 Following Mode background autopilot with ORCA collision avoidance
 def following_worker():
-    print("[FOLLOW] 🦆 Following Mode 워커 스레드 시작", flush=True)
+    print("[FOLLOW] 🦆 Following Mode 워커 스레드 시작 (ORCA 충돌 회피 활성화)", flush=True)
     while True:
         if not following_mode_enabled or not is_airsim_connected:
             time.sleep(0.2)
@@ -708,8 +746,75 @@ def following_worker():
                     state = ctrl.getMultirotorState(vehicle_name=f_vname)
                     if state.landed_state == airsim.LandedState.Landed:
                         continue  # this duckling hasn't taken off yet - don't force it into the air
+
+                    # 1. Current follower kinematics (World Coordinates)
+                    f_offset = DRONES_CONFIG[follower_id].get("spawn_offset", (0.0, 0.0, 0.0))
+                    f_pos = state.kinematics_estimated.position
+                    f_vel = state.kinematics_estimated.linear_velocity
+                    cur_pos = (f_pos.x_val + f_offset[0], f_pos.y_val + f_offset[1], f_pos.z_val + f_offset[2])
+                    cur_vel = (f_vel.x_val, f_vel.y_val, f_vel.z_val)
+
+                    # 2. Preferred velocity towards target position with distance slowdown
+                    dx = tx - cur_pos[0]
+                    dy = ty - cur_pos[1]
+                    dz = tz - cur_pos[2]
+                    dist_2d = math.sqrt(dx**2 + dy**2)
+
+                    max_spd = following_velocity or ORCA_MAX_SPEED_MPS
+
+                    # Safe headway distance to immediate leader (Proactive smooth deceleration)
+                    leader_t = latest_telemetries.get(leader_id)
+                    if leader_t and leader_t.get("connected", False):
+                        dist_to_leader = math.sqrt((leader_t["x"] - cur_pos[0])**2 + (leader_t["y"] - cur_pos[1])**2)
+                        # Proactive deceleration buffer: 7.0m down to 4.5m
+                        if dist_to_leader < 7.0:
+                            headway_ratio = max(0.0, (dist_to_leader - 4.5) / 2.5)
+                            max_spd = max_spd * headway_ratio
+
+                    if dist_2d > 0.1 and max_spd > 0.05:
+                        speed_2d = min(max_spd, dist_2d / max(0.1, FOLLOW_TICK_INTERVAL_SEC))
+                        pref_vx = (dx / dist_2d) * speed_2d
+                        pref_vy = (dy / dist_2d) * speed_2d
+                    else:
+                        pref_vx = 0.0
+                        pref_vy = 0.0
+
+                    pref_vz = (dz / max(0.1, FOLLOW_TICK_INTERVAL_SEC))
+
+                    # 3. Neighbors list (including Alpha and all other drones)
+                    neighbors = []
+                    for other_id in DRONES_CONFIG.keys():
+                        if other_id == follower_id:
+                            continue
+                        t_other = latest_telemetries.get(other_id)
+                        if t_other and t_other.get("connected", False):
+                            # Alpha is human/manual leader obstacle (weight 1.0), followers reciprocal 50:50 (weight 0.5)
+                            w = 1.0 if other_id == "Drone1" else 0.5
+                            neighbors.append({
+                                "pos": (t_other["x"], t_other["y"], t_other["z"]),
+                                "vel": (t_other["vx"], t_other["vy"], t_other["vz"]),
+                                "radius": ORCA_AGENT_RADIUS_M,
+                                "weight": w
+                            })
+
+                    # 4. Compute ORCA safe velocity (2D XY + clipped Z)
+                    safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
+                        agent_pos=cur_pos,
+                        agent_vel=cur_vel,
+                        preferred_vel=(pref_vx, pref_vy, pref_vz),
+                        neighbors=neighbors,
+                        agent_radius=ORCA_AGENT_RADIUS_M,
+                        time_horizon=ORCA_TIME_HORIZON_SEC,
+                        max_speed=max_spd,
+                        max_vz=ORCA_MAX_VZ_MPS,
+                        time_step=FOLLOW_TICK_INTERVAL_SEC
+                    )
+
+                    # 5. Issue velocity command (ensure API control first, duration slightly longer than tick)
                     ensure_api_control(ctrl, f_vname)
-                    ctrl.moveToPositionAsync(tx, ty, tz, following_velocity, vehicle_name=f_vname)
+                    duration = FOLLOW_TICK_INTERVAL_SEC * 1.5
+                    ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, duration, vehicle_name=f_vname)
+
         except Exception as e:
             print(f"[FOLLOW] ⚠️ 오류: {type(e).__name__}: {e}", flush=True)
         time.sleep(FOLLOW_TICK_INTERVAL_SEC)

@@ -383,6 +383,24 @@ body.dark-theme {
     font-size: 10px;
     color: var(--text-dim);
     font-family: var(--font-mono);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fleet-col-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+}
+
+.fleet-col-badge.collided {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--accent-critical-strong);
+    border: 1px solid var(--accent-critical);
+    font-weight: 700;
 }
 
 /* ==========================================================================
@@ -510,6 +528,18 @@ body.dark-theme {
     background: rgba(239, 68, 68, 0.12);
     color: var(--accent-critical-strong);
     border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pill-critical {
+    background: rgba(239, 68, 68, 0.25);
+    color: var(--accent-critical-strong);
+    border: 1px solid var(--accent-critical);
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1.0; }
 }
 
 /* ==========================================================================
