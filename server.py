@@ -151,6 +151,7 @@ FOLLOW_HISTORY_DRONES = ["Drone1", "Drone2", "Drone3"]  # every drone that is so
 FOLLOW_TICK_INTERVAL_SEC = 0.1
 
 following_mode_enabled = False
+formation_assemble_in_progress = False
 following_lag_seconds = 2.0
 following_velocity = 3.0
 position_history = {d_id: deque(maxlen=400) for d_id in FOLLOW_HISTORY_DRONES}  # (t, x, y, z), ~2min @ 25Hz worst case
@@ -166,10 +167,8 @@ def record_position_history(d_id, x, y, z):
         position_history[d_id].append((time.time(), x, y, z))
 
 def is_follower_locked(drone_id: str) -> bool:
-    """True while Following Mode is autopiloting this drone - it should not
-    also be fighting a manual joystick/takeoff/rotate/RTH command at the same
-    time. Landing is intentionally exempt (always allowed as a safety override)."""
-    return following_mode_enabled and drone_id in FOLLOW_CHAIN
+    """True while Following Mode or Formation Assemble is autopiloting this drone."""
+    return (following_mode_enabled or formation_assemble_in_progress) and drone_id in FOLLOW_CHAIN
 
 def get_lagged_leader_position(leader_id, lag_seconds):
     """Most recent recorded position of leader_id at least lag_seconds old (i.e. 'where the leader was')."""
@@ -731,8 +730,8 @@ def ensure_api_control(ctrl, vehicle_name: str):
 def following_worker():
     print("[FOLLOW] 🦆 Following Mode 워커 스레드 시작 (ORCA 충돌 회피 활성화)", flush=True)
     while True:
-        if not following_mode_enabled or not is_airsim_connected:
-            time.sleep(0.2)
+        if not following_mode_enabled or not is_airsim_connected or formation_assemble_in_progress:
+            time.sleep(0.1)
             continue
         try:
             with control_lock:
@@ -906,100 +905,177 @@ def select_drone(req: SelectDroneRequest):
 def _do_formation_assemble(spacing: float = 12.0, velocity: float = 4.0):
     """
     Alpha (Drone 1) calls all wingmen (Drone 2 Bravo, Drone 3 Charlie, Drone 4 Delta).
-    1. Check Alpha leader flight state:
-       - If Alpha is airborne (z < -1.0 or landed_state == Flying), strictly preserve Alpha's current (X, Y, Z).
-       - If Alpha is on ground, take off Alpha safely to 5m altitude.
-    2. Command Alpha to lock position and maintain solid hover.
-    3. All wingmen on ground take off in parallel and climb to Alpha's altitude at their own spot (동일고도 유지).
-    4. Wingmen fly smoothly to their dedicated trail slots behind Alpha with 3x expanded spacing (12m interval).
+    ORCA-based collision-free velocity control in synchronized World Coordinate System.
     """
-    with control_lock:
-        ctrl = get_control_client()
-        ensure_all_drones_spawned(ctrl)
+    global formation_assemble_in_progress, following_mode_enabled
+    formation_assemble_in_progress = True
+    following_mode_enabled = False  # Disable following mode to prevent dual-command conflicts
 
-        alpha_vname = get_real_vehicle_name(ctrl, "Drone1")
-        ensure_api_control(ctrl, alpha_vname)
-        ctrl.armDisarm(True, vehicle_name=alpha_vname)
+    try:
+        with control_lock:
+            ctrl = get_control_client()
+            ensure_all_drones_spawned(ctrl)
 
-        # 1. Check Alpha leader state
-        s_alpha = ctrl.getMultirotorState(vehicle_name=alpha_vname)
-        cur_z = s_alpha.kinematics_estimated.position.z_val
-        cur_x = s_alpha.kinematics_estimated.position.x_val
-        cur_y = s_alpha.kinematics_estimated.position.y_val
-        _, _, alpha_yaw = airsim.to_eularian_angles(s_alpha.kinematics_estimated.orientation)
+            alpha_vname = get_real_vehicle_name(ctrl, "Drone1")
+            ensure_api_control(ctrl, alpha_vname)
+            ctrl.armDisarm(True, vehicle_name=alpha_vname)
 
-        is_alpha_on_ground = (s_alpha.landed_state == airsim.LandedState.Landed) or (cur_z > -1.0)
-        print(f"[FORMATION] 🔍 Alpha 상태 판정: landed_state={s_alpha.landed_state} (Landed={airsim.LandedState.Landed}) | cur_z={cur_z:.2f} | is_alpha_on_ground={is_alpha_on_ground}", flush=True)
-
-        if is_alpha_on_ground:
-            print("[FORMATION] 🛫 Alpha 지상으로 판정 -> takeoffAsync() 호출", flush=True)
-            ctrl.takeoffAsync(vehicle_name=alpha_vname).join()
-            target_z = -5.0
-            ctrl.moveToPositionAsync(cur_x, cur_y, target_z, 2.0, vehicle_name=alpha_vname).join()
+            # 1. Check Alpha leader state
             s_alpha = ctrl.getMultirotorState(vehicle_name=alpha_vname)
+            cur_z = s_alpha.kinematics_estimated.position.z_val
+            cur_x = s_alpha.kinematics_estimated.position.x_val
+            cur_y = s_alpha.kinematics_estimated.position.y_val
+            _, _, alpha_yaw = airsim.to_eularian_angles(s_alpha.kinematics_estimated.orientation)
+
+            is_alpha_on_ground = (s_alpha.landed_state == airsim.LandedState.Landed) or (cur_z > -1.0)
+            print(f"[FORMATION] 🔍 Alpha 상태 판정: landed_state={s_alpha.landed_state} | cur_z={cur_z:.2f} | is_alpha_on_ground={is_alpha_on_ground}", flush=True)
+
+            if is_alpha_on_ground:
+                print("[FORMATION] 🛫 Alpha 지상으로 판정 -> takeoffAsync() 호출", flush=True)
+                ctrl.takeoffAsync(vehicle_name=alpha_vname).join()
+                target_z = -5.0
+                ctrl.moveToPositionAsync(cur_x, cur_y, target_z, 2.0, vehicle_name=alpha_vname).join()
+                s_alpha = ctrl.getMultirotorState(vehicle_name=alpha_vname)
+            else:
+                target_z = cur_z
+                print(f"[FORMATION] ✅ Alpha 비행 중으로 판정 -> 현재 위치/고도 유지 (target_z={target_z:.2f})", flush=True)
+
+            # 2. Lock Alpha in autonomous hover at its position
+            print(f"[FORMATION] 🔒 Alpha 호버 고정 명령: hoverAsync() (현재 위치 유지, target_z={target_z:.2f})", flush=True)
+            ctrl.hoverAsync(vehicle_name=alpha_vname)
+
+            # 3. Take off all landed wingmen in parallel
+            wingmen_ids = ["Drone2", "Drone3", "Drone4"]
+            takeoff_futures = []
+            for w_id in wingmen_ids:
+                w_vname = get_real_vehicle_name(ctrl, w_id)
+                ensure_api_control(ctrl, w_vname)
+                ctrl.armDisarm(True, vehicle_name=w_vname)
+
+                s_w = ctrl.getMultirotorState(vehicle_name=w_vname)
+                w_z = s_w.kinematics_estimated.position.z_val
+                if (s_w.landed_state == airsim.LandedState.Landed) or (w_z > -1.0):
+                    takeoff_futures.append(ctrl.takeoffAsync(vehicle_name=w_vname))
+
+            for tf in takeoff_futures:
+                try:
+                    tf.join()
+                except Exception:
+                    pass
+
+            # 4. Compute target trail slots in World Coordinate System
             alpha_pos = s_alpha.kinematics_estimated.position
-        else:
-            # Alpha is already airborne: Preserve exact current altitude and position!
-            target_z = cur_z
-            alpha_pos = s_alpha.kinematics_estimated.position
-            print(f"[FORMATION] ✅ Alpha 비행 중으로 판정 -> 현재 위치/고도 유지 (target_z={target_z:.2f})", flush=True)
+            alpha_wx = alpha_pos.x_val
+            alpha_wy = alpha_pos.y_val
 
-        # 2. Lock Alpha in autonomous hover at its position. hoverAsync() (AirSim's
-        # dedicated "hold current position/altitude" command) instead of
-        # moveToPositionAsync(current_x, current_y, current_z, ...): the real fix
-        # for the ground-dive was guarding the redundant enableApiControl() call
-        # above via ensure_api_control() (see its docstring), but hoverAsync is
-        # still the more correct way to express "just hold position" than
-        # commanding a move-to-position controller to a ~0-distance target.
-        print(f"[FORMATION] 🔒 Alpha 호버 고정 명령: hoverAsync() (현재 위치 유지, target_z={target_z:.2f})", flush=True)
-        alpha_yaw_mode = airsim.YawMode(is_rate=False, yaw_or_rate=math.degrees(alpha_yaw))
-        ctrl.hoverAsync(vehicle_name=alpha_vname)
+            back_dir_x = -math.cos(alpha_yaw)
+            back_dir_y = -math.sin(alpha_yaw)
 
-        # 3. Take off all landed wingmen
-        wingmen_ids = ["Drone2", "Drone3", "Drone4"]
-        need_takeoff = False
-        for w_id in wingmen_ids:
-            w_vname = get_real_vehicle_name(ctrl, w_id)
-            ensure_api_control(ctrl, w_vname)
-            ctrl.armDisarm(True, vehicle_name=w_vname)
+            target_slots = {}
+            for i, w_id in enumerate(wingmen_ids, start=1):
+                slot_dist = i * spacing
+                target_slots[w_id] = (
+                    alpha_wx + (back_dir_x * slot_dist),
+                    alpha_wy + (back_dir_y * slot_dist),
+                    target_z
+                )
+                print(f"[FORMATION] 🎯 {w_id} 트레일 슬롯(월드): ({target_slots[w_id][0]:.2f}, {target_slots[w_id][1]:.2f}, {target_slots[w_id][2]:.2f})", flush=True)
 
-            s_w = ctrl.getMultirotorState(vehicle_name=w_vname)
-            w_z = s_w.kinematics_estimated.position.z_val
-            if (s_w.landed_state == airsim.LandedState.Landed) or (w_z > -1.0):
-                ctrl.takeoffAsync(vehicle_name=w_vname)
-                need_takeoff = True
+            # 5. Integrated 10Hz ORCA Velocity Loop towards target slots
+            tick_dt = FOLLOW_TICK_INTERVAL_SEC
+            max_loop_seconds = 20.0
+            t_start = time.time()
 
-        if need_takeoff:
-            time.sleep(2.5)
+            while time.time() - t_start < max_loop_seconds:
+                all_reached = True
 
-        # 4. Stage 1: Climb each wingman vertically to target_z at its own current spot (동일고도 유지)
-        for w_id in wingmen_ids:
-            w_vname = get_real_vehicle_name(ctrl, w_id)
-            s_w = ctrl.getMultirotorState(vehicle_name=w_vname)
-            wx = s_w.kinematics_estimated.position.x_val
-            wy = s_w.kinematics_estimated.position.y_val
-            ctrl.moveToPositionAsync(wx, wy, target_z, 3.0, yaw_mode=alpha_yaw_mode, vehicle_name=w_vname)
+                for w_id in wingmen_ids:
+                    w_vname = get_real_vehicle_name(ctrl, w_id)
+                    s_w = ctrl.getMultirotorState(vehicle_name=w_vname)
+                    p_w = s_w.kinematics_estimated.position
+                    v_w = s_w.kinematics_estimated.linear_velocity
 
-        time.sleep(2.0)
+                    w_off = DRONES_CONFIG[w_id].get("spawn_offset", (0.0, 0.0, 0.0))
+                    cur_wpos = (p_w.x_val + w_off[0], p_w.y_val + w_off[1], p_w.z_val + w_off[2])
+                    cur_wvel = (v_w.x_val, v_w.y_val, v_w.z_val)
 
-        # 5. Stage 2: Transit wingmen to trailing formation slots behind Alpha (3x expanded X, Y spacing)
-        back_dir_x = -math.cos(alpha_yaw)
-        back_dir_y = -math.sin(alpha_yaw)
+                    tx, ty, tz = target_slots[w_id]
+                    dx = tx - cur_wpos[0]
+                    dy = ty - cur_wpos[1]
+                    dz = tz - cur_wpos[2]
+                    dist_2d = math.sqrt(dx**2 + dy**2)
+                    dist_3d = math.sqrt(dist_2d**2 + dz**2)
 
-        for i, w_id in enumerate(wingmen_ids, start=1):
-            w_vname = get_real_vehicle_name(ctrl, w_id)
-            slot_dist = i * spacing
-            tx = alpha_pos.x_val + (back_dir_x * slot_dist)
-            ty = alpha_pos.y_val + (back_dir_y * slot_dist)
+                    # Convergence check for this wingman
+                    spd_curr = math.sqrt(cur_wvel[0]**2 + cur_wvel[1]**2 + cur_wvel[2]**2)
+                    if dist_3d > 0.8 or spd_curr > 0.4:
+                        all_reached = False
 
-            yaw_mode = airsim.YawMode(is_rate=False, yaw_or_rate=math.degrees(alpha_yaw))
-            ctrl.moveToPositionAsync(tx, ty, target_z, velocity, yaw_mode=yaw_mode, vehicle_name=w_vname)
+                    # Preferred velocity calculation with distance slowdown
+                    if dist_2d > 0.05:
+                        desired_speed = min(velocity, dist_2d / 0.8)
+                        pref_vx = (dx / dist_2d) * desired_speed
+                        pref_vy = (dy / dist_2d) * desired_speed
+                    else:
+                        pref_vx = 0.0
+                        pref_vy = 0.0
 
-        # 6. Re-assert Alpha station-keeping hover (see note in step 2 - hoverAsync,
-        # not moveToPositionAsync-to-self, to avoid the ground-dive trajectory bug)
-        ctrl.hoverAsync(vehicle_name=alpha_vname)
+                    pref_vz = dz / 0.5
 
-        return target_z
+                    # Build neighbors list (Alpha weight=1.0, other drones weight=0.5)
+                    neighbors = []
+                    for other_id in DRONES_CONFIG.keys():
+                        if other_id == w_id:
+                            continue
+                        other_t = latest_telemetries.get(other_id)
+                        if not other_t or not other_t.get("connected", False):
+                            continue
+
+                        w_weight = 1.0 if other_id == "Drone1" else 0.5
+                        neighbors.append({
+                            "pos": (other_t["x"], other_t["y"], other_t["z"]),
+                            "vel": (other_t["vx"], other_t["vy"], other_t["vz"]),
+                            "radius": ORCA_AGENT_RADIUS_M,
+                            "weight": w_weight
+                        })
+
+                    # Compute ORCA safe velocity
+                    safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
+                        agent_pos=cur_wpos,
+                        agent_vel=cur_wvel,
+                        preferred_vel=(pref_vx, pref_vy, pref_vz),
+                        neighbors=neighbors,
+                        agent_radius=ORCA_AGENT_RADIUS_M,
+                        time_horizon=ORCA_TIME_HORIZON_SEC,
+                        max_speed=velocity,
+                        max_vz=ORCA_MAX_VZ_MPS,
+                        time_step=tick_dt
+                    )
+
+                    # Issue velocity command
+                    ensure_api_control(ctrl, w_vname)
+                    ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, tick_dt * 1.5, vehicle_name=w_vname)
+
+                if all_reached and (time.time() - t_start > 1.5):
+                    print(f"[FORMATION] 🎉 모든 윙맨이 트레일 슬롯에 안전하게 수렴 완료 ({time.time() - t_start:.2f}초 소요)", flush=True)
+                    break
+
+                time.sleep(tick_dt)
+
+            # 6. Lock all wingmen in hover at their assembled positions
+            for w_id in wingmen_ids:
+                w_vname = get_real_vehicle_name(ctrl, w_id)
+                try:
+                    ctrl.hoverAsync(vehicle_name=w_vname)
+                except Exception:
+                    pass
+
+            # Re-assert Alpha station-keeping hover
+            ctrl.hoverAsync(vehicle_name=alpha_vname)
+            return target_z
+
+    finally:
+        formation_assemble_in_progress = False
 
 @app.post("/api/formation/assemble")
 async def formation_assemble(req: FormationAssembleRequest = None):
