@@ -165,6 +165,106 @@ ORCA_AGENT_RADIUS_M = 1.6    # Safety collision radius per drone (Combined safet
 ORCA_MAX_SPEED_MPS = 3.0     # Default maximum horizontal speed
 ORCA_MAX_VZ_MPS = 2.0        # Default maximum climb/descent speed
 
+# Static Obstacle Avoidance Parameters & Registry Cache
+ORCA_STATIC_OBSTACLE_RADIUS_M = 2.2  # Safety collision radius per static obstacle
+cached_static_obstacles = []         # [{'name': str, 'pos': (x, y, z), 'radius': float}, ...]
+static_obstacles_lock = threading.Lock()
+
+def get_static_obstacle_neighbors(agent_wpos, max_dist: float = 12.0, max_count: int = 3, max_dz: float = 8.0) -> list:
+    """
+    Returns non-reciprocal (weight=1.0, vel=(0,0,0)) ORCA neighbors for static obstacles near the agent.
+    """
+    with static_obstacles_lock:
+        obstacles = list(cached_static_obstacles)
+
+    if not obstacles:
+        return []
+
+    ax, ay, az = agent_wpos
+    nearby = []
+    for obs in obstacles:
+        ox, oy, oz = obs["pos"]
+        # Vertical height filter: obstacles within max_dz vertical range of agent
+        if abs(oz - az) > max_dz:
+            continue
+        # Fast 2D bounding box pre-filter
+        dx = ox - ax
+        dy = oy - ay
+        if abs(dx) > max_dist or abs(dy) > max_dist:
+            continue
+        dist_sq = dx**2 + dy**2
+        if dist_sq <= max_dist**2:
+            nearby.append((dist_sq, obs))
+
+    if not nearby:
+        return []
+
+    # Sort by squared distance and select top max_count
+    nearby.sort(key=lambda item: item[0])
+    selected = nearby[:max_count]
+
+    neighbors = []
+    for _, obs in selected:
+        neighbors.append({
+            "pos": obs["pos"],
+            "vel": (0.0, 0.0, 0.0),
+            "radius": obs.get("radius", ORCA_STATIC_OBSTACLE_RADIUS_M),
+            "weight": 1.0  # Non-reciprocal: agent bears 100% of the avoidance responsibility
+        })
+    return neighbors
+
+def _build_static_obstacles(client, sim_id: str):
+    """
+    Queries scene objects from AirSim using the existing client_telemetry instance
+    and caches static obstacles near origin (<150m). Called once upon successful connection.
+    """
+    t_start = time.time()
+    print(f"[OBSTACLES] 🏗️ [{sim_id}] 정적 장애물 레지스트리 구축 시작 (client_telemetry 활용)...", flush=True)
+    try:
+        all_objs = client.simListSceneObjects('.*')
+        exclude_keywords = (
+            'camera', 'ground', 'asphalt', 'light', 'sky', 'particle',
+            'trigger', 'cine', 'player', 'postprocess', 'fog', 'volume',
+            'terrain', 'game', 'hud', 'controller', 'manager', 'weather',
+            'menu', 'state', 'info', 'mode', 'nav', 'map', 'simpleflight',
+            'drone', 'pip', 'network', 'session', 'debugger', 'audio',
+            'sound', 'wind', 'abstract', 'reflection', 'brush', 'world'
+        )
+
+        filtered_names = []
+        for name in all_objs:
+            name_lower = name.lower()
+            if any(k in name_lower for k in exclude_keywords):
+                continue
+            filtered_names.append(name)
+
+        new_obstacles = []
+        for name in filtered_names:
+            try:
+                pose = client.simGetObjectPose(name)
+                pos = pose.position
+                # Filter objects within 150m of origin (active fleet operational area)
+                # and exclude objects located directly at origin (0,0) which are engine managers/actors
+                if abs(pos.x_val) <= 150.0 and abs(pos.y_val) <= 150.0:
+                    if abs(pos.x_val) < 0.5 and abs(pos.y_val) < 0.5:
+                        continue
+                    new_obstacles.append({
+                        "name": name,
+                        "pos": (round(pos.x_val, 2), round(pos.y_val, 2), round(pos.z_val, 2)),
+                        "radius": ORCA_STATIC_OBSTACLE_RADIUS_M
+                    })
+            except Exception:
+                pass
+
+        with static_obstacles_lock:
+            global cached_static_obstacles
+            cached_static_obstacles = new_obstacles
+
+        elapsed = time.time() - t_start
+        print(f"[OBSTACLES] ✅ [{sim_id}] 정적 장애물 {len(new_obstacles)}개 캐시 완료 (전체 {len(all_objs)}개 중 필터링, 소요시간: {elapsed:.2f}초)", flush=True)
+    except Exception as e:
+        print(f"[OBSTACLES] ⚠️ 정적 장애물 레지스트리 구축 중 예외: {e}", flush=True)
+
 def record_position_history(d_id, x, y, z):
     if d_id in position_history:
         position_history[d_id].append((time.time(), x, y, z))
@@ -325,10 +425,12 @@ def kill_all_simulators():
     close_airsim_client(client_telemetry)
     client_control = None
     client_telemetry = None
-    # Stale vehicle-name cache from the previous map must never leak into the next one
+    # Stale vehicle-name cache and static obstacle cache from the previous map must never leak into the next one
     cached_vehicles_list = []
     last_vehicles_check = 0.0
-    print("[KILL] 🧹 RPC 클라이언트 소켓 종료 및 차량 목록 캐시 초기화 완료", flush=True)
+    with static_obstacles_lock:
+        cached_static_obstacles = []
+    print("[KILL] 🧹 RPC 클라이언트 소켓 종료, 차량 목록 및 정적 장애물 캐시 초기화 완료", flush=True)
 
     all_target_names = set()
     for s in SIMULATORS.values():
@@ -544,6 +646,10 @@ def airsim_worker():
                     spawn_verified = ensure_all_drones_spawned(client_telemetry)
                     if not spawn_verified:
                         print(f"[WORKER] ⏳ 편대 스폰 미완료, 1초 후 재시도... (경과: {t_now - connect_started_at:.1f}초)", flush=True)
+                    else:
+                        # Build static obstacles registry synchronously using the telemetry client (0.1s once per connection)
+                        sim_id_str = cached_sim_info["id"] if cached_sim_info else "unknown"
+                        _build_static_obstacles(client_telemetry, sim_id_str)
 
                 sim_name = cached_sim_info["name"] if cached_sim_info else "AirSim 엔진"
                 sim_icon = cached_sim_info["icon"] if cached_sim_info else "🎮"
@@ -783,7 +889,7 @@ def following_worker():
 
                     pref_vz = (dz / max(0.1, FOLLOW_TICK_INTERVAL_SEC))
 
-                    # 3. Neighbors list (including Alpha and all other drones)
+                    # 3. Neighbors list (including Alpha, other drones, and static obstacles)
                     neighbors = []
                     for other_id in DRONES_CONFIG.keys():
                         if other_id == follower_id:
@@ -798,6 +904,7 @@ def following_worker():
                                 "radius": ORCA_AGENT_RADIUS_M,
                                 "weight": w
                             })
+                    neighbors.extend(get_static_obstacle_neighbors(cur_pos))
 
                     # 4. Compute ORCA safe velocity (2D XY + clipped Z)
                     safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
@@ -1042,6 +1149,8 @@ def _do_formation_assemble(spacing: float = 12.0, velocity: float = 4.0):
                             "weight": w_weight
                         })
 
+                    neighbors.extend(get_static_obstacle_neighbors(cur_wpos))
+
                     # Compute ORCA safe velocity
                     safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
                         agent_pos=cur_wpos,
@@ -1080,12 +1189,26 @@ def _do_formation_assemble(spacing: float = 12.0, velocity: float = 4.0):
     finally:
         formation_assemble_in_progress = False
 
+def ensure_airsim_connection_ready(timeout: float = 4.0) -> bool:
+    """If AirSim process/port is open but worker is still connecting, wait briefly before falling back to simulated demo."""
+    global is_airsim_connected
+    if is_airsim_connected:
+        return True
+    if not check_port_open():
+        return False
+    t_start = time.time()
+    while time.time() - t_start < timeout:
+        if is_airsim_connected:
+            return True
+        time.sleep(0.1)
+    return is_airsim_connected
+
 @app.post("/api/formation/assemble")
 async def formation_assemble(req: FormationAssembleRequest = None):
     spacing = req.spacing if req else 12.0
     vel = req.velocity if req else 4.0
     
-    if is_airsim_connected:
+    if ensure_airsim_connection_ready():
         try:
             target_z = await asyncio.to_thread(_do_formation_assemble, spacing, vel)
             snap_a = get_telemetry_snapshot("Drone1")
@@ -1129,7 +1252,7 @@ def toggle_following_mode(req: FollowingModeRequest):
     if following_mode_enabled:
         # Alpha is the one you actively fly while the ducklings autopilot behind it
         selected_drone_id = "Drone1"
-        if is_airsim_connected:
+        if ensure_airsim_connection_ready():
             return {
                 "status": "success",
                 "enabled": True,
@@ -1160,12 +1283,6 @@ def get_following_status():
 # Fleet All Takeoff & All Land APIs
 # =========================================================================
 def _do_fleet_takeoff():
-    # NOTE: takeoffAsync()/moveToPositionAsync() return futures immediately -
-    # calling .join() on each one INSIDE the loop (as this used to) blocks until
-    # that single drone's maneuver fully finishes before the next drone's
-    # takeoff is even dispatched, turning "동시 이륙" into a sequential
-    # Alpha->Bravo->Charlie->Delta queue. Dispatch all 4 first, THEN join all 4,
-    # so they actually fly at the same time.
     with control_lock:
         ctrl = get_control_client()
         ensure_all_drones_spawned(ctrl)
@@ -1191,7 +1308,7 @@ def _do_fleet_takeoff():
 
 @app.post("/api/fleet/takeoff")
 async def fleet_takeoff():
-    if is_airsim_connected:
+    if ensure_airsim_connection_ready():
         try:
             await asyncio.to_thread(_do_fleet_takeoff)
             return {"status": "success", "message": "[전체 편대 동시 이륙] 알파/브라보/찰리/델타 4대 동시 수직 이륙 완료."}
@@ -1206,9 +1323,6 @@ async def fleet_takeoff():
     return {"status": "simulated", "message": "[가상 데모] 4대 편대 전 기체 동시 수직 이륙 완료 (고도 3m)"}
 
 def _do_fleet_land():
-    # Same fix as _do_fleet_takeoff: dispatch all 4 landAsync() calls first,
-    # THEN join all 4, instead of joining inside the loop (which landed them
-    # one at a time, Alpha->Bravo->Charlie->Delta, instead of together).
     with control_lock:
         ctrl = get_control_client()
         v_names = [get_real_vehicle_name(ctrl, d_id) for d_id in ["Drone1", "Drone2", "Drone3", "Drone4"]]
@@ -1231,7 +1345,7 @@ def _do_fleet_land():
 
 @app.post("/api/fleet/land")
 async def fleet_land():
-    if is_airsim_connected:
+    if ensure_airsim_connection_ready():
         try:
             await asyncio.to_thread(_do_fleet_land)
             return {"status": "success", "message": "[전체 편대 동시 착륙] 4대 기체 안전 착륙 완료."}
@@ -1498,10 +1612,26 @@ def _do_rth(target_drone_id: str):
                         print(f"[RTH] ✅ [{target_drone_id}] {leg_name} 완료 (오차={dist_3d:.2f}m, 소요={time.time()-t_start:.1f}초)", flush=True)
                         return True
 
-                    if dist_2d > 0.05:
+                    # Obstacle bypass sub-goal navigation: if a static obstacle is between agent and target
+                    target_x_nav = tx
+                    target_y_nav = ty
+                    for obs in get_static_obstacle_neighbors(cur_wpos, max_dist=25.0, max_count=1, max_dz=25.0):
+                        ox, oy, oz = obs["pos"]
+                        # Check if obstacle is ahead along current path
+                        if (cur_wpos[1] > oy > ty or cur_wpos[1] < oy < ty) and abs(ox - cur_wpos[0]) < 4.0:
+                            # Bypass side (+X direction)
+                            target_x_nav = ox + 3.8
+                            target_y_nav = oy - (3.0 if ty < cur_wpos[1] else -3.0)
+                            break
+
+                    dx_nav = target_x_nav - cur_wpos[0]
+                    dy_nav = target_y_nav - cur_wpos[1]
+                    dist_2d_nav = math.sqrt(dx_nav**2 + dy_nav**2)
+
+                    if dist_2d_nav > 0.05:
                         desired_speed = min(max_speed, dist_2d / 0.8)
-                        pref_vx = (dx / dist_2d) * desired_speed
-                        pref_vy = (dy / dist_2d) * desired_speed
+                        pref_vx = (dx_nav / dist_2d_nav) * desired_speed
+                        pref_vy = (dy_nav / dist_2d_nav) * desired_speed
                     else:
                         pref_vx = 0.0
                         pref_vy = 0.0
@@ -1519,12 +1649,19 @@ def _do_rth(target_drone_id: str):
                         other_t = latest_telemetries.get(other_id)
                         if not other_t or not other_t.get("connected", False):
                             continue
+                        if abs(other_t["z"] - cur_wpos[2]) > 5.0:
+                            continue
+                        d_other = math.sqrt((other_t["x"] - cur_wpos[0])**2 + (other_t["y"] - cur_wpos[1])**2)
+                        if d_other > 15.0:
+                            continue
                         neighbors.append({
                             "pos": (other_t["x"], other_t["y"], other_t["z"]),
                             "vel": (other_t["vx"], other_t["vy"], other_t["vz"]),
                             "radius": calc_radius,
                             "weight": 0.5
                         })
+
+                    neighbors.extend(get_static_obstacle_neighbors(cur_wpos, max_dist=10.0, max_count=2))
 
                     safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
                         agent_pos=cur_wpos,
@@ -1538,15 +1675,18 @@ def _do_rth(target_drone_id: str):
                         time_step=tick_dt
                     )
 
+                    if (int((time.time() - t_start) * 2) % 4 == 0):
+                        print(f"[RTH-DBG] {leg_name} t={time.time()-t_start:.1f}s | cur=({cur_wpos[0]:.1f},{cur_wpos[1]:.1f},{cur_wpos[2]:.1f}) | pref=({pref_vx:.2f},{pref_vy:.2f}) | safe=({safe_vx:.2f},{safe_vy:.2f}) | n={len(neighbors)}", flush=True)
+
                     ensure_api_control(ctrl, v_name)
-                    ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, tick_dt * 1.5, vehicle_name=v_name)
+                    ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, 0.5, vehicle_name=v_name)
 
                 # Sleep outside the lock so other RTH threads and API calls can acquire control_lock
                 time.sleep(tick_dt)
             return True
 
-        # Leg 1: Safe Climb (15m higher than current position, or at least -15.0m)
-        safe_climb_z = min(p.z_val - 15.0, -15.0)
+        # Leg 1: Safe Climb (12m higher than current position, or at least -15.0m)
+        safe_climb_z = min(p.z_val - 12.0, -15.0)
         print(f"[RTH] 🛫 [{target_drone_id}] Leg 1: 안전 고도 상승 시작 (목표 고도: {safe_climb_z:.2f}m)...", flush=True)
         wpos1 = (p.x_val + w_off[0], p.y_val + w_off[1], safe_climb_z)
         if not run_rth_orca_leg(wpos1, max_speed=2.0, max_vz=ORCA_MAX_VZ_MPS, tol_3d=0.8, max_sec=12.0, leg_name="Leg 1 상승"):
@@ -1555,7 +1695,7 @@ def _do_rth(target_drone_id: str):
         # Leg 2: Horizontal Return to Own Home (X/Y to home_wx/wy, maintain safe_climb_z)
         print(f"[RTH] 🧭 [{target_drone_id}] Leg 2: 홈 원점 수평 이동 시작 (홈 월드 좌표: {home_wx:.1f}, {home_wy:.1f})...", flush=True)
         wpos2 = (home_wx, home_wy, safe_climb_z)
-        if not run_rth_orca_leg(wpos2, max_speed=4.0, max_vz=1.0, tol_3d=0.8, max_sec=25.0, leg_name="Leg 2 수평 복귀"):
+        if not run_rth_orca_leg(wpos2, max_speed=4.0, max_vz=1.0, tol_3d=0.8, max_sec=40.0, leg_name="Leg 2 수평 복귀"):
             return False
 
         # Leg 3: Slow Descent to 3m above home point (Z to -3.0m)

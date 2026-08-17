@@ -1,0 +1,1153 @@
+{
+  "total_objects": 227,
+  "near_origin_count": 209,
+  "poses": {
+    "CameraActor_2147482537": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "Cone_5": [
+      34.5,
+      -34.4,
+      -1.68
+    ],
+    "Cylinder2": [
+      -46.8,
+      -94.0,
+      -0.48
+    ],
+    "Cylinder3": [
+      -43.7,
+      -95.0,
+      -0.48
+    ],
+    "Cylinder4": [
+      -37.0,
+      -95.0,
+      -0.48
+    ],
+    "Cylinder5": [
+      -39.6,
+      -92.0,
+      -0.48
+    ],
+    "Cylinder6": [
+      -41.9,
+      -97.1,
+      -0.48
+    ],
+    "Cylinder7": [
+      -42.4,
+      -89.8,
+      -0.48
+    ],
+    "Cylinder8": [
+      -40.0,
+      -99.3,
+      -0.48
+    ],
+    "Cylinder_2": [
+      -45.5,
+      -87.8,
+      -0.48
+    ],
+    "Ground": [
+      -56.9,
+      -1.5,
+      1.02
+    ],
+    "Ground_2": [
+      -56.9,
+      78.5,
+      1.02
+    ],
+    "Ground_3": [
+      23.1,
+      78.5,
+      1.02
+    ],
+    "Ground_4": [
+      -56.9,
+      -81.5,
+      1.02
+    ],
+    "Ground_5": [
+      23.1,
+      -1.9,
+      1.02
+    ],
+    "Ground_6": [
+      23.1,
+      -81.5,
+      1.02
+    ],
+    "OrangeBall": [
+      34.25,
+      33.1,
+      -3.68
+    ],
+    "TemplateCube_48": [
+      58.1,
+      -16.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_10": [
+      -31.9,
+      -26.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_100": [
+      -21.9,
+      23.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_101": [
+      -31.9,
+      33.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_102": [
+      -31.9,
+      23.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_103": [
+      48.1,
+      -6.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_104": [
+      48.1,
+      -16.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_105": [
+      48.1,
+      13.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_106": [
+      48.1,
+      13.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_108": [
+      48.1,
+      3.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_109": [
+      18.1,
+      -56.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_110": [
+      18.1,
+      -56.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_111": [
+      18.1,
+      -66.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_112": [
+      18.1,
+      -66.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_113": [
+      18.1,
+      -66.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_114": [
+      18.1,
+      -66.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_115": [
+      58.1,
+      -6.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_116": [
+      58.1,
+      -16.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_117": [
+      58.1,
+      13.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_119": [
+      18.1,
+      63.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_120": [
+      18.1,
+      63.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_121": [
+      18.1,
+      63.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_122": [
+      18.1,
+      63.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_123": [
+      28.1,
+      53.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_124": [
+      38.1,
+      -16.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_125": [
+      48.1,
+      -16.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_126": [
+      58.1,
+      -6.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_128": [
+      58.1,
+      3.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_129": [
+      28.1,
+      63.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_13": [
+      -21.9,
+      -36.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_130": [
+      28.1,
+      63.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_131": [
+      28.1,
+      -56.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_132": [
+      28.1,
+      -56.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_133": [
+      58.1,
+      13.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_134": [
+      28.1,
+      -56.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_135": [
+      28.1,
+      -66.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_136": [
+      28.1,
+      -66.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_137": [
+      28.1,
+      -66.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_138": [
+      48.1,
+      3.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_139": [
+      58.1,
+      13.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_140": [
+      18.1,
+      -66.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_141": [
+      18.1,
+      63.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_142": [
+      -71.9,
+      53.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_143": [
+      -71.9,
+      53.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_144": [
+      28.1,
+      53.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_145": [
+      28.1,
+      -56.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_146": [
+      -71.9,
+      53.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_147": [
+      28.1,
+      -6.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_148": [
+      28.1,
+      -16.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_149": [
+      28.1,
+      13.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_150": [
+      28.1,
+      3.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_151": [
+      -71.9,
+      -56.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_152": [
+      -71.9,
+      -56.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_153": [
+      48.1,
+      -16.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_154": [
+      -71.9,
+      53.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_155": [
+      58.1,
+      -6.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_156": [
+      58.1,
+      -16.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_157": [
+      58.1,
+      13.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_158": [
+      58.1,
+      3.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_159": [
+      58.1,
+      -116.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_160": [
+      58.1,
+      -116.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_173": [
+      48.1,
+      113.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_174": [
+      48.1,
+      113.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_175": [
+      48.1,
+      103.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_176": [
+      48.1,
+      103.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_185": [
+      -92.0,
+      113.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_186": [
+      -91.9,
+      113.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_187": [
+      -91.9,
+      103.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_196": [
+      -91.9,
+      -106.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_197": [
+      -91.9,
+      -116.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_198": [
+      -91.9,
+      -116.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_199": [
+      -81.9,
+      -106.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_200": [
+      -81.9,
+      -106.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_209": [
+      48.1,
+      -106.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_210": [
+      48.1,
+      -116.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_211": [
+      58.1,
+      -106.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_212": [
+      58.1,
+      -116.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_217": [
+      18.1,
+      -56.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_218": [
+      18.1,
+      -56.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_231": [
+      18.1,
+      53.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_232": [
+      18.1,
+      53.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_233": [
+      18.1,
+      53.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_234": [
+      18.1,
+      53.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_243": [
+      28.1,
+      53.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_244": [
+      28.1,
+      53.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_245": [
+      28.1,
+      53.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_246": [
+      28.1,
+      63.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_247": [
+      28.1,
+      63.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_256": [
+      28.1,
+      -56.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_257": [
+      28.1,
+      -66.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_26": [
+      28.1,
+      13.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_266": [
+      18.1,
+      -56.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_267": [
+      18.1,
+      53.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_268": [
+      28.1,
+      63.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_269": [
+      28.1,
+      -66.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_282": [
+      38.1,
+      -16.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_283": [
+      38.1,
+      13.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_284": [
+      48.1,
+      13.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_31": [
+      38.1,
+      -16.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_4": [
+      -31.9,
+      23.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_45": [
+      58.1,
+      13.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_47": [
+      58.1,
+      3.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_48": [
+      -21.9,
+      -26.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_49": [
+      -21.9,
+      -26.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_50": [
+      48.1,
+      13.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_51": [
+      48.1,
+      3.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_52": [
+      -21.9,
+      -36.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_53": [
+      58.1,
+      3.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_54": [
+      48.1,
+      13.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_55": [
+      -31.9,
+      -36.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_56": [
+      -31.9,
+      -36.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_57": [
+      58.1,
+      3.5,
+      -21.48
+    ],
+    "TemplateCube_Rounded_6": [
+      -31.9,
+      -26.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_60": [
+      -71.9,
+      53.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_61": [
+      -21.9,
+      23.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_62": [
+      -21.9,
+      23.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_63": [
+      -71.9,
+      -56.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_64": [
+      -71.9,
+      -56.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_65": [
+      -21.9,
+      33.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_66": [
+      -21.9,
+      33.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_67": [
+      58.1,
+      -106.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_68": [
+      58.1,
+      -106.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_69": [
+      -31.9,
+      -36.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_7": [
+      -31.9,
+      23.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_70": [
+      -31.9,
+      -36.5,
+      -16.48
+    ],
+    "TemplateCube_Rounded_71": [
+      48.1,
+      -106.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_72": [
+      48.1,
+      -106.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_73": [
+      48.1,
+      -116.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_74": [
+      48.1,
+      -116.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_75": [
+      28.1,
+      -6.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_76": [
+      28.1,
+      -6.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_77": [
+      28.1,
+      -16.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_78": [
+      28.1,
+      -16.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_79": [
+      58.1,
+      113.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_8": [
+      -31.9,
+      33.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_80": [
+      58.1,
+      113.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_81": [
+      58.1,
+      103.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_82": [
+      58.1,
+      103.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_83": [
+      28.1,
+      13.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_84": [
+      28.1,
+      3.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_85": [
+      28.1,
+      3.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_86": [
+      -92.0,
+      103.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_87": [
+      -81.9,
+      113.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_88": [
+      -81.9,
+      113.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_89": [
+      -82.0,
+      103.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_9": [
+      -31.9,
+      33.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_90": [
+      -81.9,
+      103.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_91": [
+      -91.9,
+      -106.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_92": [
+      38.1,
+      -6.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_93": [
+      38.1,
+      13.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_94": [
+      38.1,
+      13.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_96": [
+      38.1,
+      3.5,
+      -11.48
+    ],
+    "TemplateCube_Rounded_97": [
+      -81.9,
+      -116.5,
+      -6.48
+    ],
+    "TemplateCube_Rounded_98": [
+      -81.9,
+      -116.5,
+      -1.48
+    ],
+    "TemplateCube_Rounded_99": [
+      -21.9,
+      33.5,
+      -11.48
+    ],
+    "ParticleEventManager_2147482555": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "PlayerCameraManager_2147482547": [
+      -3.0,
+      0.0,
+      -1.21
+    ],
+    "GameplayDebuggerCategoryReplicator_2147482531": [
+      -56.9,
+      1.0,
+      2.02
+    ],
+    "GameplayDebuggerPlayerManager_2147482561": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "SkyShereBlueprint": [
+      -56.9,
+      1.0,
+      2.02
+    ],
+    "WeatherActor_C_2147482268": [
+      0.0,
+      0.0,
+      0.83
+    ],
+    "MenuActor_C_2147482266": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "GameStateBase_2147482553": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "SkyLight_1": [
+      -56.6,
+      1.08,
+      1.82
+    ],
+    "AtmosphericFog_1": [
+      -31.61,
+      6.41,
+      -8.22
+    ],
+    "ExponentialHeightFog_2147482267": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "GameNetworkManager_2147482552": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "GameSession_2147482556": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "PlayerState_2147482548": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "WorldInfo_0": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "CameraDirector": [
+      -3.0,
+      0.0,
+      -2.34
+    ],
+    "SimHUD_2147482532": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "PlayerController_2147482549": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "SphereReflectionCaptureCentre": [
+      -19.06,
+      -0.92,
+      -11.42
+    ],
+    "SphereReflectionCaptureLeft": [
+      -18.36,
+      -69.24,
+      -11.42
+    ],
+    "SphereReflectionCaptureRight": [
+      -19.06,
+      75.08,
+      -11.42
+    ],
+    "LightSource": [
+      -55.9,
+      -1.0,
+      -3.68
+    ],
+    "FlyingExampleMap_C_0": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "PlayerStart_3": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "AbstractNavData-Default": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "AirSimGameMode_2147482560": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "SimpleFlight": [
+      0.0,
+      0.0,
+      0.83
+    ],
+    "SimModeWorldMultiRotor_2147482530": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "LightmassImportanceVolume_2": [
+      -15.9,
+      -1.0,
+      -18.98
+    ],
+    "PostProcessVolume_2": [
+      -8.86,
+      1.06,
+      -7.58
+    ],
+    "ExternalCamera": [
+      -3.0,
+      0.0,
+      -1.21
+    ],
+    "BP_PIPCamera_C_2147482506": [
+      0.46,
+      0.12,
+      0.83
+    ],
+    "BP_PIPCamera_C_2147482495": [
+      0.46,
+      -0.12,
+      0.83
+    ],
+    "BP_PIPCamera_C_2147482484": [
+      0.46,
+      0.0,
+      0.83
+    ],
+    "BP_PIPCamera_C_2147482473": [
+      -0.46,
+      0.0,
+      0.83
+    ],
+    "BP_PIPCamera_C_2147482462": [
+      0.0,
+      0.0,
+      0.95
+    ],
+    "DefaultPhysicsVolume_2147482563": [
+      -56.9,
+      1.0,
+      2.02
+    ]
+  },
+  "sample_names": [
+    "CameraActor_2147482537",
+    "Cone_5",
+    "Cylinder2",
+    "Cylinder3",
+    "Cylinder4",
+    "Cylinder5",
+    "Cylinder6",
+    "Cylinder7",
+    "Cylinder8",
+    "Cylinder_2",
+    "Ground",
+    "Ground_2",
+    "Ground_3",
+    "Ground_4",
+    "Ground_5",
+    "Ground_6",
+    "OrangeBall",
+    "TemplateCube_48",
+    "TemplateCube_Rounded_10",
+    "TemplateCube_Rounded_100",
+    "TemplateCube_Rounded_101",
+    "TemplateCube_Rounded_102",
+    "TemplateCube_Rounded_103",
+    "TemplateCube_Rounded_104",
+    "TemplateCube_Rounded_105",
+    "TemplateCube_Rounded_106",
+    "TemplateCube_Rounded_108",
+    "TemplateCube_Rounded_109",
+    "TemplateCube_Rounded_110",
+    "TemplateCube_Rounded_111",
+    "TemplateCube_Rounded_112",
+    "TemplateCube_Rounded_113",
+    "TemplateCube_Rounded_114",
+    "TemplateCube_Rounded_115",
+    "TemplateCube_Rounded_116",
+    "TemplateCube_Rounded_117",
+    "TemplateCube_Rounded_119",
+    "TemplateCube_Rounded_120",
+    "TemplateCube_Rounded_121",
+    "TemplateCube_Rounded_122",
+    "TemplateCube_Rounded_123",
+    "TemplateCube_Rounded_124",
+    "TemplateCube_Rounded_125",
+    "TemplateCube_Rounded_126",
+    "TemplateCube_Rounded_128",
+    "TemplateCube_Rounded_129",
+    "TemplateCube_Rounded_13",
+    "TemplateCube_Rounded_130",
+    "TemplateCube_Rounded_131",
+    "TemplateCube_Rounded_132",
+    "TemplateCube_Rounded_133",
+    "TemplateCube_Rounded_134",
+    "TemplateCube_Rounded_135",
+    "TemplateCube_Rounded_136",
+    "TemplateCube_Rounded_137",
+    "TemplateCube_Rounded_138",
+    "TemplateCube_Rounded_139",
+    "TemplateCube_Rounded_140",
+    "TemplateCube_Rounded_141",
+    "TemplateCube_Rounded_142",
+    "TemplateCube_Rounded_143",
+    "TemplateCube_Rounded_144",
+    "TemplateCube_Rounded_145",
+    "TemplateCube_Rounded_146",
+    "TemplateCube_Rounded_147",
+    "TemplateCube_Rounded_148",
+    "TemplateCube_Rounded_149",
+    "TemplateCube_Rounded_150",
+    "TemplateCube_Rounded_151",
+    "TemplateCube_Rounded_152",
+    "TemplateCube_Rounded_153",
+    "TemplateCube_Rounded_154",
+    "TemplateCube_Rounded_155",
+    "TemplateCube_Rounded_156",
+    "TemplateCube_Rounded_157",
+    "TemplateCube_Rounded_158",
+    "TemplateCube_Rounded_159",
+    "TemplateCube_Rounded_160",
+    "TemplateCube_Rounded_173",
+    "TemplateCube_Rounded_174",
+    "TemplateCube_Rounded_175",
+    "TemplateCube_Rounded_176",
+    "TemplateCube_Rounded_185",
+    "TemplateCube_Rounded_186",
+    "TemplateCube_Rounded_187",
+    "TemplateCube_Rounded_196",
+    "TemplateCube_Rounded_197",
+    "TemplateCube_Rounded_198",
+    "TemplateCube_Rounded_199",
+    "TemplateCube_Rounded_200",
+    "TemplateCube_Rounded_209",
+    "TemplateCube_Rounded_210",
+    "TemplateCube_Rounded_211",
+    "TemplateCube_Rounded_212",
+    "TemplateCube_Rounded_217",
+    "TemplateCube_Rounded_218",
+    "TemplateCube_Rounded_231",
+    "TemplateCube_Rounded_232",
+    "TemplateCube_Rounded_233",
+    "TemplateCube_Rounded_234"
+  ]
+}

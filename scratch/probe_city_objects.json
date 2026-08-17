@@ -1,0 +1,5588 @@
+{
+  "total_objects": 5707,
+  "near_origin_count": 1096,
+  "poses": {
+    "CameraActor_2147482518": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "006_hatchback_SM7": [
+      12.13,
+      -155.04,
+      2.19
+    ],
+    "009_suv_sm5_83": [
+      12.35,
+      -160.62,
+      2.19
+    ],
+    "AirDuct_Cap2": [
+      63.43,
+      -178.59,
+      -7.25
+    ],
+    "AirDuct_Cap3": [
+      63.43,
+      -169.41,
+      -7.25
+    ],
+    "AirDuct_Cap4": [
+      63.43,
+      -160.63,
+      -7.25
+    ],
+    "AirDuct_Cap_153": [
+      63.43,
+      -187.45,
+      -7.25
+    ],
+    "Apartment_Cyldr_Tower_23": [
+      -171.42,
+      -61.94,
+      -26.52
+    ],
+    "Apartment_LShape2": [
+      -15.85,
+      147.14,
+      2.25
+    ],
+    "Apartment_LShape3": [
+      -15.85,
+      156.96,
+      2.25
+    ],
+    "Apartment_LShape4": [
+      -15.85,
+      166.74,
+      2.25
+    ],
+    "Apartment_LShape6": [
+      -15.85,
+      186.51,
+      2.25
+    ],
+    "Apartment_LShape_98": [
+      -43.95,
+      175.62,
+      2.25
+    ],
+    "Apartment_Square_Tower2_107": [
+      57.32,
+      111.8,
+      1.84
+    ],
+    "Apartment_Square_Tower3": [
+      57.32,
+      164.98,
+      1.84
+    ],
+    "Apartment_Square_Tower_32": [
+      -60.34,
+      119.32,
+      2.25
+    ],
+    "Apartment_wBalconies_26": [
+      93.16,
+      -69.06,
+      2.15
+    ],
+    "Bench10_28": [
+      -14.32,
+      19.08,
+      1.74
+    ],
+    "Bench13_664": [
+      6.14,
+      45.78,
+      1.74
+    ],
+    "Bench2": [
+      52.63,
+      -72.72,
+      2.03
+    ],
+    "Bench3": [
+      59.71,
+      -67.33,
+      2.03
+    ],
+    "Bench9_25": [
+      -25.27,
+      8.37,
+      1.76
+    ],
+    "Bench_01_358": [
+      93.39,
+      86.61,
+      1.84
+    ],
+    "Bench_361": [
+      94.46,
+      89.7,
+      1.84
+    ],
+    "Bench_364": [
+      107.5,
+      106.88,
+      1.83
+    ],
+    "Bench_367": [
+      105.95,
+      111.96,
+      1.83
+    ],
+    "Bench_67": [
+      47.84,
+      -75.65,
+      2.03
+    ],
+    "BG_Building_A4_73": [
+      147.61,
+      -46.83,
+      2.35
+    ],
+    "BG_Building_A5": [
+      148.09,
+      -46.89,
+      -42.08
+    ],
+    "BG_Building_A6": [
+      -194.65,
+      43.95,
+      3.85
+    ],
+    "BG_Building_B10": [
+      0.27,
+      28.92,
+      2.53
+    ],
+    "BG_Building_B5": [
+      -40.04,
+      -167.01,
+      2.3
+    ],
+    "BG_Building_B8": [
+      -194.75,
+      105.11,
+      2.53
+    ],
+    "BG_Building_B9": [
+      -195.1,
+      -156.28,
+      2.04
+    ],
+    "BG_Building_C2_81": [
+      -147.12,
+      -43.38,
+      2.35
+    ],
+    "BG_Building_E_84": [
+      -69.59,
+      -184.45,
+      2.35
+    ],
+    "BG_Building_F5": [
+      152.0,
+      161.4,
+      1.9
+    ],
+    "bin_02_382": [
+      102.93,
+      128.91,
+      1.84
+    ],
+    "bin_370": [
+      103.27,
+      96.7,
+      1.83
+    ],
+    "bin_377": [
+      106.68,
+      78.04,
+      1.83
+    ],
+    "building_1_01_39": [
+      -77.0,
+      -4.05,
+      1.95
+    ],
+    "Building_2_10": [
+      169.81,
+      199.68,
+      -36.59
+    ],
+    "Building_2_7": [
+      135.68,
+      -3.59,
+      1.78
+    ],
+    "Building_2_9": [
+      171.94,
+      196.52,
+      2.38
+    ],
+    "Building_3_01_42": [
+      124.18,
+      55.18,
+      2.31
+    ],
+    "Building_4_02_36": [
+      -95.5,
+      72.51,
+      -25.62
+    ],
+    "Building_4_30": [
+      -95.09,
+      66.94,
+      2.38
+    ],
+    "Building_6_11": [
+      -194.84,
+      127.57,
+      2.38
+    ],
+    "Building_6_2": [
+      -75.73,
+      177.78,
+      2.38
+    ],
+    "Building_6_3": [
+      -56.26,
+      148.2,
+      2.38
+    ],
+    "Building_6_4": [
+      -20.73,
+      193.42,
+      2.38
+    ],
+    "Building_6_5": [
+      -194.84,
+      148.5,
+      2.38
+    ],
+    "Building_7_48": [
+      108.91,
+      145.47,
+      2.0
+    ],
+    "Building_9_02_15": [
+      -114.61,
+      100.26,
+      2.35
+    ],
+    "Building_9_13": [
+      96.58,
+      25.93,
+      2.35
+    ],
+    "Building_9_20": [
+      -173.3,
+      172.81,
+      2.35
+    ],
+    "Building_9_3": [
+      -173.3,
+      144.29,
+      2.35
+    ],
+    "Building_9_5": [
+      -140.08,
+      177.13,
+      6.76
+    ],
+    "Building_B_Bot_CornerOut_A58_Blueprint2": [
+      -131.11,
+      47.04,
+      -46.11
+    ],
+    "Building_C_Bot_Straight_A_14": [
+      1.45,
+      -96.04,
+      2.09
+    ],
+    "Building_C_Bot_Straight_B10": [
+      -19.64,
+      -104.98,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B11": [
+      1.44,
+      -96.05,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B12": [
+      1.44,
+      -86.1,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B13": [
+      1.44,
+      -78.1,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B14": [
+      -3.51,
+      -84.41,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B15": [
+      -9.7,
+      -92.31,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B16": [
+      -19.64,
+      -104.98,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B17": [
+      1.44,
+      -96.05,
+      -13.75
+    ],
+    "Building_C_Bot_Straight_B18": [
+      1.44,
+      -86.1,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B19": [
+      1.44,
+      -78.1,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B2": [
+      1.44,
+      -78.1,
+      2.08
+    ],
+    "Building_C_Bot_Straight_B20": [
+      -3.51,
+      -84.41,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B21": [
+      -9.7,
+      -92.31,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B22": [
+      -19.64,
+      -104.98,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B23": [
+      1.44,
+      -96.05,
+      -21.68
+    ],
+    "Building_C_Bot_Straight_B3": [
+      -3.52,
+      -84.44,
+      2.08
+    ],
+    "Building_C_Bot_Straight_B4": [
+      -9.7,
+      -92.31,
+      2.08
+    ],
+    "Building_C_Bot_Straight_B5": [
+      -19.64,
+      -104.98,
+      2.08
+    ],
+    "Building_C_Bot_Straight_B6": [
+      1.44,
+      -86.1,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B7": [
+      1.44,
+      -78.1,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B8": [
+      -3.51,
+      -84.41,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B9": [
+      -9.7,
+      -92.31,
+      -5.76
+    ],
+    "Building_C_Bot_Straight_B_19": [
+      1.44,
+      -86.1,
+      2.08
+    ],
+    "BuildingA_Bottom_Wall_Short_VarA_21": [
+      99.35,
+      -196.22,
+      2.17
+    ],
+    "BusStop2_51": [
+      65.81,
+      -56.9,
+      1.82
+    ],
+    "BusStop3": [
+      5.26,
+      49.73,
+      1.76
+    ],
+    "BusStop_34": [
+      -15.61,
+      11.03,
+      1.76
+    ],
+    "CardboardBox_VarB4_204": [
+      94.8,
+      -193.79,
+      1.96
+    ],
+    "CardboardBox_VarB_38": [
+      6.35,
+      -81.17,
+      2.09
+    ],
+    "CardboardBox_VarC2": [
+      7.31,
+      -82.13,
+      2.09
+    ],
+    "CardboardBox_VarC_35": [
+      6.15,
+      -82.55,
+      2.09
+    ],
+    "CardboardBox_VarD2": [
+      90.48,
+      -195.73,
+      1.96
+    ],
+    "CardboardBox_VarD3_207": [
+      94.61,
+      -194.83,
+      1.95
+    ],
+    "ChainlinkFence_Tall_C2": [
+      7.32,
+      -76.48,
+      2.09
+    ],
+    "ChainlinkFence_Tall_C3": [
+      8.13,
+      -81.42,
+      2.09
+    ],
+    "ChainlinkFence_Tall_C4": [
+      8.13,
+      -86.38,
+      2.09
+    ],
+    "ChainlinkFence_Tall_C_42": [
+      3.55,
+      -73.36,
+      2.09
+    ],
+    "Cylinder_8": [
+      22.54,
+      -25.59,
+      2.16
+    ],
+    "Flg_hedge_Tall2": [
+      63.16,
+      -72.13,
+      1.79
+    ],
+    "Flg_hedge_Tall_30": [
+      54.13,
+      -78.07,
+      1.79
+    ],
+    "flg_tree_03_291": [
+      43.65,
+      -113.19,
+      1.9
+    ],
+    "flg_tree_2": [
+      -35.07,
+      -175.66,
+      1.67
+    ],
+    "flg_tree_4": [
+      43.65,
+      -145.16,
+      1.9
+    ],
+    "flg_tree_5": [
+      0.11,
+      -175.7,
+      1.04
+    ],
+    "flg_tree_6": [
+      43.65,
+      -128.93,
+      1.9
+    ],
+    "flg_tree_7": [
+      -16.13,
+      -187.78,
+      1.04
+    ],
+    "Fountain_mdl2_281": [
+      -8.29,
+      -181.66,
+      2.07
+    ],
+    "Fountain_mdl_4": [
+      22.75,
+      -25.55,
+      2.38
+    ],
+    "Garbage_Bag4_238": [
+      95.4,
+      -196.29,
+      1.93
+    ],
+    "Garbage_Bag5": [
+      94.3,
+      -195.72,
+      1.93
+    ],
+    "GarbageBin_48": [
+      -0.63,
+      -75.17,
+      2.08
+    ],
+    "GarbageDesbris_B2_254": [
+      -7.75,
+      -196.34,
+      2.2
+    ],
+    "GarbageDesbris_B3_257": [
+      2.59,
+      -196.46,
+      2.18
+    ],
+    "GarbageDesbris_C2_260": [
+      -1.76,
+      -197.26,
+      2.19
+    ],
+    "GarbageDesbris_C_251": [
+      61.25,
+      -199.88,
+      2.19
+    ],
+    "gardenPlanter_A2": [
+      2.06,
+      -173.86,
+      2.06
+    ],
+    "gardenPlanter_A3": [
+      -14.23,
+      -173.86,
+      2.06
+    ],
+    "gardenPlanter_A4": [
+      -14.23,
+      -185.87,
+      2.06
+    ],
+    "gardenPlanter_A5": [
+      -32.87,
+      -173.86,
+      2.06
+    ],
+    "gardenPlanter_A_274": [
+      2.06,
+      -185.97,
+      2.06
+    ],
+    "gardenPlanter_D_284": [
+      -45.36,
+      -163.63,
+      2.06
+    ],
+    "Hedge_03_14": [
+      10.22,
+      -4.46,
+      2.38
+    ],
+    "Hedge_10": [
+      41.0,
+      -40.62,
+      2.38
+    ],
+    "Hedge_11": [
+      28.86,
+      -48.08,
+      2.38
+    ],
+    "Hedge_12": [
+      14.52,
+      -47.14,
+      2.38
+    ],
+    "Hedge_13": [
+      3.17,
+      -39.26,
+      2.38
+    ],
+    "Hedge_4": [
+      23.33,
+      -1.38,
+      2.38
+    ],
+    "Hedge_5": [
+      36.95,
+      -4.24,
+      2.38
+    ],
+    "Hedge_6": [
+      0.94,
+      -13.49,
+      2.38
+    ],
+    "Hedge_7": [
+      -1.73,
+      -27.52,
+      2.38
+    ],
+    "Hedge_8": [
+      44.64,
+      -14.55,
+      2.38
+    ],
+    "Hedge_9": [
+      46.41,
+      -28.61,
+      2.38
+    ],
+    "Intersection_LargeLarge5": [
+      120.07,
+      -24.29,
+      2.64
+    ],
+    "Intersection_LargeLarge7": [
+      22.42,
+      76.55,
+      2.64
+    ],
+    "Intersection_LargeLarge9": [
+      180.12,
+      -177.41,
+      2.67
+    ],
+    "LitterPile_C3": [
+      87.76,
+      90.59,
+      1.83
+    ],
+    "LitterPile_D2_412": [
+      42.72,
+      82.69,
+      1.82
+    ],
+    "LitterPile_D_409": [
+      49.81,
+      87.3,
+      1.82
+    ],
+    "Monument_01_387": [
+      95.02,
+      99.97,
+      1.84
+    ],
+    "NewspaperBox2_415": [
+      55.24,
+      81.74,
+      1.82
+    ],
+    "NewspaperBox_418": [
+      49.54,
+      81.84,
+      1.82
+    ],
+    "Oak_03_29": [
+      3.05,
+      -25.54,
+      2.38
+    ],
+    "Oak_4": [
+      41.55,
+      -25.54,
+      2.38
+    ],
+    "Oak_5": [
+      21.8,
+      -8.86,
+      2.38
+    ],
+    "Oak_6": [
+      21.8,
+      -45.27,
+      2.38
+    ],
+    "Oak_7": [
+      48.85,
+      -82.09,
+      2.38
+    ],
+    "Oak_8": [
+      60.44,
+      -77.14,
+      2.38
+    ],
+    "Oak_9": [
+      68.75,
+      -68.12,
+      2.38
+    ],
+    "OrnateWall_Pillar_Tall": [
+      134.85,
+      -171.71,
+      1.78
+    ],
+    "OrnateWall_Pillar_Tall2": [
+      139.28,
+      -77.83,
+      1.78
+    ],
+    "OrnateWall_Pillar_Tall3": [
+      101.53,
+      -46.25,
+      1.78
+    ],
+    "OrnateWall_Wall_LongShort10": [
+      105.73,
+      -156.81,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort11": [
+      138.49,
+      -46.24,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort12": [
+      138.49,
+      -56.96,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort13": [
+      138.49,
+      -67.49,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort14": [
+      149.1,
+      -45.98,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort2": [
+      110.48,
+      -125.32,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort3": [
+      114.68,
+      -135.04,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort4": [
+      119.03,
+      -144.53,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort5": [
+      124.04,
+      -154.07,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort6": [
+      129.37,
+      -163.06,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort7": [
+      105.73,
+      -125.85,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort8": [
+      105.73,
+      -136.03,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort9": [
+      105.73,
+      -146.47,
+      1.76
+    ],
+    "OrnateWall_Wall_LongShort_599": [
+      106.55,
+      -115.62,
+      1.76
+    ],
+    "OrnateWall_Wall_ShortShort2": [
+      77.99,
+      -49.44,
+      1.97
+    ],
+    "OrnateWall_Wall_ShortShort3": [
+      80.03,
+      -45.61,
+      1.97
+    ],
+    "OrnateWall_Wall_ShortShort4": [
+      85.39,
+      -45.61,
+      1.97
+    ],
+    "OrnateWall_Wall_ShortShort5": [
+      45.67,
+      -85.89,
+      1.97
+    ],
+    "OrnateWall_Wall_ShortShort6": [
+      71.88,
+      -86.55,
+      2.07
+    ],
+    "OrnateWall_Wall_ShortShort_86": [
+      45.4,
+      -80.81,
+      1.97
+    ],
+    "OrnateWall_Wall_TallLong2": [
+      59.21,
+      -73.28,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong3": [
+      66.91,
+      -66.37,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong4": [
+      73.27,
+      -58.71,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong5": [
+      91.05,
+      -46.0,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong6": [
+      56.27,
+      -86.11,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong7": [
+      66.92,
+      -86.24,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong8_141": [
+      72.56,
+      -76.44,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong9": [
+      72.56,
+      -66.25,
+      2.16
+    ],
+    "OrnateWall_Wall_TallLong_89": [
+      50.67,
+      -78.33,
+      2.16
+    ],
+    "Path_A2": [
+      0.16,
+      43.07,
+      2.11
+    ],
+    "Path_A3": [
+      0.16,
+      33.16,
+      2.11
+    ],
+    "Path_A_457": [
+      0.16,
+      52.95,
+      2.11
+    ],
+    "Pillar_B2_427": [
+      77.14,
+      79.59,
+      1.82
+    ],
+    "Pillar_B3": [
+      72.46,
+      80.81,
+      2.22
+    ],
+    "Pillar_B4_431": [
+      88.11,
+      75.48,
+      1.82
+    ],
+    "Pillar_B5_434": [
+      98.21,
+      70.48,
+      1.82
+    ],
+    "Pillar_B6_437": [
+      4.13,
+      25.32,
+      1.76
+    ],
+    "Pillar_B7_440": [
+      6.59,
+      27.8,
+      2.25
+    ],
+    "Pillar_B8_443": [
+      8.74,
+      32.14,
+      2.25
+    ],
+    "Pillar_B_424": [
+      82.87,
+      78.03,
+      1.82
+    ],
+    "prp_barrier_Sml2_68": [
+      188.62,
+      183.13,
+      2.15
+    ],
+    "prp_barrier_Sml3_71": [
+      185.71,
+      184.62,
+      2.15
+    ],
+    "prp_barrier_Sml4_74": [
+      180.33,
+      188.11,
+      2.15
+    ],
+    "prp_barrier_Sml5_77": [
+      177.13,
+      189.81,
+      2.15
+    ],
+    "prp_barrier_Sml_235": [
+      6.38,
+      -196.94,
+      2.18
+    ],
+    "prp_cementBarrier2": [
+      5.27,
+      -194.66,
+      2.17
+    ],
+    "prp_cementBarrier3_80": [
+      185.09,
+      189.01,
+      2.15
+    ],
+    "prp_cementBarrier4": [
+      182.02,
+      190.18,
+      2.15
+    ],
+    "prp_cementBarrier5": [
+      179.29,
+      192.48,
+      2.15
+    ],
+    "prp_cementBarrier6": [
+      188.66,
+      186.79,
+      2.15
+    ],
+    "prp_cementBarrier_231": [
+      5.08,
+      -197.94,
+      2.17
+    ],
+    "prp_electricalBox2_668": [
+      6.68,
+      54.56,
+      1.91
+    ],
+    "prp_garbageCan4_306": [
+      -17.35,
+      -168.05,
+      2.07
+    ],
+    "prp_garbageCan5_86": [
+      191.32,
+      176.95,
+      1.95
+    ],
+    "prp_garbageCan6_89": [
+      169.67,
+      192.22,
+      1.81
+    ],
+    "prp_garbageCan7": [
+      5.01,
+      51.28,
+      2.11
+    ],
+    "prp_sewerGrate6_343": [
+      9.8,
+      -181.33,
+      1.95
+    ],
+    "prp_sewerGrate7": [
+      9.8,
+      -172.15,
+      1.95
+    ],
+    "prp_sewerGrate8_92": [
+      170.0,
+      184.99,
+      2.07
+    ],
+    "prp_sewerGrate9": [
+      188.91,
+      171.93,
+      2.07
+    ],
+    "prp_streetLight13": [
+      36.26,
+      -189.6,
+      2.03
+    ],
+    "prp_streetLight14": [
+      36.26,
+      -109.79,
+      2.03
+    ],
+    "prp_streetLight17": [
+      9.9,
+      -186.82,
+      2.03
+    ],
+    "prp_streetLight18": [
+      9.9,
+      -137.53,
+      2.03
+    ],
+    "prp_streetLight19": [
+      9.9,
+      -89.3,
+      2.03
+    ],
+    "prp_streetLight20": [
+      36.09,
+      -91.86,
+      2.13
+    ],
+    "prp_streetLight21": [
+      -18.79,
+      -57.45,
+      2.03
+    ],
+    "prp_streetLight22": [
+      3.2,
+      -72.98,
+      2.03
+    ],
+    "prp_streetLight23": [
+      43.29,
+      -72.98,
+      2.03
+    ],
+    "prp_streetLight25": [
+      73.22,
+      -5.4,
+      2.03
+    ],
+    "prp_streetLight26": [
+      42.87,
+      23.61,
+      2.03
+    ],
+    "Road_Crosswalk_Small_A4": [
+      -196.46,
+      -171.74,
+      2.24
+    ],
+    "RoadDecal_Arrow_Right10_60": [
+      7.99,
+      20.56,
+      2.12
+    ],
+    "RoadDecal_Arrow_Right11_63": [
+      -11.88,
+      -70.96,
+      2.08
+    ],
+    "RoadDecal_Arrow_Right14": [
+      67.29,
+      -6.08,
+      2.12
+    ],
+    "RoadDecal_Arrow_Right15": [
+      37.64,
+      -70.32,
+      2.12
+    ],
+    "RoadDecal_Arrow_Right16": [
+      -23.55,
+      -39.15,
+      2.12
+    ],
+    "RoadDecal_Arrow_Right3_54": [
+      82.37,
+      -33.54,
+      2.13
+    ],
+    "RoadDecal_Arrow_Right5": [
+      13.16,
+      -84.38,
+      2.17
+    ],
+    "RoadDecal_Arrow_Right6": [
+      17.54,
+      -84.38,
+      2.17
+    ],
+    "RoadDecal_Arrow_Right7": [
+      21.71,
+      -84.38,
+      2.17
+    ],
+    "RoadDecal_Arrow_Right8": [
+      39.91,
+      -69.55,
+      2.17
+    ],
+    "RoadDecal_Arrow_Right_197": [
+      32.88,
+      -190.69,
+      2.17
+    ],
+    "RoadDecal_BusLane15": [
+      13.22,
+      -183.77,
+      2.17
+    ],
+    "RoadDecal_BusLane16": [
+      13.22,
+      -149.85,
+      2.17
+    ],
+    "RoadDecal_BusLane17": [
+      13.22,
+      -111.14,
+      2.17
+    ],
+    "RoadDecal_BusLane18_37": [
+      -14.72,
+      5.93,
+      2.3
+    ],
+    "RoadDecal_BusLane19_40": [
+      48.16,
+      15.76,
+      2.25
+    ],
+    "RoadDecal_BusLane2": [
+      32.83,
+      -183.86,
+      2.17
+    ],
+    "RoadDecal_BusLane20_43": [
+      59.94,
+      -56.29,
+      2.3
+    ],
+    "RoadDecal_BusLane21_46": [
+      -19.22,
+      -49.03,
+      2.3
+    ],
+    "RoadDecal_BusLane3": [
+      32.83,
+      -151.56,
+      2.17
+    ],
+    "RoadDecal_BusLane4": [
+      32.83,
+      -111.89,
+      2.17
+    ],
+    "RoadDecal_BusLane5": [
+      32.83,
+      -84.29,
+      2.17
+    ],
+    "RoadDecal_Manhole_B2": [
+      28.92,
+      -188.81,
+      2.17
+    ],
+    "RoadDecal_Manhole_B3": [
+      28.92,
+      -151.77,
+      2.17
+    ],
+    "RoadGrate_B_23": [
+      7.75,
+      -69.96,
+      2.16
+    ],
+    "Rock_01_345": [
+      99.39,
+      82.04,
+      2.16
+    ],
+    "Rock_A2_134": [
+      -46.42,
+      -50.52,
+      2.35
+    ],
+    "Rock_A_109": [
+      59.83,
+      -82.23,
+      2.16
+    ],
+    "Rock_B2_128": [
+      -42.46,
+      -66.75,
+      2.35
+    ],
+    "Rock_B3": [
+      -42.46,
+      -73.61,
+      2.35
+    ],
+    "Rock_B_112": [
+      64.33,
+      -79.23,
+      2.16
+    ],
+    "Rock_C2_131": [
+      -34.97,
+      -50.46,
+      2.33
+    ],
+    "Rock_C_115": [
+      68.16,
+      -78.19,
+      2.16
+    ],
+    "Rock_D2": [
+      -45.55,
+      -58.57,
+      2.35
+    ],
+    "Rock_D_124": [
+      -34.31,
+      -58.57,
+      2.35
+    ],
+    "Rock_E2_137": [
+      -31.29,
+      -66.47,
+      2.34
+    ],
+    "Rock_E_121": [
+      -35.43,
+      -53.05,
+      2.35
+    ],
+    "Scaffolding_Bot_Straight_32": [
+      1.44,
+      -83.97,
+      2.11
+    ],
+    "Scaffolding_Plat_Stairs_26": [
+      1.49,
+      -78.13,
+      2.08
+    ],
+    "Scaffolding_Top_Straight_29": [
+      1.69,
+      -78.01,
+      -1.88
+    ],
+    "Sidewalk_Corner_Large_A12": [
+      112.75,
+      -80.38,
+      2.08
+    ],
+    "Sidewalk_Corner_Large_A15": [
+      99.94,
+      -106.98,
+      2.15
+    ],
+    "Sidewalk_Corner_Large_A18_5": [
+      128.46,
+      -51.6,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A2": [
+      -53.49,
+      -91.4,
+      2.07
+    ],
+    "Sidewalk_Corner_Large_A23": [
+      115.38,
+      2.88,
+      2.09
+    ],
+    "Sidewalk_Corner_Large_A24": [
+      141.0,
+      -12.28,
+      2.01
+    ],
+    "Sidewalk_Corner_Large_A25": [
+      48.99,
+      80.64,
+      2.07
+    ],
+    "Sidewalk_Corner_Large_A26": [
+      34.2,
+      55.7,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A28": [
+      34.2,
+      186.01,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A29": [
+      -69.19,
+      -13.23,
+      2.09
+    ],
+    "Sidewalk_Corner_Large_A3": [
+      -27.64,
+      -83.19,
+      2.08
+    ],
+    "Sidewalk_Corner_Large_A30": [
+      180.29,
+      197.01,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A31": [
+      198.11,
+      165.14,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A32": [
+      -90.9,
+      1.9,
+      2.09
+    ],
+    "Sidewalk_Corner_Large_A36": [
+      155.35,
+      -185.61,
+      2.1
+    ],
+    "Sidewalk_Corner_Large_A4": [
+      -72.9,
+      -51.74,
+      2.09
+    ],
+    "Sidewalk_Corner_Large_A52": [
+      -185.76,
+      -166.76,
+      2.1
+    ],
+    "Sidewalk_Corner_Large_A56": [
+      -184.92,
+      -12.93,
+      2.1
+    ],
+    "Sidewalk_Corner_Large_A5_2": [
+      35.21,
+      -120.12,
+      2.16
+    ],
+    "Sidewalk_Corner_Large_A6_3": [
+      96.93,
+      -36.47,
+      2.06
+    ],
+    "Sidewalk_Corner_Large_A7": [
+      50.26,
+      -95.26,
+      2.15
+    ],
+    "Sidewalk_Corner_Large_A_109": [
+      -95.23,
+      -37.01,
+      2.02
+    ],
+    "Sidewalk_Corner_Small_A": [
+      50.2,
+      -197.33,
+      2.15
+    ],
+    "Sidewalk_Corner_Small_A2": [
+      10.98,
+      -178.88,
+      2.09
+    ],
+    "Sidewalk_Extra_Small_A10": [
+      -17.51,
+      -170.01,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A100_103": [
+      -51.06,
+      -171.88,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A1012": [
+      -52.01,
+      89.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1013": [
+      -52.01,
+      99.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1014": [
+      -52.01,
+      108.5,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1015": [
+      -35.99,
+      89.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1016": [
+      -35.99,
+      99.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1017": [
+      -35.99,
+      108.5,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1018": [
+      -35.98,
+      117.76,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1019": [
+      -35.98,
+      127.02,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A101_104": [
+      -51.06,
+      -163.8,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A1020": [
+      -52.02,
+      117.76,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1021": [
+      -52.02,
+      127.02,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1022": [
+      -102.82,
+      83.22,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1023": [
+      -94.64,
+      87.55,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1024": [
+      -86.39,
+      91.9,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1025": [
+      -95.34,
+      69.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1026": [
+      -87.15,
+      73.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1027": [
+      -78.91,
+      77.75,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1028": [
+      -70.72,
+      82.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1029": [
+      -62.54,
+      86.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A102_105": [
+      -29.65,
+      -170.8,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A103_106": [
+      -51.06,
+      -155.68,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A104": [
+      -23.48,
+      -103.1,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A105_162": [
+      177.12,
+      -2.65,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A106_109": [
+      -29.67,
+      -176.74,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A11": [
+      -26.59,
+      -175.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1156": [
+      142.34,
+      -199.85,
+      2.12
+    ],
+    "Sidewalk_Extra_Small_A1173": [
+      147.67,
+      -192.98,
+      2.12
+    ],
+    "Sidewalk_Extra_Small_A1174": [
+      141.86,
+      -179.59,
+      2.12
+    ],
+    "Sidewalk_Extra_Small_A1175": [
+      121.25,
+      -192.41,
+      2.12
+    ],
+    "Sidewalk_Extra_Small_A1176": [
+      121.63,
+      -179.02,
+      2.12
+    ],
+    "Sidewalk_Extra_Small_A12": [
+      -26.59,
+      -170.01,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1206": [
+      -78.22,
+      96.24,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1207": [
+      -70.04,
+      100.57,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1208": [
+      -140.53,
+      62.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1209": [
+      -131.27,
+      62.72,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1210": [
+      -121.95,
+      62.84,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1211": [
+      -140.3,
+      46.57,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1212": [
+      -131.05,
+      46.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1213": [
+      -121.72,
+      46.83,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1214": [
+      -112.47,
+      46.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1215": [
+      -103.21,
+      47.08,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1216": [
+      -112.69,
+      62.99,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1217": [
+      -103.44,
+      63.12,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1218": [
+      -192.22,
+      59.13,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1219": [
+      -181.03,
+      59.29,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1220": [
+      -169.75,
+      59.44,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1221": [
+      -192.0,
+      43.12,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1222": [
+      -180.8,
+      43.27,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1223": [
+      -169.53,
+      43.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1224": [
+      -158.33,
+      43.58,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1225": [
+      -147.14,
+      43.73,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1226": [
+      -158.56,
+      59.62,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1227": [
+      -147.37,
+      59.77,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1228": [
+      -138.91,
+      -7.49,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1229": [
+      -139.01,
+      3.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1230": [
+      -139.11,
+      14.98,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1231": [
+      -122.9,
+      -7.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1232": [
+      -123.0,
+      3.84,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1233": [
+      -123.1,
+      15.12,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1234": [
+      -123.19,
+      26.31,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1235": [
+      -123.29,
+      37.51,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1236": [
+      -139.23,
+      26.17,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1237": [
+      -139.33,
+      37.36,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1238": [
+      -84.26,
+      -95.92,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1239": [
+      -88.25,
+      -86.74,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1240": [
+      -92.26,
+      -77.48,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1241": [
+      -69.57,
+      -89.54,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1242": [
+      -73.56,
+      -80.36,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1243": [
+      -77.57,
+      -71.11,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1244": [
+      -81.55,
+      -61.92,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1245": [
+      -85.53,
+      -52.73,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1246": [
+      -96.26,
+      -68.31,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1247": [
+      -100.25,
+      -59.12,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1248": [
+      -113.03,
+      -119.17,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1249": [
+      -118.65,
+      -106.22,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1250": [
+      -124.31,
+      -93.17,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1251": [
+      -92.41,
+      -110.22,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1252": [
+      -98.03,
+      -97.27,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1253": [
+      -103.69,
+      -84.22,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1254": [
+      -109.29,
+      -71.27,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1255": [
+      -114.91,
+      -58.32,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1256": [
+      -129.95,
+      -80.23,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1257": [
+      -135.57,
+      -67.28,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1258": [
+      -169.26,
+      -116.09,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1259": [
+      -169.09,
+      -101.97,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1260": [
+      -168.93,
+      -87.75,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1261": [
+      -145.16,
+      -116.37,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1262": [
+      -145.0,
+      -102.25,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1263": [
+      -144.83,
+      -88.03,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1264": [
+      -144.65,
+      -73.92,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1265": [
+      -144.49,
+      -59.8,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1266": [
+      -168.79,
+      -73.64,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1267": [
+      -168.62,
+      -59.52,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1268": [
+      -191.92,
+      -133.06,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1269": [
+      -177.8,
+      -133.12,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1270": [
+      -163.58,
+      -133.19,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1271": [
+      -192.03,
+      -157.15,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1272": [
+      -177.91,
+      -157.22,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1273": [
+      -163.69,
+      -157.28,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1274": [
+      -149.58,
+      -157.36,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1275": [
+      -135.46,
+      -157.43,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1276": [
+      -149.46,
+      -133.23,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1277": [
+      -135.35,
+      -133.29,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1278": [
+      -157.94,
+      -116.09,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1279": [
+      -157.77,
+      -101.97,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1280": [
+      -157.61,
+      -87.75,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1281": [
+      -133.84,
+      -116.37,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1282": [
+      -133.68,
+      -102.25,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1283": [
+      -133.51,
+      -88.03,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1284": [
+      -133.33,
+      -73.92,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1285": [
+      -133.17,
+      -59.8,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1286": [
+      -157.47,
+      -73.64,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1287": [
+      -157.3,
+      -59.52,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1288": [
+      -132.2,
+      -143.93,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1289": [
+      -122.64,
+      -133.54,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1290": [
+      -113.01,
+      -123.07,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1291": [
+      -114.46,
+      -160.24,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1292": [
+      -104.91,
+      -149.85,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1293": [
+      -95.28,
+      -139.38,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1294": [
+      -85.71,
+      -129.01,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1295": [
+      -76.15,
+      -118.62,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1296": [
+      -103.47,
+      -112.67,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A1297": [
+      -93.92,
+      -102.28,
+      2.24
+    ],
+    "Sidewalk_Extra_Small_A13": [
+      -35.65,
+      -175.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1368": [
+      -68.14,
+      -194.35,
+      1.96
+    ],
+    "Sidewalk_Extra_Small_A1369": [
+      -14.19,
+      89.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1370": [
+      -14.19,
+      99.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1371": [
+      -14.19,
+      108.5,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1372": [
+      1.82,
+      89.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1373": [
+      1.82,
+      99.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1374": [
+      1.82,
+      108.5,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1375": [
+      1.83,
+      117.76,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1376": [
+      1.83,
+      127.02,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1377": [
+      -14.21,
+      117.76,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1378": [
+      -14.21,
+      127.02,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A1379": [
+      158.83,
+      -112.99,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A138": [
+      -59.66,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A1380": [
+      158.83,
+      -104.85,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1381": [
+      157.32,
+      -95.68,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1382": [
+      157.32,
+      -87.54,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1383": [
+      157.32,
+      -78.52,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1384": [
+      157.32,
+      -70.39,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1385": [
+      157.32,
+      -63.8,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A1386": [
+      157.32,
+      -55.67,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A139": [
+      -68.8,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A14": [
+      -35.65,
+      -170.01,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A140": [
+      -50.44,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A141": [
+      -78.0,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A142": [
+      -87.2,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A143": [
+      -96.45,
+      -197.88,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A144": [
+      -41.3,
+      -197.9,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A146": [
+      -43.22,
+      -78.01,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A147": [
+      -50.04,
+      -64.09,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A148": [
+      -37.56,
+      -64.09,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A149": [
+      -27.55,
+      -64.09,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A15": [
+      0.65,
+      -187.87,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A150": [
+      -27.55,
+      -81.31,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A151": [
+      -21.31,
+      -71.66,
+      2.49
+    ],
+    "Sidewalk_Extra_Small_A159": [
+      177.12,
+      6.61,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A16": [
+      0.66,
+      -181.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A160": [
+      177.12,
+      15.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A161": [
+      193.13,
+      -2.65,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A162": [
+      193.13,
+      6.61,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A163": [
+      193.13,
+      15.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A164": [
+      193.15,
+      25.19,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A165": [
+      193.15,
+      34.44,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A166": [
+      177.1,
+      25.19,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A167": [
+      177.1,
+      34.44,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A168": [
+      179.19,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A169": [
+      179.19,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A17": [
+      -8.43,
+      -187.87,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A170": [
+      179.19,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A171": [
+      195.21,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A172": [
+      195.21,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A173": [
+      195.21,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A174": [
+      195.22,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A175": [
+      195.22,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A176": [
+      179.18,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A177": [
+      179.18,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A18": [
+      -8.43,
+      -181.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A188": [
+      157.26,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A189": [
+      157.26,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A19": [
+      -17.51,
+      -187.87,
+      2.01
+    ],
+    "Sidewalk_Extra_Small_A190": [
+      157.26,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A191": [
+      173.28,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A192": [
+      173.28,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A193": [
+      173.28,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A194": [
+      173.29,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A195": [
+      173.29,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A196": [
+      157.25,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A197": [
+      157.25,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A198": [
+      145.89,
+      -2.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A199": [
+      145.89,
+      6.55,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A2": [
+      -78.69,
+      -84.12,
+      2.37
+    ],
+    "Sidewalk_Extra_Small_A20": [
+      -17.51,
+      -181.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A200": [
+      145.89,
+      15.88,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A201": [
+      161.9,
+      -2.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A202": [
+      161.9,
+      6.55,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A203": [
+      161.91,
+      15.88,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A204": [
+      161.92,
+      25.14,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A205": [
+      161.92,
+      34.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A206": [
+      145.87,
+      25.14,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A207": [
+      145.87,
+      34.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A208": [
+      147.25,
+      89.11,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A209": [
+      147.25,
+      98.36,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A21": [
+      -26.59,
+      -187.87,
+      2.0
+    ],
+    "Sidewalk_Extra_Small_A210": [
+      147.25,
+      107.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A211": [
+      163.27,
+      89.11,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A212": [
+      163.27,
+      98.36,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A213": [
+      163.27,
+      107.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A214": [
+      163.28,
+      116.94,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A215": [
+      163.28,
+      126.2,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A216": [
+      147.24,
+      116.94,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A217": [
+      147.24,
+      126.2,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A218": [
+      115.36,
+      67.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A219": [
+      115.36,
+      77.14,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A22": [
+      -26.59,
+      -181.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A220": [
+      115.36,
+      86.47,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A221": [
+      131.37,
+      67.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A222": [
+      131.37,
+      77.14,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A223": [
+      131.37,
+      86.47,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A224": [
+      131.38,
+      95.72,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A225": [
+      131.38,
+      104.98,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A226": [
+      115.34,
+      95.72,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A227": [
+      115.34,
+      104.98,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A228": [
+      134.55,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A229": [
+      134.55,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A230": [
+      134.55,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A231": [
+      150.57,
+      43.59,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A232": [
+      150.57,
+      52.85,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A233": [
+      150.57,
+      62.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A234": [
+      150.58,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A235": [
+      150.58,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A236": [
+      134.54,
+      71.43,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A237": [
+      134.54,
+      80.69,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A238": [
+      115.36,
+      113.79,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A239": [
+      115.36,
+      123.05,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A23_41": [
+      -8.36,
+      -107.04,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A24": [
+      -35.65,
+      -181.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A240": [
+      115.36,
+      132.37,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A241": [
+      131.37,
+      113.79,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A242": [
+      131.37,
+      123.05,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A243": [
+      131.37,
+      132.37,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A244": [
+      131.38,
+      141.63,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A245": [
+      131.38,
+      150.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A246": [
+      115.34,
+      141.63,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A247": [
+      115.34,
+      150.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A248": [
+      83.52,
+      113.79,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A249": [
+      83.52,
+      123.05,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A25": [
+      0.71,
+      -107.04,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A250": [
+      83.52,
+      132.37,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A251": [
+      99.53,
+      113.79,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A252": [
+      99.53,
+      123.05,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A253": [
+      99.53,
+      132.37,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A254": [
+      99.54,
+      141.63,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A255": [
+      99.54,
+      150.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A256": [
+      83.5,
+      141.63,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A257": [
+      83.5,
+      150.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A258": [
+      92.63,
+      77.97,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A259": [
+      92.63,
+      87.23,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A26": [
+      0.71,
+      -101.09,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A260": [
+      92.63,
+      96.55,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A261": [
+      108.65,
+      77.97,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A262": [
+      108.65,
+      87.23,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A263": [
+      108.65,
+      96.55,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A264": [
+      108.66,
+      105.81,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A265": [
+      108.66,
+      115.07,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A266": [
+      92.62,
+      105.81,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A267": [
+      92.62,
+      115.07,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A268": [
+      60.49,
+      84.77,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A269": [
+      60.49,
+      94.03,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A27": [
+      0.71,
+      -94.82,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A270": [
+      60.49,
+      103.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A271": [
+      76.8,
+      84.77,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A272": [
+      76.8,
+      94.03,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A273": [
+      76.81,
+      103.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A274": [
+      76.82,
+      112.61,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A275": [
+      76.82,
+      121.86,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A276": [
+      60.47,
+      112.61,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A277": [
+      60.47,
+      121.86,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A278": [
+      60.49,
+      129.23,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A279": [
+      60.49,
+      139.2,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A28": [
+      -5.25,
+      -88.33,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A280": [
+      60.49,
+      149.24,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A281": [
+      76.5,
+      129.23,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A282": [
+      76.5,
+      139.2,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A283": [
+      76.5,
+      149.24,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A284": [
+      76.52,
+      159.21,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A285": [
+      76.52,
+      169.17,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A286": [
+      60.47,
+      159.21,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A287": [
+      60.47,
+      169.17,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A288": [
+      91.8,
+      145.81,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A289": [
+      91.8,
+      155.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A29": [
+      -14.32,
+      -101.1,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A290": [
+      91.8,
+      164.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A291": [
+      107.82,
+      145.81,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A292": [
+      107.82,
+      155.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A293": [
+      107.82,
+      164.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A294": [
+      107.83,
+      173.64,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A295": [
+      107.83,
+      182.9,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A296": [
+      91.79,
+      173.64,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A297": [
+      91.79,
+      182.9,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A298": [
+      121.44,
+      139.09,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A299": [
+      121.45,
+      148.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A30": [
+      -17.51,
+      -103.13,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A300": [
+      121.45,
+      157.67,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A301": [
+      137.46,
+      139.09,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A302": [
+      137.46,
+      148.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A303": [
+      137.46,
+      157.67,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A304": [
+      137.47,
+      166.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A305": [
+      137.47,
+      176.19,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A306": [
+      121.43,
+      166.93,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A307": [
+      121.43,
+      176.19,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A308": [
+      128.0,
+      132.3,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A309": [
+      132.91,
+      140.15,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A31": [
+      57.5,
+      -153.32,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A310": [
+      137.85,
+      148.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A311": [
+      141.58,
+      123.81,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A312": [
+      146.49,
+      131.66,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A313": [
+      151.43,
+      139.57,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A314": [
+      156.34,
+      147.42,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A315": [
+      161.25,
+      155.26,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A316": [
+      142.74,
+      155.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A317": [
+      147.65,
+      163.77,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A318": [
+      191.69,
+      121.29,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A319": [
+      184.66,
+      127.31,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A32": [
+      69.59,
+      -153.32,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A320": [
+      177.58,
+      133.39,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A322": [
+      195.09,
+      139.47,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A323": [
+      188.01,
+      145.54,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A324": [
+      180.99,
+      151.58,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A325": [
+      173.96,
+      157.6,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A326": [
+      170.55,
+      139.4,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A327": [
+      163.52,
+      145.42,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A33": [
+      57.5,
+      -147.12,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A336": [
+      195.7,
+      109.35,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A337": [
+      191.33,
+      117.51,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A34": [
+      69.59,
+      -147.12,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A35": [
+      57.5,
+      -140.85,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A36": [
+      69.59,
+      -140.85,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A37": [
+      57.5,
+      -134.54,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A38": [
+      69.59,
+      -134.54,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A39": [
+      57.5,
+      -128.22,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A3_12": [
+      4.98,
+      -187.89,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A4": [
+      4.98,
+      -181.92,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A40": [
+      69.59,
+      -128.22,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A41": [
+      57.5,
+      -122.0,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A42": [
+      69.59,
+      -122.0,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A43": [
+      40.41,
+      -78.78,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A44": [
+      28.4,
+      -78.78,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A45": [
+      16.31,
+      -78.78,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A46": [
+      -17.51,
+      -114.59,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A47": [
+      -23.48,
+      -114.59,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A48": [
+      -29.39,
+      -118.43,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A49": [
+      57.5,
+      -159.33,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A5": [
+      0.65,
+      -175.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A50": [
+      58.27,
+      -85.03,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A51_48": [
+      71.59,
+      -86.12,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A52_68": [
+      69.59,
+      -159.33,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A53": [
+      81.7,
+      -122.0,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A54": [
+      93.79,
+      -122.0,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A55": [
+      87.43,
+      -87.35,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A56": [
+      87.43,
+      -78.09,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A57": [
+      87.43,
+      -68.77,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A58": [
+      103.44,
+      -87.35,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A59": [
+      103.44,
+      -78.09,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A6": [
+      0.66,
+      -170.01,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A60": [
+      103.44,
+      -68.77,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A61": [
+      103.45,
+      -59.51,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A619": [
+      193.89,
+      -99.72,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A62": [
+      103.45,
+      -50.25,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A620": [
+      183.53,
+      -99.72,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A622": [
+      193.89,
+      -80.8,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A623": [
+      183.53,
+      -80.8,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A624": [
+      173.25,
+      -80.78,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A625": [
+      162.97,
+      -80.78,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A626": [
+      173.25,
+      -99.73,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A627": [
+      162.97,
+      -99.73,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A628": [
+      179.11,
+      -159.22,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A629": [
+      177.49,
+      -149.97,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A630": [
+      177.49,
+      -140.64,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A631": [
+      196.14,
+      -159.22,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A632": [
+      196.14,
+      -149.97,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A633": [
+      196.14,
+      -140.64,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A634": [
+      196.15,
+      -131.39,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A635": [
+      196.15,
+      -122.13,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A636": [
+      177.48,
+      -131.39,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A637": [
+      177.48,
+      -122.13,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A638": [
+      167.39,
+      -140.64,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A639": [
+      161.61,
+      -131.39,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A63_59": [
+      87.41,
+      -59.51,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A64": [
+      87.41,
+      -50.25,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A640": [
+      162.55,
+      -122.13,
+      2.3
+    ],
+    "Sidewalk_Extra_Small_A642": [
+      193.89,
+      -63.69,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A643": [
+      183.53,
+      -63.69,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A645": [
+      193.89,
+      -44.77,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A646": [
+      183.53,
+      -44.77,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A647": [
+      173.25,
+      -44.75,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A648": [
+      162.97,
+      -44.75,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A649": [
+      173.25,
+      -63.7,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A65": [
+      81.82,
+      -129.15,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A650": [
+      162.97,
+      -63.7,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A654": [
+      60.49,
+      141.73,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A657": [
+      185.78,
+      -59.12,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A658": [
+      180.83,
+      -68.13,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A66": [
+      93.91,
+      -129.15,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A660": [
+      197.44,
+      -77.25,
+      2.08
+    ],
+    "Sidewalk_Extra_Small_A661": [
+      60.49,
+      151.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A662": [
+      60.49,
+      161.74,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A663": [
+      76.5,
+      141.73,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A664": [
+      76.5,
+      151.7,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A665": [
+      76.5,
+      161.74,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A666": [
+      76.52,
+      171.71,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A667": [
+      76.52,
+      181.67,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A668": [
+      60.47,
+      171.71,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A669": [
+      60.47,
+      181.67,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A67": [
+      105.79,
+      -122.0,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A68": [
+      105.79,
+      -129.08,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A69": [
+      105.79,
+      -136.05,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A7": [
+      -8.43,
+      -175.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A70": [
+      105.79,
+      -143.08,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A71": [
+      105.79,
+      -150.12,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A72": [
+      105.79,
+      -157.13,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A73": [
+      105.91,
+      -164.15,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A74": [
+      105.79,
+      -171.15,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A75": [
+      105.91,
+      -178.2,
+      2.23
+    ],
+    "Sidewalk_Extra_Small_A76": [
+      105.79,
+      -186.53,
+      2.02
+    ],
+    "Sidewalk_Extra_Small_A77": [
+      -35.65,
+      -164.04,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A78": [
+      -35.65,
+      -158.07,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A79": [
+      -35.65,
+      -152.06,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A8": [
+      -8.43,
+      -170.01,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A80": [
+      3.44,
+      -79.78,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A81": [
+      -6.21,
+      -72.63,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A82": [
+      -15.93,
+      -65.44,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A83": [
+      77.45,
+      -7.24,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A84": [
+      76.8,
+      -19.23,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A85": [
+      76.14,
+      -31.3,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A86": [
+      -31.29,
+      -43.8,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A87": [
+      -31.42,
+      -31.79,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A88": [
+      -31.56,
+      -19.7,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A89": [
+      41.82,
+      18.68,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A9": [
+      -17.51,
+      -175.95,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A90": [
+      29.81,
+      18.81,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A91": [
+      17.72,
+      18.95,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A92_81": [
+      -35.67,
+      -187.87,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A93_89": [
+      -44.73,
+      -171.2,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A940": [
+      -78.16,
+      -197.48,
+      1.96
+    ],
+    "Sidewalk_Extra_Small_A941": [
+      -78.15,
+      -189.41,
+      1.96
+    ],
+    "Sidewalk_Extra_Small_A942": [
+      -78.15,
+      -181.28,
+      1.96
+    ],
+    "Sidewalk_Extra_Small_A943": [
+      -90.8,
+      -198.48,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A944": [
+      -90.8,
+      -190.4,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A945": [
+      -90.8,
+      -182.28,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A94_90": [
+      -44.73,
+      -165.27,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A95_91": [
+      -44.74,
+      -177.18,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A96_92": [
+      -44.73,
+      -159.29,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A972_109": [
+      -44.09,
+      -150.82,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A974": [
+      -73.03,
+      -192.13,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A975": [
+      -82.18,
+      -192.13,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A976": [
+      -63.82,
+      -192.14,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A977": [
+      -91.38,
+      -192.13,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A978": [
+      -100.57,
+      -192.13,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A979_110": [
+      -40.56,
+      -146.05,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A97_93": [
+      -44.73,
+      -153.32,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A980": [
+      -54.68,
+      -192.15,
+      2.1
+    ],
+    "Sidewalk_Extra_Small_A981": [
+      -47.66,
+      -155.62,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A982": [
+      -37.0,
+      -141.25,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A983": [
+      -33.44,
+      -136.45,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A984": [
+      -29.87,
+      -131.62,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A985": [
+      -51.2,
+      -160.39,
+      2.21
+    ],
+    "Sidewalk_Extra_Small_A986": [
+      -87.84,
+      -171.98,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A987": [
+      -81.0,
+      -167.68,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A988": [
+      -74.13,
+      -163.35,
+      2.28
+    ],
+    "Sidewalk_Extra_Small_A989": [
+      -139.0,
+      -187.99,
+      2.36
+    ],
+    "Sidewalk_Extra_Small_A98_94": [
+      -44.73,
+      -147.31,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A990": [
+      -128.68,
+      -187.82,
+      2.36
+    ],
+    "Sidewalk_Extra_Small_A991": [
+      -118.3,
+      -187.64,
+      2.36
+    ],
+    "Sidewalk_Extra_Small_A99_95": [
+      -44.75,
+      -183.12,
+      1.98
+    ],
+    "Sidewalk_Extra_Small_A_118": [
+      -78.71,
+      -76.81,
+      2.38
+    ],
+    "Sidewalk_MetalCurb_A2": [
+      88.86,
+      198.0,
+      2.23
+    ],
+    "Sidewalk_MetalCurb_A3": [
+      139.39,
+      185.01,
+      2.15
+    ],
+    "Sign_1_mdl2_122": [
+      126.83,
+      187.33,
+      1.82
+    ],
+    "Sign_2_mdl3_90": [
+      173.24,
+      190.31,
+      1.88
+    ],
+    "Sign_2_mdl4_93": [
+      193.23,
+      180.59,
+      1.81
+    ],
+    "Sign_2_mdl_284": [
+      7.74,
+      -192.11,
+      2.26
+    ],
+    "Sign_3_mdl_87": [
+      10.08,
+      -91.89,
+      1.97
+    ],
+    "Sign_5_mdl2_75": [
+      77.41,
+      -38.19,
+      1.82
+    ],
+    "Sign_5_mdl3_78": [
+      35.27,
+      30.19,
+      1.85
+    ],
+    "Sign_5_mdl4_81": [
+      -30.01,
+      -10.1,
+      1.76
+    ],
+    "Sign_5_mdl5_84": [
+      9.0,
+      -76.99,
+      1.97
+    ],
+    "Sign_5_mdl_281": [
+      37.91,
+      -106.66,
+      2.13
+    ],
+    "Sign_Danger_57": [
+      8.07,
+      -80.75,
+      0.76
+    ],
+    "Sign_RoadClosed4_62": [
+      157.44,
+      194.56,
+      2.25
+    ],
+    "Sign_Slow2": [
+      7.25,
+      -73.36,
+      1.99
+    ],
+    "Sign_Slow_60": [
+      13.59,
+      -60.13,
+      1.99
+    ],
+    "SL_C_11": [
+      78.97,
+      -38.23,
+      2.25
+    ],
+    "SL_C_12": [
+      78.97,
+      -10.65,
+      2.25
+    ],
+    "SL_C_15": [
+      173.33,
+      -10.65,
+      2.25
+    ],
+    "SL_C_26": [
+      190.54,
+      176.09,
+      2.25
+    ],
+    "SL_C_27": [
+      168.88,
+      190.15,
+      2.25
+    ],
+    "SL_C_31": [
+      35.86,
+      197.84,
+      2.25
+    ],
+    "SL_C_32": [
+      8.85,
+      197.84,
+      2.25
+    ],
+    "SL_C_33": [
+      35.86,
+      84.24,
+      2.25
+    ],
+    "SL_C_34": [
+      8.85,
+      84.24,
+      2.25
+    ],
+    "SL_C_35": [
+      35.86,
+      66.22,
+      2.25
+    ],
+    "SL_C_37": [
+      35.86,
+      28.59,
+      2.25
+    ],
+    "SL_C_38": [
+      8.85,
+      28.59,
+      2.25
+    ],
+    "SL_C_39": [
+      90.48,
+      73.06,
+      2.25
+    ],
+    "SL_C_40": [
+      85.67,
+      59.94,
+      2.25
+    ],
+    "SL_C_41": [
+      119.16,
+      43.63,
+      2.25
+    ],
+    "SL_C_42": [
+      106.8,
+      37.02,
+      2.25
+    ],
+    "SL_C_43": [
+      113.03,
+      4.7,
+      2.25
+    ],
+    "SL_C_44": [
+      128.01,
+      3.9,
+      2.25
+    ],
+    "SL_C_45": [
+      8.85,
+      66.22,
+      2.25
+    ],
+    "SL_C_48": [
+      163.97,
+      169.73,
+      2.25
+    ],
+    "SL_C_49": [
+      105.57,
+      191.78,
+      2.25
+    ],
+    "SL_C_57": [
+      190.66,
+      -166.9,
+      2.25
+    ],
+    "SL_C_58": [
+      190.66,
+      -189.2,
+      2.25
+    ],
+    "SL_C_59": [
+      168.93,
+      -166.14,
+      2.25
+    ],
+    "SL_C_60": [
+      159.25,
+      -186.23,
+      2.25
+    ],
+    "SL_C_61": [
+      146.87,
+      -135.87,
+      2.25
+    ],
+    "SL_C_62": [
+      126.8,
+      -145.59,
+      2.25
+    ],
+    "SL_C_9": [
+      172.28,
+      -38.23,
+      2.25
+    ],
+    "SM_MERGED_Building_C_Mid_CornerIn_C264_Blueprint": [
+      192.66,
+      5.23,
+      -102.25
+    ],
+    "SM_MERGED_Building_E_Bot_Door_A6_Blueprint_11": [
+      58.72,
+      -171.38,
+      -7.65
+    ],
+    "SM_MERGED_Building_F_Bot_Door_A65_Blueprint01_1850": [
+      -38.76,
+      106.59,
+      -68.53
+    ],
+    "SM_MERGED_Scaffolding_Bot_Corner_Blueprint_8": [
+      5.72,
+      -146.88,
+      -9.65
+    ],
+    "SM_MERGED_TemplateFloor21_Blueprint3_4": [
+      -74.78,
+      -102.88,
+      -25.15
+    ],
+    "Tree_A12": [
+      -32.19,
+      16.81,
+      2.35
+    ],
+    "Tree_A13": [
+      94.1,
+      135.46,
+      1.93
+    ],
+    "Tree_A14": [
+      115.07,
+      135.46,
+      1.93
+    ],
+    "Tree_A15": [
+      134.18,
+      -178.39,
+      2.35
+    ],
+    "Tree_A2": [
+      -57.36,
+      -52.28,
+      2.35
+    ],
+    "Tree_A20": [
+      110.7,
+      -138.37,
+      2.35
+    ],
+    "Tree_A3": [
+      83.75,
+      4.3,
+      2.35
+    ],
+    "Tree_A4_10": [
+      49.38,
+      37.96,
+      2.35
+    ],
+    "Tree_A5": [
+      113.13,
+      -153.76,
+      2.35
+    ],
+    "Tree_A6": [
+      94.1,
+      79.35,
+      1.93
+    ],
+    "Tree_A_128": [
+      -48.09,
+      -64.41,
+      2.35
+    ],
+    "Tree_A_A3": [
+      -16.53,
+      -175.88,
+      1.67
+    ],
+    "Tree_A_A4": [
+      -47.38,
+      -167.42,
+      1.67
+    ],
+    "Tree_A_A5": [
+      -1.33,
+      -187.74,
+      1.67
+    ],
+    "Tree_A_A6": [
+      -54.11,
+      -164.59,
+      1.67
+    ],
+    "Tree_B2_121": [
+      -28.05,
+      -61.84,
+      2.34
+    ],
+    "Tree_B_115": [
+      -36.17,
+      -48.67,
+      2.35
+    ],
+    "Tree_C4": [
+      -96.54,
+      -72.78,
+      2.35
+    ],
+    "Tree_C5": [
+      -83.61,
+      -128.85,
+      2.35
+    ],
+    "Tree_C6": [
+      -68.06,
+      38.96,
+      2.35
+    ],
+    "Tree_C_118": [
+      -37.14,
+      -74.25,
+      2.35
+    ],
+    "Tree_Fence_mdl2": [
+      43.53,
+      -128.95,
+      2.03
+    ],
+    "Tree_Fence_mdl3": [
+      43.53,
+      -145.07,
+      2.03
+    ],
+    "Tree_Fence_mdl_275": [
+      43.53,
+      -113.04,
+      2.03
+    ],
+    "Vehicle_A_182": [
+      12.12,
+      -178.42,
+      2.17
+    ],
+    "Vehicle_Police5": [
+      34.28,
+      -171.11,
+      2.17
+    ],
+    "Vehicle_Police6": [
+      33.14,
+      -137.21,
+      2.17
+    ],
+    "Vehicle_Police_188": [
+      12.05,
+      -126.03,
+      2.17
+    ],
+    "Vehicle_Taxi15": [
+      33.39,
+      -124.65,
+      2.17
+    ],
+    "Vehicle_Taxi16": [
+      33.39,
+      -151.14,
+      2.17
+    ],
+    "Vehicle_Taxi17": [
+      33.48,
+      -118.24,
+      2.17
+    ],
+    "Vehicle_Taxi_185": [
+      12.18,
+      -168.99,
+      2.17
+    ],
+    "Veranda_01_348": [
+      94.33,
+      88.71,
+      2.16
+    ],
+    "Veranda_352": [
+      108.35,
+      111.97,
+      1.83
+    ],
+    "prp_streetLight24": [
+      73.22,
+      -44.86,
+      2.03
+    ],
+    "ParticleEventManager_2147482537": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "PlayerCameraManager_2147482528": [
+      -3.0,
+      -0.0,
+      -0.29
+    ],
+    "GameplayDebuggerPlayerManager_2147482553": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "Lighting_Pole2": [
+      92.43,
+      -196.35,
+      2.33
+    ],
+    "Lighting_Pole3": [
+      63.81,
+      -196.35,
+      2.33
+    ],
+    "Lighting_Pole4": [
+      48.48,
+      -196.35,
+      2.33
+    ],
+    "Lighting_Pole_95": [
+      92.47,
+      -196.35,
+      2.33
+    ],
+    "Dumpster_Closed2_575": [
+      95.85,
+      -195.59,
+      2.1
+    ],
+    "WeatherActor_C_2147481665": [
+      -0.0,
+      -0.0,
+      1.75
+    ],
+    "MenuActor_C_2147481664": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "GameStateBase_2147482535": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "GameNetworkManager_2147482534": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "GameSession_2147482538": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "PlayerState_2147482529": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "WorldInfo_0": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "BaseCarPath_BP10": [
+      168.22,
+      -180.38,
+      2.15
+    ],
+    "BaseCarPath_BP11": [
+      168.22,
+      -183.88,
+      2.15
+    ],
+    "BaseCarPath_BP12": [
+      80.72,
+      -18.88,
+      2.15
+    ],
+    "BaseCarPath_BP13": [
+      107.72,
+      -30.38,
+      2.15
+    ],
+    "BaseCarPath_BP14": [
+      107.72,
+      -26.38,
+      2.15
+    ],
+    "BaseCarPath_BP148": [
+      -120.78,
+      -179.88,
+      2.15
+    ],
+    "BaseCarPath_BP149": [
+      -116.78,
+      -179.88,
+      2.15
+    ],
+    "BaseCarPath_BP150_70164": [
+      -138.78,
+      -172.88,
+      2.15
+    ],
+    "BaseCarPath_BP152": [
+      -88.78,
+      -163.88,
+      2.15
+    ],
+    "BaseCarPath_BP15_27440": [
+      119.72,
+      -40.88,
+      2.15
+    ],
+    "BaseCarPath_BP16_36467": [
+      123.22,
+      -41.38,
+      2.15
+    ],
+    "BaseCarPath_BP17": [
+      126.72,
+      -41.38,
+      2.15
+    ],
+    "BaseCarPath_BP18": [
+      107.72,
+      -34.38,
+      2.15
+    ],
+    "BaseCarPath_BP189": [
+      65.02,
+      -37.38,
+      2.15
+    ],
+    "BaseCarPath_BP19": [
+      80.72,
+      -14.88,
+      2.15
+    ],
+    "BaseCarPath_BP20_1357": [
+      13.22,
+      88.12,
+      2.15
+    ],
+    "BaseCarPath_BP21": [
+      16.22,
+      88.12,
+      2.15
+    ],
+    "BaseCarPath_BP22": [
+      20.22,
+      88.12,
+      2.15
+    ],
+    "BaseCarPath_BP23": [
+      24.22,
+      198.12,
+      2.15
+    ],
+    "BaseCarPath_BP24": [
+      28.22,
+      198.12,
+      2.15
+    ],
+    "BaseCarPath_BP25": [
+      32.22,
+      198.12,
+      2.15
+    ],
+    "BaseCarPath_BP267": [
+      28.57,
+      -80.88,
+      2.15
+    ],
+    "BaseCarPath_BP26_7336": [
+      68.22,
+      -39.88,
+      2.15
+    ],
+    "BaseCarPath_BP27": [
+      -24.78,
+      -10.88,
+      2.15
+    ],
+    "BaseCarPath_BP28": [
+      38.22,
+      21.12,
+      2.15
+    ],
+    "BaseCarPath_BP29_13702": [
+      32.22,
+      66.12,
+      2.15
+    ],
+    "BaseCarPath_BP30": [
+      28.22,
+      66.12,
+      2.15
+    ],
+    "BaseCarPath_BP31": [
+      24.22,
+      66.12,
+      2.15
+    ],
+    "BaseCarPath_BP32": [
+      20.22,
+      32.12,
+      2.15
+    ],
+    "BaseCarPath_BP33": [
+      16.22,
+      32.12,
+      2.15
+    ],
+    "BaseCarPath_BP335": [
+      14.62,
+      -67.48,
+      2.15
+    ],
+    "BaseCarPath_BP34": [
+      12.22,
+      32.12,
+      2.15
+    ],
+    "BaseCarPath_BP346": [
+      -8.58,
+      -55.68,
+      2.15
+    ],
+    "BaseCarPath_BP347": [
+      -19.88,
+      -12.38,
+      2.15
+    ],
+    "BaseCarPath_BP348": [
+      36.12,
+      15.92,
+      2.15
+    ],
+    "BaseCarPath_BP35_15952": [
+      6.22,
+      74.12,
+      2.15
+    ],
+    "BaseCarPath_BP36_22544": [
+      13.22,
+      -71.88,
+      2.15
+    ],
+    "BaseCarPath_BP37_22789": [
+      -12.78,
+      -57.88,
+      2.15
+    ],
+    "BaseCarPath_BP38_24354": [
+      33.22,
+      -80.88,
+      2.15
+    ],
+    "BaseCarPath_BP4": [
+      146.22,
+      -21.88,
+      2.15
+    ],
+    "BaseCarPath_BP40": [
+      25.22,
+      -80.88,
+      2.15
+    ],
+    "BaseCarPath_BP42": [
+      29.22,
+      -114.88,
+      2.15
+    ],
+    "BaseCarPath_BP43_199": [
+      -34.78,
+      -26.88,
+      2.15
+    ],
+    "BaseCarPath_BP44": [
+      -34.78,
+      -30.88,
+      2.15
+    ],
+    "BaseCarPath_BP45": [
+      -34.78,
+      -34.88,
+      2.15
+    ],
+    "BaseCarPath_BP46": [
+      -195.78,
+      -22.88,
+      2.15
+    ],
+    "BaseCarPath_BP47": [
+      -195.78,
+      -19.88,
+      2.15
+    ],
+    "BaseCarPath_BP48": [
+      -195.78,
+      -15.88,
+      2.15
+    ],
+    "BaseCarPath_BP49": [
+      -81.78,
+      -34.88,
+      2.15
+    ],
+    "BaseCarPath_BP5": [
+      146.22,
+      -18.88,
+      2.15
+    ],
+    "BaseCarPath_BP50": [
+      -80.78,
+      -15.88,
+      2.15
+    ],
+    "BaseCarPath_BP51_16004": [
+      -88.78,
+      -9.88,
+      2.15
+    ],
+    "BaseCarPath_BP58": [
+      17.22,
+      -191.88,
+      2.15
+    ],
+    "BaseCarPath_BP6": [
+      146.22,
+      -14.88,
+      2.15
+    ],
+    "BaseCarPath_BP79_107643": [
+      183.22,
+      -190.88,
+      2.15
+    ],
+    "BaseCarPath_BP7_15677": [
+      118.72,
+      -7.88,
+      2.15
+    ],
+    "BaseCarPath_BP85_122789": [
+      191.22,
+      -170.88,
+      2.15
+    ],
+    "BaseCarPath_BP86": [
+      191.22,
+      -173.88,
+      2.15
+    ],
+    "BaseCarPath_BP89_129830": [
+      -8.78,
+      -70.88,
+      2.15
+    ],
+    "BaseCarPath_BP8_20890": [
+      39.22,
+      78.12,
+      2.15
+    ],
+    "BaseCarPath_BP90_135423": [
+      -195.78,
+      -169.88,
+      2.15
+    ],
+    "BaseCarPath_BP91_138118": [
+      -42.78,
+      -96.88,
+      2.15
+    ],
+    "BaseCarPath_BP92_139222": [
+      -32.78,
+      -93.88,
+      2.15
+    ],
+    "BaseCarPath_BP93_139470": [
+      -74.78,
+      -39.88,
+      2.15
+    ],
+    "BaseCarPath_BP94_37379": [
+      108.52,
+      -103.18,
+      2.15
+    ],
+    "BaseCarPath_BP95_165975": [
+      40.22,
+      -97.88,
+      2.15
+    ],
+    "BaseCarPath_BP96_166649": [
+      114.22,
+      -92.88,
+      2.15
+    ],
+    "BaseCarPath_BP9_26364": [
+      80.72,
+      -22.38,
+      2.15
+    ],
+    "BaseIntersectionLogic_BP11_332": [
+      22.22,
+      77.12,
+      -5.55
+    ],
+    "BaseIntersectionLogic_BP2_131": [
+      179.22,
+      -176.88,
+      -6.55
+    ],
+    "BaseIntersectionLogic_BP33_236": [
+      23.22,
+      -27.88,
+      -10.9
+    ],
+    "BaseIntersectionLogic_BP36": [
+      112.22,
+      -99.88,
+      -12.55
+    ],
+    "BaseIntersectionLogic_BP37": [
+      31.22,
+      -99.88,
+      -12.55
+    ],
+    "BaseIntersectionLogic_BP52": [
+      -88.28,
+      -16.38,
+      -6.95
+    ],
+    "BaseIntersectionLogic_BP53": [
+      -76.48,
+      -36.38,
+      -6.95
+    ],
+    "BaseIntersectionLogic_BP54": [
+      -38.28,
+      -97.38,
+      -6.95
+    ],
+    "BaseIntersectionLogic_BP55": [
+      -83.28,
+      -161.38,
+      -6.95
+    ],
+    "BaseIntersectionLogic_BP56": [
+      -124.28,
+      -176.38,
+      -6.95
+    ],
+    "BaseIntersectionLogic_BP8": [
+      21.22,
+      -199.88,
+      -4.55
+    ],
+    "BaseIntersectionLogic_BP_257": [
+      118.22,
+      -24.88,
+      -12.55
+    ],
+    "BasePedestrianPath_BP100_109643": [
+      199.42,
+      -164.11,
+      1.85
+    ],
+    "BasePedestrianPath_BP101_113199": [
+      110.03,
+      -92.42,
+      0.82
+    ],
+    "BasePedestrianPath_BP102_114271": [
+      78.76,
+      -41.0,
+      1.87
+    ],
+    "BasePedestrianPath_BP103_118078": [
+      5.96,
+      26.99,
+      1.76
+    ],
+    "BasePedestrianPath_BP104_119375": [
+      74.95,
+      -6.96,
+      1.7
+    ],
+    "BasePedestrianPath_BP105_120299": [
+      36.84,
+      67.62,
+      1.88
+    ],
+    "BasePedestrianPath_BP106": [
+      7.18,
+      67.62,
+      1.88
+    ],
+    "BasePedestrianPath_BP107_121472": [
+      77.71,
+      -8.14,
+      1.84
+    ],
+    "BasePedestrianPath_BP108_122183": [
+      110.09,
+      -8.52,
+      1.84
+    ],
+    "BasePedestrianPath_BP109_125145": [
+      37.58,
+      83.2,
+      1.59
+    ],
+    "BasePedestrianPath_BP10_24670": [
+      165.96,
+      -188.3,
+      1.45
+    ],
+    "BasePedestrianPath_BP110_129718": [
+      39.5,
+      -92.04,
+      2.0
+    ],
+    "BasePedestrianPath_BP111": [
+      38.92,
+      -107.43,
+      2.0
+    ],
+    "BasePedestrianPath_BP112_134438": [
+      -85.59,
+      -171.51,
+      1.17
+    ],
+    "BasePedestrianPath_BP113_136638": [
+      6.23,
+      -188.7,
+      1.8
+    ],
+    "BasePedestrianPath_BP11_27155": [
+      166.11,
+      -189.56,
+      1.81
+    ],
+    "BasePedestrianPath_BP13_28489": [
+      -69.28,
+      -41.18,
+      1.95
+    ],
+    "BasePedestrianPath_BP14": [
+      -80.58,
+      -9.68,
+      1.95
+    ],
+    "BasePedestrianPath_BP16_11155": [
+      -95.27,
+      -8.49,
+      1.85
+    ],
+    "BasePedestrianPath_BP18_2136": [
+      36.63,
+      85.02,
+      1.99
+    ],
+    "BasePedestrianPath_BP21_38087": [
+      191.23,
+      -190.56,
+      1.9
+    ],
+    "BasePedestrianPath_BP22": [
+      -198.9,
+      -163.0,
+      1.81
+    ],
+    "BasePedestrianPath_BP25_53327": [
+      -197.78,
+      -178.25,
+      1.78
+    ],
+    "BasePedestrianPath_BP28": [
+      -140.55,
+      -178.9,
+      1.77
+    ],
+    "BasePedestrianPath_BP36_4437": [
+      -95.78,
+      -9.18,
+      1.85
+    ],
+    "BasePedestrianPath_BP39_2057": [
+      -4.45,
+      -74.18,
+      1.8
+    ],
+    "BasePedestrianPath_BP40_4514": [
+      -87.54,
+      -169.98,
+      0.91
+    ],
+    "BasePedestrianPath_BP43_15788": [
+      -81.58,
+      -9.31,
+      1.99
+    ],
+    "BasePedestrianPath_BP44_19929": [
+      7.23,
+      85.29,
+      1.07
+    ],
+    "BasePedestrianPath_BP46_30589": [
+      39.46,
+      199.45,
+      1.95
+    ],
+    "BasePedestrianPath_BP5_12876": [
+      135.62,
+      -10.75,
+      1.76
+    ],
+    "BasePedestrianPath_BP8_106486": [
+      37.22,
+      -91.88,
+      1.85
+    ],
+    "BasePedestrianPath_BP96_105344": [
+      9.19,
+      -80.83,
+      1.8
+    ],
+    "BasePedestrianPath_BP98_107556": [
+      -110.55,
+      -179.7,
+      1.47
+    ],
+    "BasePedestrianPath_BP_34": [
+      133.22,
+      -40.88,
+      1.85
+    ],
+    "CityEnviron_TrafficLight15": [
+      -197.18,
+      -35.18,
+      -0.55
+    ],
+    "CityEnviron_TrafficLight171_2786": [
+      -13.28,
+      -61.38,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight172": [
+      -27.28,
+      -9.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight173": [
+      36.52,
+      24.12,
+      -0.75
+    ],
+    "CityEnviron_TrafficLight174": [
+      76.52,
+      -35.88,
+      -0.75
+    ],
+    "CityEnviron_TrafficLight175": [
+      9.72,
+      -77.38,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight18": [
+      -199.08,
+      -176.88,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight2_446": [
+      131.22,
+      -35.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight3": [
+      112.22,
+      -13.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight4": [
+      113.22,
+      -37.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight42": [
+      13.22,
+      -187.88,
+      -0.85
+    ],
+    "CityEnviron_TrafficLight44": [
+      34.22,
+      -194.88,
+      -0.85
+    ],
+    "CityEnviron_TrafficLight59_3058": [
+      35.72,
+      72.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight5_2695": [
+      165.22,
+      -184.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight6": [
+      183.22,
+      -170.88,
+      -1.15
+    ],
+    "CityEnviron_TrafficLight60": [
+      8.22,
+      72.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight61": [
+      33.22,
+      82.62,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight62": [
+      32.22,
+      65.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight63": [
+      5.22,
+      80.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight64": [
+      35.22,
+      80.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight65": [
+      12.22,
+      65.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight66": [
+      12.22,
+      86.12,
+      -0.65
+    ],
+    "CityEnviron_TrafficLight7": [
+      177.22,
+      -166.88,
+      -1.15
+    ],
+    "CameraDirector": [
+      -3.0,
+      0.0,
+      -2.34
+    ],
+    "CityEnv_PedManager_26": [
+      -9.88,
+      -116.18,
+      -29.85
+    ],
+    "CityEnviron_NPCVehicleManager": [
+      -12.48,
+      -112.48,
+      -29.85
+    ],
+    "SimHUD_2147482513": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "PlayerController_2147482530": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "LandscapeGizmoActiveActor2_3": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "SphereReflectionCapture2": [
+      23.92,
+      -66.98,
+      0.35
+    ],
+    "SphereReflectionCapture3": [
+      23.92,
+      49.22,
+      0.35
+    ],
+    "SphereReflectionCapture4": [
+      23.92,
+      85.12,
+      0.35
+    ],
+    "SphereReflectionCapture5_7": [
+      -22.58,
+      -24.18,
+      -1.65
+    ],
+    "SphereReflectionCapture_1": [
+      23.92,
+      -89.38,
+      0.35
+    ],
+    "Sun": [
+      20.54,
+      -57.67,
+      -73.74
+    ],
+    "Main_CityEnvironment_C_0": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "Industrial_C_0": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "NetworkPlayerStart_1": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "AbstractNavData-Default": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "SimpleFlight": [
+      -0.0,
+      -0.0,
+      1.75
+    ],
+    "AirSimGameMode_2147482552": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "BaseBaseBicyclePathBP100_136": [
+      187.02,
+      174.82,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP104": [
+      113.12,
+      -95.08,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP105_149": [
+      109.82,
+      -105.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP106_152": [
+      38.82,
+      -95.38,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP107_155": [
+      35.02,
+      -80.98,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP108_158": [
+      35.12,
+      -107.88,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP10_10": [
+      -83.88,
+      -36.78,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP11_11": [
+      -73.18,
+      -40.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP122_200": [
+      188.52,
+      -190.58,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP12_12": [
+      -43.38,
+      -98.58,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP13_13": [
+      10.52,
+      31.12,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP14_14": [
+      34.22,
+      198.92,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP152_301": [
+      -75.88,
+      -163.58,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP153_304": [
+      -138.88,
+      -175.48,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP15_15": [
+      33.82,
+      70.72,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP17_17": [
+      6.52,
+      72.62,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP18_18": [
+      -90.88,
+      -9.48,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP19_19": [
+      -81.78,
+      -13.48,
+      2.25
+    ],
+    "BaseBaseBicyclePathBP20_5": [
+      -195.88,
+      -13.38,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP219_2": [
+      69.42,
+      -42.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP21_22": [
+      -196.28,
+      -167.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP220_5": [
+      8.12,
+      -72.08,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP221_8": [
+      -14.28,
+      -57.88,
+      1.75
+    ],
+    "BaseBaseBicyclePathBP222_11": [
+      -24.28,
+      -7.58,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP223_14": [
+      40.52,
+      21.12,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP22_23": [
+      -34.38,
+      -91.98,
+      2.25
+    ],
+    "BaseBaseBicyclePathBP24_8": [
+      -7.58,
+      -73.48,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP25_268": [
+      -114.88,
+      -180.38,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP26": [
+      -83.88,
+      -36.78,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP27": [
+      -73.18,
+      -40.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP28": [
+      -43.38,
+      -98.58,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP29": [
+      10.52,
+      31.12,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP2_2": [
+      115.82,
+      -7.98,
+      1.95
+    ],
+    "BaseBaseBicyclePathBP30": [
+      34.22,
+      198.92,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP31_2": [
+      10.62,
+      84.52,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP32": [
+      38.62,
+      80.62,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP33": [
+      6.52,
+      72.62,
+      2.05
+    ],
+    "BaseBaseBicyclePathBP34": [
+      -90.88,
+      -9.48,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP35": [
+      -81.78,
+      -13.48,
+      2.25
+    ],
+    "BaseBaseBicyclePathBP36_12": [
+      -85.48,
+      -165.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP37": [
+      -196.28,
+      -167.28,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP38": [
+      -34.38,
+      -91.98,
+      2.35
+    ],
+    "BaseBaseBicyclePathBP3_3": [
+      130.02,
+      -12.38,
+      1.95
+    ],
+    "BaseBaseBicyclePathBP4_4": [
+      128.12,
+      -41.58,
+      1.95
+    ],
+    "BaseBaseBicyclePathBP5_5": [
+      107.52,
+      -36.18,
+      1.95
+    ],
+    "BaseBaseBicyclePathBP64_32": [
+      11.22,
+      -190.88,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP8_8": [
+      166.02,
+      -185.68,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP9_9": [
+      -34.08,
+      -36.78,
+      2.15
+    ],
+    "BaseBaseBicyclePathBP_1": [
+      79.22,
+      -12.38,
+      1.95
+    ],
+    "BasePedestrianPath_Crosswalk_BP10_2004": [
+      167.42,
+      -188.18,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP14_3132": [
+      -95.08,
+      -11.28,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP15_3261": [
+      8.02,
+      -190.78,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP17_3556": [
+      -73.38,
+      -160.98,
+      1.85
+    ],
+    "BasePedestrianPath_Crosswalk_BP2": [
+      114.22,
+      -38.88,
+      1.85
+    ],
+    "BasePedestrianPath_Crosswalk_BP3": [
+      13.92,
+      -78.28,
+      2.15
+    ],
+    "BasePedestrianPath_Crosswalk_BP31": [
+      -197.12,
+      -10.42,
+      2.1
+    ],
+    "BasePedestrianPath_Crosswalk_BP32_8335": [
+      -197.87,
+      -176.83,
+      2.16
+    ],
+    "BasePedestrianPath_Crosswalk_BP39_10971": [
+      -134.92,
+      -177.52,
+      2.16
+    ],
+    "BasePedestrianPath_Crosswalk_BP44": [
+      7.92,
+      68.15,
+      1.75
+    ],
+    "BasePedestrianPath_Crosswalk_BP45": [
+      36.04,
+      68.66,
+      1.75
+    ],
+    "BasePedestrianPath_Crosswalk_BP4_205": [
+      -31.48,
+      -40.38,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP5_783": [
+      7.92,
+      27.82,
+      2.15
+    ],
+    "BasePedestrianPath_Crosswalk_BP6_1006": [
+      75.72,
+      -8.78,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP7_1389": [
+      -3.28,
+      -71.88,
+      2.15
+    ],
+    "BasePedestrianPath_Crosswalk_BP8_1629": [
+      36.72,
+      -106.78,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP9_1788": [
+      109.82,
+      -93.98,
+      2.05
+    ],
+    "BasePedestrianPath_Crosswalk_BP_86": [
+      114.22,
+      -10.88,
+      1.85
+    ],
+    "SimModeWorldMultiRotor_2147481926": [
+      -0.01,
+      -0.0,
+      0.0
+    ],
+    "ExternalCamera": [
+      -3.0,
+      -0.0,
+      -0.29
+    ],
+    "BP_PIPCamera_C_2147481902": [
+      0.2,
+      0.43,
+      1.75
+    ],
+    "BP_PIPCamera_C_2147481891": [
+      0.39,
+      0.27,
+      1.75
+    ],
+    "BP_PIPCamera_C_2147481880": [
+      0.3,
+      0.35,
+      1.75
+    ],
+    "BP_PIPCamera_C_2147481869": [
+      -0.3,
+      -0.35,
+      1.75
+    ],
+    "BP_PIPCamera_C_2147481858": [
+      0.0,
+      0.0,
+      1.87
+    ]
+  },
+  "sample_names": [
+    "CameraActor_2147482518",
+    "CameraActor_0",
+    "003_saloon_SM2",
+    "003_saloon_SM3",
+    "003_saloon_SM4",
+    "003_saloon_SM5",
+    "003_saloon_SM50",
+    "003_saloon_SM51",
+    "003_saloon_SM54",
+    "003_saloon_SM6",
+    "003_saloon_SM7",
+    "003_saloon_SM9",
+    "006_hatchback_SM14",
+    "006_hatchback_SM15",
+    "006_hatchback_SM3",
+    "006_hatchback_SM4_45",
+    "006_hatchback_SM5",
+    "006_hatchback_SM7",
+    "009_suv_sm10",
+    "009_suv_sm11",
+    "009_suv_sm2",
+    "009_suv_sm3",
+    "009_suv_sm4",
+    "009_suv_sm41",
+    "009_suv_sm45",
+    "009_suv_sm46",
+    "009_suv_sm47",
+    "009_suv_sm5_83",
+    "009_suv_sm6",
+    "009_suv_sm7",
+    "009_suv_sm8",
+    "009_suv_sm9",
+    "009_suv_sm_8",
+    "011_sedan_SM2",
+    "011_sedan_SM_22",
+    "012_coupe_SM2",
+    "012_coupe_SM3",
+    "012_coupe_SM4",
+    "012_coupe_SM_19",
+    "013_suv_SM2",
+    "013_suv_SM3",
+    "013_suv_SM5_65",
+    "013_suv_SM62",
+    "013_suv_SM64",
+    "013_suv_SM_27",
+    "AirDuct_Cap2",
+    "AirDuct_Cap3",
+    "AirDuct_Cap4",
+    "AirDuct_Cap_153",
+    "Apartment_Cyldr_Tower_23",
+    "Apartment_LShape2",
+    "Apartment_LShape3",
+    "Apartment_LShape4",
+    "Apartment_LShape5",
+    "Apartment_LShape6",
+    "Apartment_LShape_98",
+    "Apartment_On_Stilts_001_44",
+    "Apartment_Square_Tower2_107",
+    "Apartment_Square_Tower3",
+    "Apartment_Square_Tower_32",
+    "Apartment_Triple_Tower",
+    "Apartment_Triple_Tower2",
+    "Apartment_wBalconies2_559",
+    "Apartment_wBalconies3",
+    "Apartment_wBalconies_26",
+    "Bench10_28",
+    "Bench13_664",
+    "Bench2",
+    "Bench3",
+    "Bench4_96",
+    "Bench5",
+    "Bench6",
+    "Bench7_400",
+    "Bench8",
+    "Bench9_25",
+    "Bench_01_358",
+    "Bench_361",
+    "Bench_364",
+    "Bench_367",
+    "Bench_67",
+    "BG_Building_A10",
+    "BG_Building_A11",
+    "BG_Building_A12",
+    "BG_Building_A13",
+    "BG_Building_A2",
+    "BG_Building_A3_8",
+    "BG_Building_A4_73",
+    "BG_Building_A5",
+    "BG_Building_A6",
+    "BG_Building_A7",
+    "BG_Building_A8",
+    "BG_Building_A9",
+    "BG_Building_B10",
+    "BG_Building_B11",
+    "BG_Building_B12",
+    "BG_Building_B13",
+    "BG_Building_B14",
+    "BG_Building_B5",
+    "BG_Building_B8",
+    "BG_Building_B9"
+  ]
+}

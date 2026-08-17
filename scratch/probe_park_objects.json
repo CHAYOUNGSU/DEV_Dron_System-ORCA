@@ -1,0 +1,1173 @@
+{
+  "total_objects": 231,
+  "near_origin_count": 213,
+  "poses": {
+    "CameraActor_2147482536": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "SM_Asphalt_Broken_02_22": [
+      -16.9,
+      -10.8,
+      3.34
+    ],
+    "SM_Asphalt_Broken_3": [
+      -3.17,
+      -9.81,
+      3.35
+    ],
+    "SM_Asphalt_Plane2": [
+      12.99,
+      5.58,
+      3.44
+    ],
+    "SM_Asphalt_Plane3": [
+      2.74,
+      0.8,
+      3.44
+    ],
+    "SM_Asphalt_Plane4": [
+      5.47,
+      8.32,
+      3.44
+    ],
+    "SM_Asphalt_Plane5": [
+      15.73,
+      13.1,
+      3.44
+    ],
+    "SM_Asphalt_Plane6": [
+      18.46,
+      20.62,
+      3.44
+    ],
+    "SM_Asphalt_Plane7": [
+      8.21,
+      15.84,
+      3.44
+    ],
+    "SM_Asphalt_Plane8": [
+      10.95,
+      23.35,
+      3.44
+    ],
+    "SM_Asphalt_Plane_27": [
+      10.25,
+      -1.94,
+      3.44
+    ],
+    "SM_CarouselA_2": [
+      -0.07,
+      17.92,
+      3.64
+    ],
+    "SM_DaisyFan_Base_DaisyFanBase_7": [
+      11.7,
+      10.7,
+      3.44
+    ],
+    "SM_DaisyFan_DaisyFan_13": [
+      12.7,
+      9.7,
+      3.64
+    ],
+    "SM_DaisyStage2": [
+      -14.82,
+      1.96,
+      3.24
+    ],
+    "SM_DaisyStage_2": [
+      -14.76,
+      1.92,
+      3.24
+    ],
+    "SM_DaisySupport_DaisyB2_8": [
+      -14.72,
+      2.06,
+      3.04
+    ],
+    "SM_DaisySupport_DaisyB_2": [
+      -14.72,
+      2.06,
+      3.04
+    ],
+    "SM_Fence2": [
+      19.36,
+      19.03,
+      2.36
+    ],
+    "SM_Fence3": [
+      19.28,
+      17.06,
+      2.69
+    ],
+    "SM_Fence4": [
+      19.2,
+      15.09,
+      3.03
+    ],
+    "SM_Fence5_29": [
+      15.62,
+      5.76,
+      3.44
+    ],
+    "SM_Fence6": [
+      13.98,
+      4.62,
+      3.44
+    ],
+    "SM_Fence_16": [
+      19.44,
+      21.0,
+      2.02
+    ],
+    "SM_FenceLargeCircle_36": [
+      0.27,
+      16.08,
+      3.14
+    ],
+    "SM_FencePole2_26": [
+      13.3,
+      8.1,
+      3.34
+    ],
+    "SM_FencePole3_33": [
+      13.8,
+      2.8,
+      3.24
+    ],
+    "SM_FencePole_23": [
+      18.8,
+      11.8,
+      3.14
+    ],
+    "SM_Ferris_Balcony01_11": [
+      22.2,
+      -9.64,
+      -23.96
+    ],
+    "SM_Ferris_Balcony2": [
+      24.11,
+      -11.25,
+      -23.96
+    ],
+    "SM_Ferris_Buttom_Prefab_Broken_8": [
+      23.18,
+      -10.44,
+      3.04
+    ],
+    "SM_Ferris_Ladder_01_15": [
+      37.49,
+      -24.25,
+      -24.96
+    ],
+    "SM_Ferris_Ladder_10": [
+      22.9,
+      -7.29,
+      -16.78
+    ],
+    "SM_Ferris_Ladder_11": [
+      22.94,
+      -7.14,
+      -15.99
+    ],
+    "SM_Ferris_Ladder_12": [
+      22.97,
+      -6.99,
+      -15.21
+    ],
+    "SM_Ferris_Ladder_13": [
+      23.01,
+      -6.84,
+      -14.42
+    ],
+    "SM_Ferris_Ladder_14": [
+      23.04,
+      -6.69,
+      -13.64
+    ],
+    "SM_Ferris_Ladder_15": [
+      23.08,
+      -6.54,
+      -12.85
+    ],
+    "SM_Ferris_Ladder_16": [
+      23.06,
+      -6.32,
+      -11.62
+    ],
+    "SM_Ferris_Ladder_17": [
+      23.18,
+      -6.07,
+      -10.87
+    ],
+    "SM_Ferris_Ladder_18": [
+      23.3,
+      -5.82,
+      -10.12
+    ],
+    "SM_Ferris_Ladder_19": [
+      23.42,
+      -5.56,
+      -9.38
+    ],
+    "SM_Ferris_Ladder_2": [
+      37.55,
+      -24.22,
+      -24.17
+    ],
+    "SM_Ferris_Ladder_20": [
+      23.55,
+      -5.31,
+      -8.63
+    ],
+    "SM_Ferris_Ladder_21": [
+      23.67,
+      -5.05,
+      -7.88
+    ],
+    "SM_Ferris_Ladder_22": [
+      23.79,
+      -4.8,
+      -7.13
+    ],
+    "SM_Ferris_Ladder_23": [
+      23.91,
+      -4.55,
+      -6.38
+    ],
+    "SM_Ferris_Ladder_24": [
+      24.03,
+      -4.29,
+      -5.63
+    ],
+    "SM_Ferris_Ladder_25": [
+      24.16,
+      -4.04,
+      -4.88
+    ],
+    "SM_Ferris_Ladder_26": [
+      24.28,
+      -3.79,
+      -4.13
+    ],
+    "SM_Ferris_Ladder_27": [
+      24.4,
+      -3.53,
+      -3.38
+    ],
+    "SM_Ferris_Ladder_28": [
+      24.52,
+      -3.28,
+      -2.64
+    ],
+    "SM_Ferris_Ladder_29": [
+      24.64,
+      -3.03,
+      -1.89
+    ],
+    "SM_Ferris_Ladder_3": [
+      22.65,
+      -8.35,
+      -22.27
+    ],
+    "SM_Ferris_Ladder_30": [
+      24.76,
+      -2.77,
+      -1.14
+    ],
+    "SM_Ferris_Ladder_31": [
+      24.89,
+      -2.52,
+      -0.39
+    ],
+    "SM_Ferris_Ladder_4": [
+      22.69,
+      -8.2,
+      -21.49
+    ],
+    "SM_Ferris_Ladder_5": [
+      22.72,
+      -8.05,
+      -20.7
+    ],
+    "SM_Ferris_Ladder_6": [
+      22.76,
+      -7.9,
+      -19.92
+    ],
+    "SM_Ferris_Ladder_7": [
+      22.8,
+      -7.74,
+      -19.13
+    ],
+    "SM_Ferris_Ladder_8": [
+      22.83,
+      -7.59,
+      -18.35
+    ],
+    "SM_Ferris_Ladder_9": [
+      22.87,
+      -7.44,
+      -17.56
+    ],
+    "SM_Ferris_Support2": [
+      26.33,
+      -13.13,
+      3.04
+    ],
+    "SM_Ferris_Support_4": [
+      19.97,
+      -7.8,
+      3.04
+    ],
+    "SM_Flower04_64": [
+      5.4,
+      -3.2,
+      3.54
+    ],
+    "SM_GrassLeaf01_A2": [
+      -19.3,
+      23.7,
+      1.54
+    ],
+    "SM_GrassLeaf01_A_80": [
+      -19.0,
+      23.9,
+      1.54
+    ],
+    "SM_GrassLeaf02_A_67": [
+      5.4,
+      -1.9,
+      3.54
+    ],
+    "SM_Horse2": [
+      -1.66,
+      20.19,
+      1.74
+    ],
+    "SM_Horse3": [
+      1.18,
+      20.49,
+      1.74
+    ],
+    "SM_Horse4": [
+      1.88,
+      16.93,
+      1.52
+    ],
+    "SM_Horse5": [
+      1.68,
+      15.48,
+      1.74
+    ],
+    "SM_Horse6": [
+      -1.29,
+      15.34,
+      1.74
+    ],
+    "SM_Horse_2": [
+      -2.94,
+      17.6,
+      1.74
+    ],
+    "SM_RollerCoasterLines_4": [
+      -22.36,
+      33.86,
+      -9.24
+    ],
+    "SM_Stairs_Metal_01_10": [
+      -4.47,
+      14.84,
+      3.44
+    ],
+    "SM_Stairs_Metal_2": [
+      -4.06,
+      15.13,
+      2.94
+    ],
+    "SM_Stairs_Metal_3": [
+      -3.65,
+      15.42,
+      2.44
+    ],
+    "SM_SupportPole10": [
+      -20.44,
+      8.97,
+      5.44
+    ],
+    "SM_SupportPole11": [
+      -20.44,
+      8.97,
+      1.44
+    ],
+    "SM_SupportPole12": [
+      -20.44,
+      8.97,
+      -2.56
+    ],
+    "SM_SupportPole13": [
+      -27.07,
+      4.43,
+      2.44
+    ],
+    "SM_SupportPole14": [
+      -27.07,
+      4.43,
+      -1.56
+    ],
+    "SM_SupportPole15": [
+      -27.07,
+      4.43,
+      -5.56
+    ],
+    "SM_SupportPole16": [
+      -25.26,
+      3.38,
+      2.44
+    ],
+    "SM_SupportPole17": [
+      -25.26,
+      3.38,
+      -1.56
+    ],
+    "SM_SupportPole18": [
+      -25.26,
+      3.38,
+      -5.56
+    ],
+    "SM_SupportPole19": [
+      6.01,
+      25.37,
+      -2.06
+    ],
+    "SM_SupportPole2": [
+      -14.06,
+      17.01,
+      1.34
+    ],
+    "SM_SupportPole20": [
+      6.01,
+      25.37,
+      -6.06
+    ],
+    "SM_SupportPole21": [
+      6.01,
+      25.37,
+      -10.06
+    ],
+    "SM_SupportPole22": [
+      6.89,
+      23.47,
+      -2.06
+    ],
+    "SM_SupportPole23": [
+      6.89,
+      23.47,
+      -6.06
+    ],
+    "SM_SupportPole24": [
+      6.89,
+      23.47,
+      -10.06
+    ],
+    "SM_SupportPole3": [
+      -14.06,
+      17.01,
+      -2.66
+    ],
+    "SM_SupportPole31": [
+      6.01,
+      25.37,
+      9.94
+    ],
+    "SM_SupportPole32": [
+      6.01,
+      25.37,
+      5.94
+    ],
+    "SM_SupportPole33": [
+      6.01,
+      25.37,
+      1.94
+    ],
+    "SM_SupportPole34": [
+      6.89,
+      23.47,
+      9.94
+    ],
+    "SM_SupportPole35": [
+      6.89,
+      23.47,
+      5.94
+    ],
+    "SM_SupportPole36": [
+      6.89,
+      23.47,
+      1.94
+    ],
+    "SM_SupportPole4": [
+      -12.45,
+      15.66,
+      5.34
+    ],
+    "SM_SupportPole5": [
+      -12.45,
+      15.66,
+      1.34
+    ],
+    "SM_SupportPole6": [
+      -12.45,
+      15.66,
+      -2.66
+    ],
+    "SM_SupportPole7": [
+      -21.79,
+      10.57,
+      5.44
+    ],
+    "SM_SupportPole8": [
+      -21.79,
+      10.57,
+      1.44
+    ],
+    "SM_SupportPole9": [
+      -21.79,
+      10.57,
+      -2.56
+    ],
+    "SM_SupportPole_48": [
+      -14.06,
+      17.01,
+      5.34
+    ],
+    "SM_Tree01_70": [
+      -4.97,
+      -33.97,
+      -1.72
+    ],
+    "SM_Tree02_87": [
+      -28.6,
+      34.8,
+      -1.26
+    ],
+    "SM_Tree2": [
+      67.87,
+      17.02,
+      1.14
+    ],
+    "SM_Tree3_9": [
+      19.4,
+      5.6,
+      2.54
+    ],
+    "SM_Tree4": [
+      -35.6,
+      11.64,
+      2.54
+    ],
+    "SM_Wood_Plank_01_2": [
+      -17.1,
+      -3.5,
+      3.44
+    ],
+    "SM_Wood_Plank_02_5": [
+      -16.3,
+      -7.3,
+      3.44
+    ],
+    "SM_Wood_Plank_10": [
+      -20.17,
+      3.26,
+      2.19
+    ],
+    "SM_Wood_Plank_11": [
+      -19.13,
+      0.75,
+      2.14
+    ],
+    "SM_Wood_Plank_12": [
+      -18.2,
+      5.39,
+      2.19
+    ],
+    "SM_Wood_Plank_13": [
+      -13.59,
+      6.94,
+      2.09
+    ],
+    "SM_Wood_Plank_14": [
+      -13.56,
+      5.61,
+      2.14
+    ],
+    "SM_Wood_Plank_15": [
+      -13.35,
+      7.46,
+      2.19
+    ],
+    "SM_Wood_Plank_16": [
+      -10.95,
+      5.88,
+      2.19
+    ],
+    "SM_Wood_Plank_17": [
+      -18.31,
+      3.22,
+      2.14
+    ],
+    "SM_Wood_Plank_18": [
+      -11.4,
+      5.31,
+      2.09
+    ],
+    "SM_Wood_Plank_20": [
+      1.25,
+      18.4,
+      1.74
+    ],
+    "SM_Wood_Plank_21": [
+      -18.81,
+      5.79,
+      2.19
+    ],
+    "SM_Wood_Plank_23": [
+      -0.32,
+      19.86,
+      1.69
+    ],
+    "SM_Wood_Plank_24": [
+      2.01,
+      17.99,
+      1.74
+    ],
+    "SM_Wood_Plank_25": [
+      -11.32,
+      -1.63,
+      2.19
+    ],
+    "SM_Wood_Plank_26": [
+      -10.86,
+      -2.09,
+      2.09
+    ],
+    "SM_Wood_Plank_27": [
+      -11.4,
+      5.31,
+      2.19
+    ],
+    "SM_Wood_Plank_28": [
+      -0.28,
+      18.93,
+      1.74
+    ],
+    "SM_Wood_Plank_3": [
+      -19.9,
+      0.54,
+      2.14
+    ],
+    "SM_Wood_Plank_30": [
+      -0.36,
+      19.37,
+      1.69
+    ],
+    "SM_Wood_Plank_35": [
+      -11.88,
+      -1.06,
+      2.19
+    ],
+    "SM_Wood_Plank_37": [
+      -13.03,
+      -3.37,
+      2.19
+    ],
+    "SM_Wood_Plank_4": [
+      -19.52,
+      0.64,
+      2.19
+    ],
+    "SM_Wood_Plank_5": [
+      -20.29,
+      0.44,
+      2.19
+    ],
+    "SM_Wood_Plank_6": [
+      -18.65,
+      0.88,
+      2.19
+    ],
+    "SM_Wood_Plank_7": [
+      -19.64,
+      3.08,
+      2.09
+    ],
+    "SM_Wood_Plank_8": [
+      -18.68,
+      3.36,
+      2.19
+    ],
+    "InstancedFoliageActor_1": [
+      -15.6,
+      65.0,
+      270.74
+    ],
+    "PS_FallingLeaves2_5": [
+      16.5,
+      9.0,
+      -4.46
+    ],
+    "PS_FallingLeaves3": [
+      -32.98,
+      -3.33,
+      -5.16
+    ],
+    "PS_FallingLeaves4": [
+      -27.16,
+      29.8,
+      -5.16
+    ],
+    "PS_FallingLeaves5": [
+      -20.3,
+      -27.4,
+      -9.56
+    ],
+    "PS_FallingLeaves6": [
+      20.5,
+      -26.3,
+      -8.66
+    ],
+    "PS_FallingLeaves_2": [
+      -7.3,
+      -24.0,
+      -9.56
+    ],
+    "ParticleEventManager_2147482553": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "PlayerCameraManager_2147482546": [
+      -3.0,
+      0.0,
+      0.68
+    ],
+    "GameplayDebuggerCategoryReplicator_2147482530": [
+      -15.6,
+      65.0,
+      10.14
+    ],
+    "GameplayDebuggerPlayerManager_2147482559": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "FbxScene_ParkDemo_01": [
+      -15.6,
+      65.0,
+      10.14
+    ],
+    "BP_ParkSkySphere02_134": [
+      -11.81,
+      -1.22,
+      3.04
+    ],
+    "BP_FerrisWheel_2601": [
+      23.16,
+      -10.44,
+      -24.51
+    ],
+    "BP_DaisyTop_Rotating_536": [
+      -14.72,
+      2.06,
+      0.54
+    ],
+    "BP_Boats_10021": [
+      -7.79,
+      -18.74,
+      3.34
+    ],
+    "WeatherActor_C_2147482267": [
+      0.0,
+      0.0,
+      2.72
+    ],
+    "MenuActor_C_2147482266": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "GameStateBase_2147482552": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "SkyLight_1": [
+      -24.2,
+      -31.6,
+      3.74
+    ],
+    "ExponentialHeightFog_1": [
+      -17.8,
+      -39.8,
+      4.54
+    ],
+    "GameNetworkManager_2147482551": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "GameSession_2147482554": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "PlayerState_2147482547": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "WorldSettings": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "CameraDirector": [
+      -3.0,
+      0.0,
+      -2.34
+    ],
+    "SimHUD_2147482531": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "PlayerController_2147482548": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "SphereReflectionCapture2": [
+      12.5,
+      6.3,
+      2.34
+    ],
+    "SphereReflectionCapture3": [
+      1.5,
+      -12.3,
+      2.34
+    ],
+    "SphereReflectionCapture4": [
+      -17.3,
+      -1.3,
+      2.34
+    ],
+    "SphereReflectionCapture5": [
+      -15.8,
+      9.8,
+      0.74
+    ],
+    "SphereReflectionCapture_2": [
+      -1.4,
+      13.5,
+      2.34
+    ],
+    "DirectionalLight_3": [
+      20.04,
+      -10.33,
+      0.53
+    ],
+    "PointLight10": [
+      3.94,
+      16.12,
+      -1.88
+    ],
+    "PointLight11": [
+      2.37,
+      14.25,
+      -1.88
+    ],
+    "PointLight12": [
+      0.39,
+      13.52,
+      -1.88
+    ],
+    "PointLight13": [
+      -4.31,
+      17.54,
+      1.32
+    ],
+    "PointLight14": [
+      -3.57,
+      15.56,
+      1.32
+    ],
+    "PointLight15": [
+      -3.98,
+      19.8,
+      1.32
+    ],
+    "PointLight16": [
+      -2.04,
+      14.11,
+      1.32
+    ],
+    "PointLight17": [
+      -2.55,
+      21.42,
+      1.32
+    ],
+    "PointLight18": [
+      -0.6,
+      22.26,
+      1.32
+    ],
+    "PointLight19": [
+      1.78,
+      21.86,
+      1.32
+    ],
+    "PointLight2": [
+      -3.57,
+      15.56,
+      -1.88
+    ],
+    "PointLight20": [
+      3.6,
+      20.48,
+      1.32
+    ],
+    "PointLight21": [
+      4.41,
+      18.22,
+      1.32
+    ],
+    "PointLight22": [
+      3.94,
+      16.12,
+      1.32
+    ],
+    "PointLight23": [
+      2.37,
+      14.25,
+      1.32
+    ],
+    "PointLight24": [
+      0.39,
+      13.52,
+      1.32
+    ],
+    "PointLight3": [
+      -3.98,
+      19.8,
+      -1.88
+    ],
+    "PointLight4": [
+      -2.04,
+      14.11,
+      -1.88
+    ],
+    "PointLight5": [
+      -2.55,
+      21.42,
+      -1.88
+    ],
+    "PointLight6": [
+      -0.6,
+      22.26,
+      -1.88
+    ],
+    "PointLight7": [
+      1.78,
+      21.86,
+      -1.88
+    ],
+    "PointLight8": [
+      3.6,
+      20.48,
+      -1.88
+    ],
+    "PointLight9": [
+      4.41,
+      18.22,
+      -1.88
+    ],
+    "PointLight_1": [
+      -4.31,
+      17.54,
+      -1.88
+    ],
+    "PlayerStart_1": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "AbstractNavData-Default": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "AirSimGameMode_2147482558": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "SimpleFlight": [
+      0.0,
+      0.0,
+      2.72
+    ],
+    "SimModeWorldMultiRotor_2147482529": [
+      0.0,
+      0.0,
+      0.01
+    ],
+    "LightmassImportanceVolume_3": [
+      0.0,
+      0.0,
+      -9.76
+    ],
+    "PostProcessVolume_1": [
+      27.6,
+      -41.2,
+      1.04
+    ],
+    "ExternalCamera": [
+      -3.0,
+      0.0,
+      0.68
+    ],
+    "BP_PIPCamera_C_2147482505": [
+      0.46,
+      0.12,
+      2.72
+    ],
+    "BP_PIPCamera_C_2147482494": [
+      0.46,
+      -0.12,
+      2.72
+    ],
+    "BP_PIPCamera_C_2147482483": [
+      0.46,
+      0.0,
+      2.72
+    ],
+    "BP_PIPCamera_C_2147482472": [
+      -0.46,
+      0.0,
+      2.72
+    ],
+    "BP_PIPCamera_C_2147482461": [
+      0.0,
+      0.0,
+      2.84
+    ],
+    "DefaultPhysicsVolume_2147482561": [
+      -15.6,
+      65.0,
+      10.14
+    ]
+  },
+  "sample_names": [
+    "CameraActor_2147482536",
+    "SM_Asphalt_Broken_02_22",
+    "SM_Asphalt_Broken_3",
+    "SM_Asphalt_Plane2",
+    "SM_Asphalt_Plane3",
+    "SM_Asphalt_Plane4",
+    "SM_Asphalt_Plane5",
+    "SM_Asphalt_Plane6",
+    "SM_Asphalt_Plane7",
+    "SM_Asphalt_Plane8",
+    "SM_Asphalt_Plane_27",
+    "SM_CarouselA_2",
+    "SM_DaisyFan_Base_DaisyFanBase_7",
+    "SM_DaisyFan_DaisyFan_13",
+    "SM_DaisyStage2",
+    "SM_DaisyStage_2",
+    "SM_DaisySupport_DaisyB2_8",
+    "SM_DaisySupport_DaisyB_2",
+    "SM_Fence2",
+    "SM_Fence3",
+    "SM_Fence4",
+    "SM_Fence5_29",
+    "SM_Fence6",
+    "SM_Fence_16",
+    "SM_FenceLargeCircle_36",
+    "SM_FencePole2_26",
+    "SM_FencePole3_33",
+    "SM_FencePole_23",
+    "SM_Ferris_Balcony01_11",
+    "SM_Ferris_Balcony2",
+    "SM_Ferris_Buttom_Prefab_Broken_8",
+    "SM_Ferris_Ladder_01_15",
+    "SM_Ferris_Ladder_10",
+    "SM_Ferris_Ladder_11",
+    "SM_Ferris_Ladder_12",
+    "SM_Ferris_Ladder_13",
+    "SM_Ferris_Ladder_14",
+    "SM_Ferris_Ladder_15",
+    "SM_Ferris_Ladder_16",
+    "SM_Ferris_Ladder_17",
+    "SM_Ferris_Ladder_18",
+    "SM_Ferris_Ladder_19",
+    "SM_Ferris_Ladder_2",
+    "SM_Ferris_Ladder_20",
+    "SM_Ferris_Ladder_21",
+    "SM_Ferris_Ladder_22",
+    "SM_Ferris_Ladder_23",
+    "SM_Ferris_Ladder_24",
+    "SM_Ferris_Ladder_25",
+    "SM_Ferris_Ladder_26",
+    "SM_Ferris_Ladder_27",
+    "SM_Ferris_Ladder_28",
+    "SM_Ferris_Ladder_29",
+    "SM_Ferris_Ladder_3",
+    "SM_Ferris_Ladder_30",
+    "SM_Ferris_Ladder_31",
+    "SM_Ferris_Ladder_4",
+    "SM_Ferris_Ladder_5",
+    "SM_Ferris_Ladder_6",
+    "SM_Ferris_Ladder_7",
+    "SM_Ferris_Ladder_8",
+    "SM_Ferris_Ladder_9",
+    "SM_Ferris_Support2",
+    "SM_Ferris_Support_4",
+    "SM_Flower04_64",
+    "SM_GrassLeaf01_A2",
+    "SM_GrassLeaf01_A_80",
+    "SM_GrassLeaf02_A_67",
+    "SM_Horse2",
+    "SM_Horse3",
+    "SM_Horse4",
+    "SM_Horse5",
+    "SM_Horse6",
+    "SM_Horse_2",
+    "SM_RollerCoasterLines_4",
+    "SM_Stairs_Metal_01_10",
+    "SM_Stairs_Metal_2",
+    "SM_Stairs_Metal_3",
+    "SM_SupportPole10",
+    "SM_SupportPole11",
+    "SM_SupportPole12",
+    "SM_SupportPole13",
+    "SM_SupportPole14",
+    "SM_SupportPole15",
+    "SM_SupportPole16",
+    "SM_SupportPole17",
+    "SM_SupportPole18",
+    "SM_SupportPole19",
+    "SM_SupportPole2",
+    "SM_SupportPole20",
+    "SM_SupportPole21",
+    "SM_SupportPole22",
+    "SM_SupportPole23",
+    "SM_SupportPole24",
+    "SM_SupportPole3",
+    "SM_SupportPole31",
+    "SM_SupportPole32",
+    "SM_SupportPole33",
+    "SM_SupportPole34",
+    "SM_SupportPole35"
+  ]
+}

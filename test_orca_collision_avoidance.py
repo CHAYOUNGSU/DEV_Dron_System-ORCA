@@ -77,6 +77,19 @@ def dist3d(a, b):
     return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2)
 
 
+def wait_for_connected(timeout: float = 60.0) -> bool:
+    t_start = time.time()
+    while time.time() - t_start < timeout:
+        try:
+            res = api_get("/api/simulators")
+            if res.get("connected", False):
+                return True
+        except Exception:
+            pass
+        time.sleep(0.5)
+    return False
+
+
 def main():
     print("=" * 80, flush=True)
     print("[ORCA 충돌 회피 & Following Mode 정밀 스트레스 실측 테스트]", flush=True)
@@ -89,7 +102,6 @@ def main():
     assert wait_for_port(41451, 60.0), "AirSim RPC 포트 오픈 대기 타임아웃"
     time.sleep(2.5)
 
-    # Main control client
     client_ctrl = None
     for attempt in range(10):
         try:

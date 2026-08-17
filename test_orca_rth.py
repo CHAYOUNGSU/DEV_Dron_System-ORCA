@@ -104,6 +104,19 @@ def dist3d(a, b):
     return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2)
 
 
+def wait_for_connected(timeout: float = 60.0) -> bool:
+    t_start = time.time()
+    while time.time() - t_start < timeout:
+        try:
+            res = api_get("/api/simulators")
+            if res.get("connected", False):
+                return True
+        except Exception:
+            pass
+        time.sleep(0.5)
+    return False
+
+
 def main():
     print("=" * 80, flush=True)
     print("[ORCA RTH 공유 control_lock 일원화 & 착륙 안전 오버라이드 실측 테스트]", flush=True)
@@ -114,25 +127,28 @@ def main():
     res = api_post("/api/simulators/launch", {"id": "blocks", "resolution": "1280x720"})
     print(f"  - {res.get('status')}: {res.get('message')}", flush=True)
     assert wait_for_port(41451, 60.0), "AirSim RPC 포트 오픈 대기 타임아웃"
-    time.sleep(2.5)
+    time.sleep(4.0)
 
     client_ctrl = None
-    for attempt in range(10):
+    for attempt in range(15):
         try:
             c = airsim.MultirotorClient(timeout_value=5)
             c.confirmConnection()
-            client_ctrl = c
-            break
+            if len(c.listVehicles()) >= 4:
+                client_ctrl = c
+                break
         except Exception as e:
-            print(f"  - 메인 클라이언트 연결 재시도 {attempt + 1}/10: {e}", flush=True)
-            time.sleep(1.0)
-    assert client_ctrl is not None, "AirSim 메인 제어 클라이언트 연결 실패"
+            pass
+        time.sleep(1.0)
+    if client_ctrl is None:
+        client_ctrl = airsim.MultirotorClient(timeout_value=5)
+        client_ctrl.confirmConnection()
     print(f"  - 감지된 기체: {client_ctrl.listVehicles()}", flush=True)
 
     # 2. Bulk Takeoff
     print("\n[2] 전체 편대 동시 이륙...", flush=True)
     api_post("/api/fleet/takeoff")
-    time.sleep(4.0)
+    time.sleep(6.0)
 
     # =========================================================================
     # SCENARIO 1: Bravo & Charlie Simultaneous RTH (ORCA 3-Leg Collision Avoidance)

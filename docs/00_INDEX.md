@@ -24,8 +24,8 @@
 | 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 완료 |
 | 17 | `17_work_order_static_obstacle_avoidance.md` | 작업지시서 (설계) | Claude | 완료 |
 | 18 | `18_implementation_plan_static_obstacle_avoidance.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 (개정판, 승인) |
-| 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 (구현 진행 중) |
-| 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 대기 |
+| 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (개정판 제출, 검수 요청) |
+| 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 승인 보류 (피드백 반영 완료) |
 
 다음 작업이 시작되면 21번부터 이어서 번호를 매깁니다.
 
