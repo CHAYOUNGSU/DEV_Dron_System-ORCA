@@ -22,6 +22,7 @@
 | 14 | `14_implementation_plan_rth_concurrency_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 |
 | 15 | `15_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (보강 재제출) |
 | 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 |
+| 17 | `17_work_order_static_obstacle_avoidance.md` | 작업지시서 (설계) | Claude | 완료 |
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -59,7 +60,23 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 전부에 적용되었고, 각각 실제 AirSim 환경에서 무충돌·안전 이격·목표
 도달 정확도를 실측 검증받았습니다.
 
-다음 작업이 시작되면 17번부터 이어서 번호를 매깁니다.
+## 작업 #4: 정적 장애물(건물/지형/구조물) 회피 적용
+
+사용자 요청("정적 장애물 회피 기능을 구현해 보고 싶어..")에 따라
+착수. 아래 "최초 조사자료 대비 미착수 항목"의 첫 번째 공백을 메우는
+작업입니다. 세 기존 ORCA 통합 지점(Following Mode/편대 집결/RTH)이
+공유하는 `orca.py`의 `neighbors` 포맷(`{"pos","vel","radius","weight"}`)이
+드론인지 아닌지 구분하지 않는다는 점을 이용해서, `simListSceneObjects()`
++ `simGetObjectPose()`로 연결(맵 전환) 시 1회 정적 장애물 후보를
+캐시하고 `vel=(0,0,0)`, `weight=1.0`(Following Mode의 알파와 동일한
+비상호적 취급)인 이웃으로 세 곳 전부에 편입시키는 "신 시점 정적
+레지스트리" 방식을 지시. LiDAR/거리 센서는 머신 전역 `settings.json`에
+설정이 전혀 없어 이번 범위에서 제외. 씬 오브젝트 필터링 전략과
+안전 반경 값은 구현자가 실제 맵에서 조사 후 근거와 함께 결정하도록
+열린 질문으로 남김(RTH의 "홈 해석" 열린 질문과 동일한 패턴).
+상세: `docs/17_work_order_static_obstacle_avoidance.md`.
+
+**작업계획서(#18) 대기 중.**
 
 ## 최초 조사자료 대비 미착수 항목 (참고용)
 
@@ -67,12 +84,13 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 + 튜닝 프로세스 3단계)와 대조했을 때, 아직 작업지시서로 만들지 않은
 항목들입니다. 우선순위는 다음 작업 착수 시점에 논의합니다.
 
-- **정적 장애물 회피 미지원**: 지금 ORCA는 다른 드론끼리만 서로
-  회피합니다 - 원본 자료의 "Case B(정적 장애물과 충돌)"에 해당하는
-  나무/건물/지형은 전혀 고려하지 않습니다. Blocks 맵에서만 테스트했기
-  때문에 드러나지 않았을 뿐, CityEnviron(빌딩)·LandscapeMountains(지형)·
-  AbandonedPark(놀이기구)에서 Following Mode/편대 집결/RTH를 실제로
-  쓰면 다른 드론은 피하면서 건물에는 그대로 박을 수 있습니다.
+- **정적 장애물 회피 미지원**: 작업 #4로 착수함 (`docs/17_work_order_static_obstacle_avoidance.md`,
+  구현/검수 대기 중). 지금 ORCA는 다른 드론끼리만 서로 회피합니다 -
+  원본 자료의 "Case B(정적 장애물과 충돌)"에 해당하는 나무/건물/지형은
+  전혀 고려하지 않습니다. Blocks 맵에서만 테스트했기 때문에 드러나지
+  않았을 뿐, CityEnviron(빌딩)·LandscapeMountains(지형)·AbandonedPark
+  (놀이기구)에서 Following Mode/편대 집결/RTH를 실제로 쓰면 다른
+  드론은 피하면서 건물에는 그대로 박을 수 있습니다.
 - **동역학 제한(Kinematics/Jerk Limiting) 미구현**: 원본 자료가 명시적으로
   요청했던 "ORCA가 계산한 이상적 속도가 모터의 가속도/저크 한계를
   넘지 않도록 후처리 Rate Limiter 추가"가 아직 없습니다. 시뮬레이션
