@@ -153,6 +153,7 @@ FOLLOW_TICK_INTERVAL_SEC = 0.1
 following_mode_enabled = False
 formation_assemble_in_progress = False
 rth_in_progress = set()
+rth_cancelled = set()
 rth_lock = threading.Lock()
 following_lag_seconds = 2.0
 following_velocity = 3.0
@@ -160,7 +161,7 @@ position_history = {d_id: deque(maxlen=400) for d_id in FOLLOW_HISTORY_DRONES}  
 
 # ORCA Collision Avoidance Parameters
 ORCA_TIME_HORIZON_SEC = 2.0  # Forward lookahead time for velocity obstacles
-ORCA_AGENT_RADIUS_M = 1.5    # Safety collision radius per drone (Combined safety distance = 3.0m)
+ORCA_AGENT_RADIUS_M = 1.6    # Safety collision radius per drone (Combined safety distance = 3.2m)
 ORCA_MAX_SPEED_MPS = 3.0     # Default maximum horizontal speed
 ORCA_MAX_VZ_MPS = 2.0        # Default maximum climb/descent speed
 
@@ -1406,9 +1407,15 @@ async def takeoff(req: DroneActionRequest = None):
     return {"status": "simulated", "message": f"[{tag} 데모] 제자리 수직 이륙 완료 (고도 3m) | {get_telemetry_snapshot(t_id)}"}
 
 def _do_land(target_drone_id: str):
+    with rth_lock:
+        if target_drone_id in rth_in_progress:
+            print(f"[LAND] 🛑 {target_drone_id} RTH 진행 중 착륙 명령 수신 -> RTH 즉시 취소 등록", flush=True)
+            rth_cancelled.add(target_drone_id)
+
     with control_lock:
         ctrl = get_control_client()
         v_name = get_real_vehicle_name(ctrl, target_drone_id)
+        ensure_api_control(ctrl, v_name)
         ctrl.landAsync(vehicle_name=v_name).join()
         ctrl.armDisarm(False, vehicle_name=v_name)
         ctrl.enableApiControl(False, vehicle_name=v_name)
@@ -1442,110 +1449,143 @@ def _do_rth(target_drone_id: str):
             print(f"[RTH] ⚠️ {target_drone_id}는 이미 RTH 진행 중입니다.", flush=True)
             return False
         rth_in_progress.add(target_drone_id)
+        rth_cancelled.discard(target_drone_id)
 
     try:
-        # Create thread-isolated AirSim client to avoid msgpack socket buffer collision across threads
-        ctrl = airsim.MultirotorClient(timeout_value=5)
-        ctrl.confirmConnection()
-
-        v_name = get_real_vehicle_name(ctrl, target_drone_id)
-        ensure_api_control(ctrl, v_name)
-        s = ctrl.getMultirotorState(vehicle_name=v_name)
-        p = s.kinematics_estimated.position
-
         w_off = DRONES_CONFIG[target_drone_id].get("spawn_offset", (0.0, 0.0, 0.0))
         home_wx, home_wy = w_off[0], w_off[1]
 
-        # Helper function for ORCA velocity loop per leg
+        with control_lock:
+            ctrl = get_control_client()
+            v_name = get_real_vehicle_name(ctrl, target_drone_id)
+            ensure_api_control(ctrl, v_name)
+            s = ctrl.getMultirotorState(vehicle_name=v_name)
+            p = s.kinematics_estimated.position
+
+        # Helper function for ORCA velocity loop per leg (Single atomic lock per tick + cancellation check)
         def run_rth_orca_leg(target_wpos, max_speed, max_vz, tol_3d, max_sec, leg_name):
             t_start = time.time()
             tick_dt = FOLLOW_TICK_INTERVAL_SEC
             while time.time() - t_start < max_sec:
-                s_curr = ctrl.getMultirotorState(vehicle_name=v_name)
-                p_curr = s_curr.kinematics_estimated.position
-                v_curr = s_curr.kinematics_estimated.linear_velocity
+                # Check cancellation first before locking
+                with rth_lock:
+                    if target_drone_id in rth_cancelled:
+                        print(f"[RTH] 🛑 [{target_drone_id}] 착륙 명령 개입으로 {leg_name} 비행 루프 즉시 취소/종료", flush=True)
+                        return False
 
-                cur_wpos = (p_curr.x_val + w_off[0], p_curr.y_val + w_off[1], p_curr.z_val + w_off[2])
-                cur_wvel = (v_curr.x_val, v_curr.y_val, v_curr.z_val)
+                # [Single atomic lock block]: read state -> ORCA compute -> write velocity
+                with control_lock:
+                    with rth_lock:
+                        if target_drone_id in rth_cancelled:
+                            return False
 
-                tx, ty, tz = target_wpos
-                dx = tx - cur_wpos[0]
-                dy = ty - cur_wpos[1]
-                dz = tz - cur_wpos[2]
-                dist_2d = math.sqrt(dx**2 + dy**2)
-                dist_3d = math.sqrt(dist_2d**2 + dz**2)
+                    ctrl = get_control_client()
+                    s_curr = ctrl.getMultirotorState(vehicle_name=v_name)
+                    p_curr = s_curr.kinematics_estimated.position
+                    v_curr = s_curr.kinematics_estimated.linear_velocity
 
-                if dist_3d <= tol_3d and (time.time() - t_start > 0.5):
-                    print(f"[RTH] ✅ [{target_drone_id}] {leg_name} 완료 (오차={dist_3d:.2f}m, 소요={time.time()-t_start:.1f}초)", flush=True)
-                    break
+                    cur_wpos = (p_curr.x_val + w_off[0], p_curr.y_val + w_off[1], p_curr.z_val + w_off[2])
+                    cur_wvel = (v_curr.x_val, v_curr.y_val, v_curr.z_val)
 
-                if dist_2d > 0.05:
-                    desired_speed = min(max_speed, dist_2d / 0.8)
-                    pref_vx = (dx / dist_2d) * desired_speed
-                    pref_vy = (dy / dist_2d) * desired_speed
-                else:
-                    pref_vx = 0.0
-                    pref_vy = 0.0
+                    tx, ty, tz = target_wpos
+                    dx = tx - cur_wpos[0]
+                    dy = ty - cur_wpos[1]
+                    dz = tz - cur_wpos[2]
+                    dist_2d = math.sqrt(dx**2 + dy**2)
+                    dist_3d = math.sqrt(dist_2d**2 + dz**2)
 
-                pref_vz = dz / 0.5
+                    if dist_3d <= tol_3d and (time.time() - t_start > 0.5):
+                        print(f"[RTH] ✅ [{target_drone_id}] {leg_name} 완료 (오차={dist_3d:.2f}m, 소요={time.time()-t_start:.1f}초)", flush=True)
+                        return True
 
-                neighbors = []
-                for other_id in DRONES_CONFIG.keys():
-                    if other_id == target_drone_id:
-                        continue
-                    other_t = latest_telemetries.get(other_id)
-                    if not other_t or not other_t.get("connected", False):
-                        continue
-                    neighbors.append({
-                        "pos": (other_t["x"], other_t["y"], other_t["z"]),
-                        "vel": (other_t["vx"], other_t["vy"], other_t["vz"]),
-                        "radius": ORCA_AGENT_RADIUS_M,
-                        "weight": 0.5
-                    })
+                    if dist_2d > 0.05:
+                        desired_speed = min(max_speed, dist_2d / 0.8)
+                        pref_vx = (dx / dist_2d) * desired_speed
+                        pref_vy = (dy / dist_2d) * desired_speed
+                    else:
+                        pref_vx = 0.0
+                        pref_vy = 0.0
 
-                safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
-                    agent_pos=cur_wpos,
-                    agent_vel=cur_wvel,
-                    preferred_vel=(pref_vx, pref_vy, pref_vz),
-                    neighbors=neighbors,
-                    agent_radius=1.7,  # Robust safety margin (3.4m combined) to prevent inertia undershoot
-                    time_horizon=ORCA_TIME_HORIZON_SEC,
-                    max_speed=max_speed,
-                    max_vz=max_vz,
-                    time_step=tick_dt
-                )
+                    pref_vz = dz / 0.5
 
-                ensure_api_control(ctrl, v_name)
-                ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, tick_dt * 1.5, vehicle_name=v_name)
+                    # Adaptive calculation radius: 1.75m during cruise (>2.5m from target) to guarantee physical separation >= 3.2m,
+                    # smoothly adapting to 1.6m when nearing home slot (3.5m inter-drone spacing) for exact landing
+                    calc_radius = 1.75 if dist_2d > 2.5 else 1.6
+
+                    neighbors = []
+                    for other_id in DRONES_CONFIG.keys():
+                        if other_id == target_drone_id:
+                            continue
+                        other_t = latest_telemetries.get(other_id)
+                        if not other_t or not other_t.get("connected", False):
+                            continue
+                        neighbors.append({
+                            "pos": (other_t["x"], other_t["y"], other_t["z"]),
+                            "vel": (other_t["vx"], other_t["vy"], other_t["vz"]),
+                            "radius": calc_radius,
+                            "weight": 0.5
+                        })
+
+                    safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
+                        agent_pos=cur_wpos,
+                        agent_vel=cur_wvel,
+                        preferred_vel=(pref_vx, pref_vy, pref_vz),
+                        neighbors=neighbors,
+                        agent_radius=calc_radius,
+                        time_horizon=ORCA_TIME_HORIZON_SEC,
+                        max_speed=max_speed,
+                        max_vz=max_vz,
+                        time_step=tick_dt
+                    )
+
+                    ensure_api_control(ctrl, v_name)
+                    ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, tick_dt * 1.5, vehicle_name=v_name)
+
+                # Sleep outside the lock so other RTH threads and API calls can acquire control_lock
                 time.sleep(tick_dt)
+            return True
 
         # Leg 1: Safe Climb (15m higher than current position, or at least -15.0m)
         safe_climb_z = min(p.z_val - 15.0, -15.0)
         print(f"[RTH] 🛫 [{target_drone_id}] Leg 1: 안전 고도 상승 시작 (목표 고도: {safe_climb_z:.2f}m)...", flush=True)
         wpos1 = (p.x_val + w_off[0], p.y_val + w_off[1], safe_climb_z)
-        run_rth_orca_leg(wpos1, max_speed=2.0, max_vz=ORCA_MAX_VZ_MPS, tol_3d=0.8, max_sec=12.0, leg_name="Leg 1 상승")
+        if not run_rth_orca_leg(wpos1, max_speed=2.0, max_vz=ORCA_MAX_VZ_MPS, tol_3d=0.8, max_sec=12.0, leg_name="Leg 1 상승"):
+            return False
 
         # Leg 2: Horizontal Return to Own Home (X/Y to home_wx/wy, maintain safe_climb_z)
         print(f"[RTH] 🧭 [{target_drone_id}] Leg 2: 홈 원점 수평 이동 시작 (홈 월드 좌표: {home_wx:.1f}, {home_wy:.1f})...", flush=True)
         wpos2 = (home_wx, home_wy, safe_climb_z)
-        run_rth_orca_leg(wpos2, max_speed=4.0, max_vz=1.0, tol_3d=0.8, max_sec=25.0, leg_name="Leg 2 수평 복귀")
+        if not run_rth_orca_leg(wpos2, max_speed=4.0, max_vz=1.0, tol_3d=0.8, max_sec=25.0, leg_name="Leg 2 수평 복귀"):
+            return False
 
         # Leg 3: Slow Descent to 3m above home point (Z to -3.0m)
         print(f"[RTH] 🛬 [{target_drone_id}] Leg 3: 홈 상공 하강 시작 (목표 고도: 3.0m)...", flush=True)
         wpos3 = (home_wx, home_wy, -3.0)
-        run_rth_orca_leg(wpos3, max_speed=1.5, max_vz=1.5, tol_3d=0.8, max_sec=12.0, leg_name="Leg 3 감속 하강")
+        if not run_rth_orca_leg(wpos3, max_speed=1.5, max_vz=1.5, tol_3d=0.8, max_sec=12.0, leg_name="Leg 3 감속 하강"):
+            return False
 
         # 4. Safe Precision Landing
+        with rth_lock:
+            if target_drone_id in rth_cancelled:
+                print(f"[RTH] 🛑 [{target_drone_id}] 착륙 명령 개입으로 RTH 최종 착륙 단계 건너뜀", flush=True)
+                return False
+
         print(f"[RTH] 🎯 [{target_drone_id}] 정밀 착륙 실행 (landAsync)...", flush=True)
-        ctrl.landAsync(vehicle_name=v_name).join()
-        ctrl.armDisarm(False, vehicle_name=v_name)
-        ctrl.enableApiControl(False, vehicle_name=v_name)
+        with control_lock:
+            with rth_lock:
+                if target_drone_id in rth_cancelled:
+                    return False
+            ctrl = get_control_client()
+            ctrl.landAsync(vehicle_name=v_name).join()
+            ctrl.armDisarm(False, vehicle_name=v_name)
+            ctrl.enableApiControl(False, vehicle_name=v_name)
         print(f"[RTH] 🏠 [{target_drone_id}] RTH 복귀 및 안전 착륙 최종 완료!", flush=True)
         return True
 
     finally:
         with rth_lock:
             rth_in_progress.discard(target_drone_id)
+            rth_cancelled.discard(target_drone_id)
 
 @app.post("/api/rth")
 async def return_to_home(req: DroneActionRequest = None):
@@ -1577,6 +1617,11 @@ async def return_to_home(req: DroneActionRequest = None):
 
 # Reset / Respawn All Drones to Starting Point
 def _do_reset(target_drone_id: str):
+    with rth_lock:
+        if rth_in_progress:
+            print(f"[RESET] 🛑 리셋 명령 수신 -> 모든 진행 중인 RTH 즉시 취소: {rth_in_progress}", flush=True)
+            rth_cancelled.update(rth_in_progress)
+
     with control_lock:
         ctrl = get_control_client()
         ctrl.reset()

@@ -19,8 +19,9 @@
 | 11 | `11_completion_report_rth_orca.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (보강 제출) |
 | 12 | `12_review_result_rth_orca.md` | 검수결과 (독립검수) | Codex | 승인 보류 (재검수 대기 아님 - 재작업 필요) |
 | 13 | `13_work_order_rth_concurrency_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
-| 14 | `14_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
-| 15 | `15_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 대기 |
+| 14 | `14_implementation_plan_rth_concurrency_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 |
+| 15 | `15_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (보강 재제출) |
+| 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 |
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -45,12 +46,20 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 "진짜 동시 실행"은 달성했지만, 그 대가로 이 프로젝트에서 이미 여러 번
 발생했던 "동일 기체에 대한 이중 제어 경로" 위험을 새로 만들어냈습니다
 (알파는 `is_follower_locked` 보호 대상이 아니고, `/api/land` 등 일부
-엔드포인트는 애초에 RTH 진행 여부를 확인하지 않음). Codex 재검수 전에
-발견되어 `docs/13_work_order_rth_concurrency_fix.md`로 재작업
-지시했습니다 - `following_worker()`처럼 공유 클라이언트를 유지하되
-매 제어 틱마다만 짧게 락을 잡는 방식으로 수정할 예정입니다.
+엔드포인트는 애초에 RTH 진행 여부를 확인하지 않음). `docs/13_work_order_rth_concurrency_fix.md`로
+재작업 지시 → `following_worker()`처럼 공유 클라이언트를 유지하되 매
+제어 틱마다 단일 락(읽기+계산+쓰기)만 잡는 방식으로 일원화하고,
+`/api/land`·`/api/reset`이 RTH 중인 기체를 대상으로 호출되면
+`rth_cancelled` 플래그로 RTH를 원자적으로 즉시 취소하는 안전장치까지
+추가로 구현. ORCA 안전 반경도 1.5m→**1.6m**(결합 안전거리 3.2m)로
+상향. **#16에서 최종 승인 완료.**
 
-다음 작업이 시작되면 16번부터 이어서 번호를 매깁니다.
+**작업 #1~#3(Following Mode, 편대 집결, RTH) 전부 승인 완료.**
+`orca.py` 솔버가 다중 기체가 동시에 움직이는 3가지 주요 시나리오
+전부에 적용되었고, 각각 실제 AirSim 환경에서 무충돌·안전 이격·목표
+도달 정확도를 실측 검증받았습니다.
+
+다음 작업이 시작되면 17번부터 이어서 번호를 매깁니다.
 
 ## 최초 조사자료 대비 미착수 항목 (참고용)
 
@@ -69,6 +78,9 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
   넘지 않도록 후처리 Rate Limiter 추가"가 아직 없습니다. 시뮬레이션
   에서는 AirSim SimpleFlight가 어느 정도 매끄럽게 처리해주지만, 실제
   물리 드론으로 이식할 계획이 있다면 필요합니다.
-- **안전 여유 및 다조건 강건성 검증 미흡**: Codex가 #04, #08 검수에서
-  두 번 다 "이격 여유가 타이트하다(0.02m 수준), 다른 맵/풍속/통신
-  지연 조건에서 반복 시험 권고"라고 지적했는데 아직 다뤄지지 않았습니다.
+- **안전 여유 및 다조건 강건성 검증 미흡 (부분 개선)**: RTH 재작업(#13~16)
+  과정에서 `ORCA_AGENT_RADIUS_M`이 1.5m→1.6m(결합 안전거리 3.0m→3.2m)로
+  상향되었고, 이 상수는 Following Mode/편대 집결도 공유하므로 세
+  기능 전부 여유가 더 커졌습니다. 다만 **"다른 맵/풍속/통신 지연
+  조건에서 반복 시험"은 여전히 안 됐습니다** - 지금까지 모든 실측
+  검증이 Blocks 맵 한 곳에서만 이루어졌습니다.
