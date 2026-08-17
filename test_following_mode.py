@@ -33,6 +33,7 @@ SERVER_BASE_URL = "http://127.0.0.1:8000"
 REPORT_PATH = "following_mode_report.json"
 VEHICLES = {"Drone1": "SimpleFlight", "Drone2": "Drone2", "Drone3": "Drone3", "Drone4": "Drone4"}
 LABELS = {"Drone1": "Alpha", "Drone2": "Bravo", "Drone3": "Charlie", "Drone4": "Delta"}
+SPAWN_OFFSETS = {"Drone1": (0.0, 0.0, 0.0), "Drone2": (0.0, 3.5, 0.0), "Drone3": (0.0, 7.0, 0.0), "Drone4": (0.0, 10.5, 0.0)}
 
 
 def api_post(endpoint: str, payload: dict = None) -> dict:
@@ -63,8 +64,19 @@ def wait_for_port(port: int = 41451, timeout: float = 60.0) -> bool:
     return False
 
 
-def dist(a, b):
-    return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
+def wait_for_server_connected(timeout: float = 30.0) -> bool:
+    t_start = time.time()
+    while time.time() - t_start < timeout:
+        try:
+            req = urllib.request.Request(f"{SERVER_BASE_URL}/api/status")
+            with urllib.request.urlopen(req, timeout=2) as res:
+                data = json.loads(res.read().decode('utf-8'))
+                if data.get("connected") is True:
+                    return True
+        except Exception:
+            pass
+        time.sleep(0.5)
+    return False
 
 
 def main():
@@ -72,39 +84,43 @@ def main():
     print("[Following Mode 검증 테스트]", flush=True)
     print("=" * 80, flush=True)
 
+    # 1. Simulator Launch
     print("\n[1] Blocks 시뮬레이터 실행...", flush=True)
     res = api_post("/api/simulators/launch", {"id": "blocks", "resolution": "1280x720"})
     print(f"  - {res.get('status')}: {res.get('message')}", flush=True)
     assert wait_for_port(41451, 60.0), "AirSim RPC 포트 오픈 대기 타임아웃"
-    time.sleep(2.0)
+    time.sleep(2.5)
 
     client = None
     for attempt in range(10):
         try:
-            c = airsim.MultirotorClient()
+            c = airsim.MultirotorClient(timeout_value=5)
             c.confirmConnection()
             client = c
             break
         except Exception as e:
-            print(f"  - 연결 재시도 {attempt + 1}/10: {e}", flush=True)
+            print(f"  - 메인 클라이언트 연결 재시도 {attempt + 1}/10: {e}", flush=True)
             time.sleep(1.0)
     assert client is not None, "AirSim 클라이언트 연결 실패"
-    print(f"  - 감지된 차량: {client.listVehicles()}", flush=True)
+    print(f"  - 감지된 기체: {client.listVehicles()}", flush=True)
 
-    print("\n[2] Alpha 이륙...", flush=True)
-    api_post("/api/takeoff", {"drone_id": "Drone1"})
-    time.sleep(3.0)
+    # 2. Bulk Takeoff
+    print("\n[2] 전체 편대 동시 이륙...", flush=True)
+    api_post("/api/fleet/takeoff")
+    time.sleep(4.0)
 
     print("\n[3] 편대 집결 (알파 호출) - 브라보/찰리/델타를 대형으로 정렬...", flush=True)
     res = api_post("/api/formation/assemble", {"spacing": 8.0, "velocity": 4.0})
     print(f"  - {res.get('status')}: {res.get('message')}", flush=True)
-    time.sleep(6.0)
+    time.sleep(2.0)
 
     positions_before = {}
     for d_id, vname in VEHICLES.items():
         s = client.getMultirotorState(vehicle_name=vname)
         p = s.kinematics_estimated.position
-        positions_before[d_id] = (p.x_val, p.y_val, p.z_val)
+        off = SPAWN_OFFSETS[d_id]
+        positions_before[d_id] = (round(p.x_val + off[0], 2), round(p.y_val + off[1], 2), round(p.z_val + off[2], 2))
+        print(f"  - {LABELS[d_id]} 집결 후 위치(월드): {positions_before[d_id]}", flush=True)
         print(f"  - {LABELS[d_id]}({vname}) 집결 후 위치: ({p.x_val:.1f}, {p.y_val:.1f}, {p.z_val:.1f})", flush=True)
 
     print("\n[4] Following Mode 활성화...", flush=True)

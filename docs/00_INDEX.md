@@ -15,9 +15,12 @@
 | 08 | `08_review_result_formation_assemble_orca.md` | 검수결과 (독립검수) | Codex | 승인 |
 
 | 09 | `09_work_order_rth_orca.md` | 작업지시서 (설계) | Claude | 완료 |
-| 10 | `10_implementation_plan_rth_orca.md` | 작업계획서 (구현 착수 전) | Antigravity | 대기 |
-| 11 | `11_completion_report_rth_orca.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
-| 12 | `12_review_result_rth_orca.md` | 검수결과 (독립검수) | Codex | 대기 |
+| 10 | `10_implementation_plan_rth_orca.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 |
+| 11 | `11_completion_report_rth_orca.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (보강 제출) |
+| 12 | `12_review_result_rth_orca.md` | 검수결과 (독립검수) | Codex | 승인 보류 (재검수 대기 아님 - 재작업 필요) |
+| 13 | `13_work_order_rth_concurrency_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
+| 14 | `14_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
+| 15 | `15_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 대기 |
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -36,4 +39,36 @@ Following Mode ORCA(#01~#04, 승인 완료)와 동일한 `orca.py` 솔버를
 RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 다루는
 작업입니다. 상세: `docs/09_work_order_rth_orca.md`.
 
-다음 작업이 시작되면 13번부터 이어서 번호를 매깁니다.
+**#12에서 승인 보류** (동시 RTH가 실제로는 `control_lock` 장기 점유로
+직렬 실행되어 핵심 요구사항이 검증되지 않음). 이후 제출된 수정판
+(#11 재작성)은 `control_lock`/공유 클라이언트를 아예 우회하는 방식으로
+"진짜 동시 실행"은 달성했지만, 그 대가로 이 프로젝트에서 이미 여러 번
+발생했던 "동일 기체에 대한 이중 제어 경로" 위험을 새로 만들어냈습니다
+(알파는 `is_follower_locked` 보호 대상이 아니고, `/api/land` 등 일부
+엔드포인트는 애초에 RTH 진행 여부를 확인하지 않음). Codex 재검수 전에
+발견되어 `docs/13_work_order_rth_concurrency_fix.md`로 재작업
+지시했습니다 - `following_worker()`처럼 공유 클라이언트를 유지하되
+매 제어 틱마다만 짧게 락을 잡는 방식으로 수정할 예정입니다.
+
+다음 작업이 시작되면 16번부터 이어서 번호를 매깁니다.
+
+## 최초 조사자료 대비 미착수 항목 (참고용)
+
+프로젝트 시작 시 조사했던 원본 자료(ORCA 알고리즘 + `simGetCollisionInfo`
++ 튜닝 프로세스 3단계)와 대조했을 때, 아직 작업지시서로 만들지 않은
+항목들입니다. 우선순위는 다음 작업 착수 시점에 논의합니다.
+
+- **정적 장애물 회피 미지원**: 지금 ORCA는 다른 드론끼리만 서로
+  회피합니다 - 원본 자료의 "Case B(정적 장애물과 충돌)"에 해당하는
+  나무/건물/지형은 전혀 고려하지 않습니다. Blocks 맵에서만 테스트했기
+  때문에 드러나지 않았을 뿐, CityEnviron(빌딩)·LandscapeMountains(지형)·
+  AbandonedPark(놀이기구)에서 Following Mode/편대 집결/RTH를 실제로
+  쓰면 다른 드론은 피하면서 건물에는 그대로 박을 수 있습니다.
+- **동역학 제한(Kinematics/Jerk Limiting) 미구현**: 원본 자료가 명시적으로
+  요청했던 "ORCA가 계산한 이상적 속도가 모터의 가속도/저크 한계를
+  넘지 않도록 후처리 Rate Limiter 추가"가 아직 없습니다. 시뮬레이션
+  에서는 AirSim SimpleFlight가 어느 정도 매끄럽게 처리해주지만, 실제
+  물리 드론으로 이식할 계획이 있다면 필요합니다.
+- **안전 여유 및 다조건 강건성 검증 미흡**: Codex가 #04, #08 검수에서
+  두 번 다 "이격 여유가 타이트하다(0.02m 수준), 다른 맵/풍속/통신
+  지연 조건에서 반복 시험 권고"라고 지적했는데 아직 다뤄지지 않았습니다.

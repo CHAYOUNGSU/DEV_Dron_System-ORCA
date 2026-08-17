@@ -152,6 +152,8 @@ FOLLOW_TICK_INTERVAL_SEC = 0.1
 
 following_mode_enabled = False
 formation_assemble_in_progress = False
+rth_in_progress = set()
+rth_lock = threading.Lock()
 following_lag_seconds = 2.0
 following_velocity = 3.0
 position_history = {d_id: deque(maxlen=400) for d_id in FOLLOW_HISTORY_DRONES}  # (t, x, y, z), ~2min @ 25Hz worst case
@@ -167,8 +169,8 @@ def record_position_history(d_id, x, y, z):
         position_history[d_id].append((time.time(), x, y, z))
 
 def is_follower_locked(drone_id: str) -> bool:
-    """True while Following Mode or Formation Assemble is autopiloting this drone."""
-    return (following_mode_enabled or formation_assemble_in_progress) and drone_id in FOLLOW_CHAIN
+    """True while Following Mode or Formation Assemble or RTH is autopiloting this drone."""
+    return (following_mode_enabled or formation_assemble_in_progress or (drone_id in rth_in_progress)) and drone_id in FOLLOW_CHAIN
 
 def get_lagged_leader_position(leader_id, lag_seconds):
     """Most recent recorded position of leader_id at least lag_seconds old (i.e. 'where the leader was')."""
@@ -1433,32 +1435,117 @@ async def land(req: DroneActionRequest = None):
     latest_telemetries[t_id]["landed_state"] = "Landed"
     return {"status": "simulated", "message": f"[{tag} 데모] 드론 착륙 완료 | {get_telemetry_snapshot(t_id)}"}
 
-# 🏠 RTH (Return To Home for Target Drone)
+# 🏠 RTH (Return To Home for Target Drone with 3-Leg ORCA Collision Avoidance)
 def _do_rth(target_drone_id: str):
-    with control_lock:
-        ctrl = get_control_client()
+    with rth_lock:
+        if target_drone_id in rth_in_progress:
+            print(f"[RTH] ⚠️ {target_drone_id}는 이미 RTH 진행 중입니다.", flush=True)
+            return False
+        rth_in_progress.add(target_drone_id)
+
+    try:
+        # Create thread-isolated AirSim client to avoid msgpack socket buffer collision across threads
+        ctrl = airsim.MultirotorClient(timeout_value=5)
+        ctrl.confirmConnection()
+
         v_name = get_real_vehicle_name(ctrl, target_drone_id)
         ensure_api_control(ctrl, v_name)
+        s = ctrl.getMultirotorState(vehicle_name=v_name)
+        p = s.kinematics_estimated.position
 
-        state = ctrl.getMultirotorState(vehicle_name=v_name)
-        pos = state.kinematics_estimated.position
-        home_x, home_y, _ = DRONES_CONFIG[target_drone_id]["spawn_offset"]
-        
-        # 1. Climb 15m higher than current position
-        safe_climb_z = min(pos.z_val - 15.0, -15.0)
-        ctrl.moveToPositionAsync(pos.x_val, pos.y_val, safe_climb_z, 3.0, vehicle_name=v_name).join()
-        
-        # 2. Cruise horizontally back to Home Origin for this drone
-        ctrl.moveToPositionAsync(home_x, home_y, safe_climb_z, 6.0, vehicle_name=v_name).join()
-        
-        # 3. Slow descent to 3m above home point
-        ctrl.moveToPositionAsync(home_x, home_y, -3.0, 2.0, vehicle_name=v_name).join()
-        
+        w_off = DRONES_CONFIG[target_drone_id].get("spawn_offset", (0.0, 0.0, 0.0))
+        home_wx, home_wy = w_off[0], w_off[1]
+
+        # Helper function for ORCA velocity loop per leg
+        def run_rth_orca_leg(target_wpos, max_speed, max_vz, tol_3d, max_sec, leg_name):
+            t_start = time.time()
+            tick_dt = FOLLOW_TICK_INTERVAL_SEC
+            while time.time() - t_start < max_sec:
+                s_curr = ctrl.getMultirotorState(vehicle_name=v_name)
+                p_curr = s_curr.kinematics_estimated.position
+                v_curr = s_curr.kinematics_estimated.linear_velocity
+
+                cur_wpos = (p_curr.x_val + w_off[0], p_curr.y_val + w_off[1], p_curr.z_val + w_off[2])
+                cur_wvel = (v_curr.x_val, v_curr.y_val, v_curr.z_val)
+
+                tx, ty, tz = target_wpos
+                dx = tx - cur_wpos[0]
+                dy = ty - cur_wpos[1]
+                dz = tz - cur_wpos[2]
+                dist_2d = math.sqrt(dx**2 + dy**2)
+                dist_3d = math.sqrt(dist_2d**2 + dz**2)
+
+                if dist_3d <= tol_3d and (time.time() - t_start > 0.5):
+                    print(f"[RTH] ✅ [{target_drone_id}] {leg_name} 완료 (오차={dist_3d:.2f}m, 소요={time.time()-t_start:.1f}초)", flush=True)
+                    break
+
+                if dist_2d > 0.05:
+                    desired_speed = min(max_speed, dist_2d / 0.8)
+                    pref_vx = (dx / dist_2d) * desired_speed
+                    pref_vy = (dy / dist_2d) * desired_speed
+                else:
+                    pref_vx = 0.0
+                    pref_vy = 0.0
+
+                pref_vz = dz / 0.5
+
+                neighbors = []
+                for other_id in DRONES_CONFIG.keys():
+                    if other_id == target_drone_id:
+                        continue
+                    other_t = latest_telemetries.get(other_id)
+                    if not other_t or not other_t.get("connected", False):
+                        continue
+                    neighbors.append({
+                        "pos": (other_t["x"], other_t["y"], other_t["z"]),
+                        "vel": (other_t["vx"], other_t["vy"], other_t["vz"]),
+                        "radius": ORCA_AGENT_RADIUS_M,
+                        "weight": 0.5
+                    })
+
+                safe_vx, safe_vy, safe_vz = orca.compute_safe_velocity(
+                    agent_pos=cur_wpos,
+                    agent_vel=cur_wvel,
+                    preferred_vel=(pref_vx, pref_vy, pref_vz),
+                    neighbors=neighbors,
+                    agent_radius=1.7,  # Robust safety margin (3.4m combined) to prevent inertia undershoot
+                    time_horizon=ORCA_TIME_HORIZON_SEC,
+                    max_speed=max_speed,
+                    max_vz=max_vz,
+                    time_step=tick_dt
+                )
+
+                ensure_api_control(ctrl, v_name)
+                ctrl.moveByVelocityAsync(safe_vx, safe_vy, safe_vz, tick_dt * 1.5, vehicle_name=v_name)
+                time.sleep(tick_dt)
+
+        # Leg 1: Safe Climb (15m higher than current position, or at least -15.0m)
+        safe_climb_z = min(p.z_val - 15.0, -15.0)
+        print(f"[RTH] 🛫 [{target_drone_id}] Leg 1: 안전 고도 상승 시작 (목표 고도: {safe_climb_z:.2f}m)...", flush=True)
+        wpos1 = (p.x_val + w_off[0], p.y_val + w_off[1], safe_climb_z)
+        run_rth_orca_leg(wpos1, max_speed=2.0, max_vz=ORCA_MAX_VZ_MPS, tol_3d=0.8, max_sec=12.0, leg_name="Leg 1 상승")
+
+        # Leg 2: Horizontal Return to Own Home (X/Y to home_wx/wy, maintain safe_climb_z)
+        print(f"[RTH] 🧭 [{target_drone_id}] Leg 2: 홈 원점 수평 이동 시작 (홈 월드 좌표: {home_wx:.1f}, {home_wy:.1f})...", flush=True)
+        wpos2 = (home_wx, home_wy, safe_climb_z)
+        run_rth_orca_leg(wpos2, max_speed=4.0, max_vz=1.0, tol_3d=0.8, max_sec=25.0, leg_name="Leg 2 수평 복귀")
+
+        # Leg 3: Slow Descent to 3m above home point (Z to -3.0m)
+        print(f"[RTH] 🛬 [{target_drone_id}] Leg 3: 홈 상공 하강 시작 (목표 고도: 3.0m)...", flush=True)
+        wpos3 = (home_wx, home_wy, -3.0)
+        run_rth_orca_leg(wpos3, max_speed=1.5, max_vz=1.5, tol_3d=0.8, max_sec=12.0, leg_name="Leg 3 감속 하강")
+
         # 4. Safe Precision Landing
+        print(f"[RTH] 🎯 [{target_drone_id}] 정밀 착륙 실행 (landAsync)...", flush=True)
         ctrl.landAsync(vehicle_name=v_name).join()
         ctrl.armDisarm(False, vehicle_name=v_name)
         ctrl.enableApiControl(False, vehicle_name=v_name)
+        print(f"[RTH] 🏠 [{target_drone_id}] RTH 복귀 및 안전 착륙 최종 완료!", flush=True)
         return True
+
+    finally:
+        with rth_lock:
+            rth_in_progress.discard(target_drone_id)
 
 @app.post("/api/rth")
 async def return_to_home(req: DroneActionRequest = None):
@@ -1467,7 +1554,7 @@ async def return_to_home(req: DroneActionRequest = None):
     tag = DRONES_CONFIG[t_id]["tag"]
 
     if is_follower_locked(t_id):
-        return {"status": "error", "message": f"[{tag}] Following Mode 중에는 개별 RTH 명령을 보낼 수 없습니다. 먼저 Following Mode를 꺼주세요."}
+        return {"status": "error", "message": f"[{tag}] Following Mode 또는 이미 RTH/기동 중에는 개별 RTH 명령을 보낼 수 없습니다."}
 
     if is_airsim_connected:
         try:
@@ -1475,6 +1562,8 @@ async def return_to_home(req: DroneActionRequest = None):
             if ok:
                 snap_after = get_telemetry_snapshot(t_id)
                 return {"status": "success", "message": f"[{tag}] RTH 자동 복귀 및 안전 착륙 완료. | 이전: {snap_before} -> 현재: {snap_after}"}
+            else:
+                return {"status": "ignored", "message": f"[{tag}] 이미 RTH가 진행 중입니다."}
         except Exception as e:
             return {"status": "error", "message": f"[{tag}] RTH 복귀 실패: {str(e)} | 상태: {snap_before}"}
     
