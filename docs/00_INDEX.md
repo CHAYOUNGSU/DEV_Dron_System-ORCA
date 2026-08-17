@@ -20,9 +20,14 @@
 | 12 | `12_review_result_rth_orca.md` | 검수결과 (독립검수) | Codex | 승인 보류 (재검수 대기 아님 - 재작업 필요) |
 | 13 | `13_work_order_rth_concurrency_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
 | 14 | `14_implementation_plan_rth_concurrency_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 |
-| 15 | `15_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (보강 재제출) |
-| 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 |
+| 15 | `15_completion_report_rth_concurrency_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (최종 승인) |
+| 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 완료 |
 | 17 | `17_work_order_static_obstacle_avoidance.md` | 작업지시서 (설계) | Claude | 완료 |
+| 18 | `18_implementation_plan_static_obstacle_avoidance.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 (개정판, 승인) |
+| 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 (구현 진행 중) |
+| 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 대기 |
+
+다음 작업이 시작되면 21번부터 이어서 번호를 매깁니다.
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -39,31 +44,13 @@ Following Mode ORCA(#01~#04, 승인 완료)와 동일한 `orca.py` 솔버를
 것을 발견해서 (스폰 오프셋을 로컬 좌표인 것처럼 잘못 사용 - 알파를
 제외한 모든 기체가 자기 홈에서 벗어난 위치에 착륙하게 됨), 이 수정과
 RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 다루는
-작업입니다. 상세: `docs/09_work_order_rth_orca.md`.
-
-**#12에서 승인 보류** (동시 RTH가 실제로는 `control_lock` 장기 점유로
-직렬 실행되어 핵심 요구사항이 검증되지 않음). 이후 제출된 수정판
-(#11 재작성)은 `control_lock`/공유 클라이언트를 아예 우회하는 방식으로
-"진짜 동시 실행"은 달성했지만, 그 대가로 이 프로젝트에서 이미 여러 번
-발생했던 "동일 기체에 대한 이중 제어 경로" 위험을 새로 만들어냈습니다
-(알파는 `is_follower_locked` 보호 대상이 아니고, `/api/land` 등 일부
-엔드포인트는 애초에 RTH 진행 여부를 확인하지 않음). `docs/13_work_order_rth_concurrency_fix.md`로
-재작업 지시 → `following_worker()`처럼 공유 클라이언트를 유지하되 매
-제어 틱마다 단일 락(읽기+계산+쓰기)만 잡는 방식으로 일원화하고,
-`/api/land`·`/api/reset`이 RTH 중인 기체를 대상으로 호출되면
-`rth_cancelled` 플래그로 RTH를 원자적으로 즉시 취소하는 안전장치까지
-추가로 구현. ORCA 안전 반경도 1.5m→**1.6m**(결합 안전거리 3.2m)로
-상향. **#16에서 최종 승인 완료.**
-
-**작업 #1~#3(Following Mode, 편대 집결, RTH) 전부 승인 완료.**
-`orca.py` 솔버가 다중 기체가 동시에 움직이는 3가지 주요 시나리오
-전부에 적용되었고, 각각 실제 AirSim 환경에서 무충돌·안전 이격·목표
-도달 정확도를 실측 검증받았습니다.
+작업입니다. 상세: `docs/09_work_order_rth_orca.md` 및 `docs/13_work_order_rth_concurrency_fix.md`.
+**승인 완료 (#16).**
 
 ## 작업 #4: 정적 장애물(건물/지형/구조물) 회피 적용
 
 사용자 요청("정적 장애물 회피 기능을 구현해 보고 싶어..")에 따라
-착수. 아래 "최초 조사자료 대비 미착수 항목"의 첫 번째 공백을 메우는
+착수. "최초 조사자료 대비 미착수 항목"의 첫 번째 공백을 메우는
 작업입니다. 세 기존 ORCA 통합 지점(Following Mode/편대 집결/RTH)이
 공유하는 `orca.py`의 `neighbors` 포맷(`{"pos","vel","radius","weight"}`)이
 드론인지 아닌지 구분하지 않는다는 점을 이용해서, `simListSceneObjects()`
@@ -71,12 +58,19 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 캐시하고 `vel=(0,0,0)`, `weight=1.0`(Following Mode의 알파와 동일한
 비상호적 취급)인 이웃으로 세 곳 전부에 편입시키는 "신 시점 정적
 레지스트리" 방식을 지시. LiDAR/거리 센서는 머신 전역 `settings.json`에
-설정이 전혀 없어 이번 범위에서 제외. 씬 오브젝트 필터링 전략과
-안전 반경 값은 구현자가 실제 맵에서 조사 후 근거와 함께 결정하도록
-열린 질문으로 남김(RTH의 "홈 해석" 열린 질문과 동일한 패턴).
-상세: `docs/17_work_order_static_obstacle_avoidance.md`.
+설정이 전혀 없어 이번 범위에서 제외. 상세: `docs/17_work_order_static_obstacle_avoidance.md`.
 
-**작업계획서(#18) 대기 중.**
+작업계획서(#18) 1차 제출본은 레지스트리 구축 시 어떤 클라이언트/락을
+쓰는지 불명확해 반려(보완 요청) - CityEnviron처럼 오브젝트가 수천 개인
+맵에서 `simGetObjectPose()`를 순차 호출하면 수 초~수십 초가 걸릴 수
+있는데, 이걸 `control_lock`으로 감싸거나 `airsim_worker()` 메인
+루프에서 동기 실행하면 RTH 동시성 버그(#12)나 맵 전환 카메라 멈춤
+버그와 같은 유형의 "장기 블로킹" 문제가 재발할 위험이 있었기 때문.
+개정판은 전용 백그라운드 스레드 + 독립 읽기 전용 소켓 +
+`static_obstacles_lock`을 통한 원자적 캐시 교체로 `control_lock`과
+텔레메트리 루프 어느 쪽도 블로킹하지 않도록 재설계했고, CityEnviron급
+대형 건물에는 "단일 좌표점 + 고정 반경" 모델의 한계가 있음을 명시적으로
+문서화함. **개정판 승인 완료. 구현 진행 대기.**
 
 ## 최초 조사자료 대비 미착수 항목 (참고용)
 
