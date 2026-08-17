@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirSim 4-UAV Fleet Command & Formation Cockpit</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body class="dark-theme">
+    <!-- Top Navigation & System Status Bar -->
+    <header class="app-header">
+        <div class="brand-section">
+            <div class="brand-text">
+                <h1 class="brand-title">AIRSIM 4-UAV FLEET COCKPIT</h1>
+                <span class="brand-subtitle">편대 비행 지휘 관제소 (Alpha Leader & 3 Wingmen Formation Deck)</span>
+            </div>
+        </div>
+
+        <div class="header-status-group">
+            <!-- Alpha Formation Call Button -->
+            <button class="btn btn-formation-call" id="btn-formation-assemble" title="편대장(알파) 호출: 모든 편대기(브라보, 찰리, 델타)가 알파 고도로 모여 일렬 종대 편대를 구성합니다 [단축키: F5]">
+                <span class="btn-text">편대 집결 (알파 호출) [F5]</span>
+            </button>
+
+            <!-- 4-Drone Fleet Selector Switcher -->
+            <div class="drone-fleet-selector" id="drone-fleet-selector">
+                <button class="btn-drone-tab active" data-drone="Drone1" id="btn-drone-1" title="알파 (편대장) 선택 [F1]">
+                    <span class="drone-tab-badge badge-alpha">알파(1)</span>
+                    <span class="drone-tab-status" id="tab-status-drone1">Landed</span>
+                </button>
+                <button class="btn-drone-tab" data-drone="Drone2" id="btn-drone-2" title="브라보 (2호기) 선택 [F2]">
+                    <span class="drone-tab-badge badge-bravo">브라보(2)</span>
+                    <span class="drone-tab-status" id="tab-status-drone2">Landed</span>
+                </button>
+                <button class="btn-drone-tab" data-drone="Drone3" id="btn-drone-3" title="찰리 (3호기) 선택 [F3]">
+                    <span class="drone-tab-badge badge-charlie">찰리(3)</span>
+                    <span class="drone-tab-status" id="tab-status-drone3">Landed</span>
+                </button>
+                <button class="btn-drone-tab" data-drone="Drone4" id="btn-drone-4" title="델타 (4호기) 선택 [F4]">
+                    <span class="drone-tab-badge badge-delta">델타(4)</span>
+                    <span class="drone-tab-status" id="tab-status-drone4">Landed</span>
+                </button>
+            </div>
+
+            <!-- Active Simulator Detection Chip & Switcher Button -->
+            <button class="status-chip sim-selector-btn" id="btn-open-sim-modal" title="시뮬레이터 맵 선택 및 전환">
+                <span class="chip-dot dot-online" id="sim-active-dot"></span>
+                <span class="chip-label" id="sim-active-text">Blocks (기본 훈련장)</span>
+                <span class="sim-switch-badge">맵 변경 ▾</span>
+            </button>
+
+            <div class="status-chip" id="conn-status-chip">
+                <span class="chip-dot dot-offline" id="conn-dot"></span>
+                <span class="chip-label" id="conn-status-text">시뮬레이터 연결 확인 중...</span>
+            </div>
+
+            <div class="status-chip clock-chip">
+                <span class="chip-value" id="live-clock">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main 2-Column Flight Deck Layout -->
+    <main class="cockpit-layout">
+
+        <!-- =========================================================================
+             LEFT MAJOR COLUMN: Large FPV Camera Viewport + Joysticks Directly Below
+             ========================================================================= -->
+        <section class="flight-deck-column">
+
+            <!-- Large FPV Camera Viewport Card -->
+            <div class="grid-card camera-hero-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>FPV Camera Stream (<span id="active-drone-title-tag" class="text-accent-cyan">Drone 1 ALPHA-01 (편대장)</span> 실시간 시점)</h2>
+                    </div>
+                    <div class="camera-badges-group">
+                        <div class="camera-badge drone-target-badge" id="camera-drone-badge">TARGET: ALPHA-01 (LEADER)</div>
+                        <div class="camera-badge" id="camera-fps">FPS: --</div>
+                        <div class="camera-badge latency-badge" id="camera-latency">Latency: -- ms</div>
+                    </div>
+                </div>
+
+                <!-- Big Camera Viewport (520px) with Tactical HUD Canvas -->
+                <div class="camera-viewport hero-viewport" id="camera-viewport-container">
+                    <img id="fpv-stream-img" src="" alt="Live Stream View" style="display: none;">
+
+                    <!-- Advanced Aviation HUD Canvas Overlay -->
+                    <canvas id="hud-canvas" class="hud-canvas"></canvas>
+
+                    <div class="camera-fallback" id="camera-fallback">
+                        <div class="crosshair-hud">
+                            <div class="hud-circle"></div>
+                            <div class="hud-line-h"></div>
+                            <div class="hud-line-v"></div>
+                        </div>
+                        <p class="fallback-text" id="fallback-status-text">AirSim Drone 1 (ALPHA-01) FPV Camera Stream Ready</p>
+                    </div>
+                </div>
+
+                <div class="camera-toolbar">
+                    <button class="btn btn-secondary" id="btn-reconnect">시뮬레이터 재연결</button>
+                    <button class="btn btn-secondary btn-hud-toggle" id="btn-toggle-hud" title="비행 HUD 오버레이 켜기/끄기 (단축키: H)">
+                        <span id="hud-toggle-text">HUD: ON [H]</span>
+                    </button>
+                    <button class="btn btn-formation-call" id="btn-call-formation-bar" title="편대장 알파 호출 및 일렬 종대 포메이션 정렬">
+                        <span>편대 집결 (알파 호출)</span>
+                    </button>
+                    <button class="btn btn-following-toggle" id="btn-following-toggle" title="편대 집결 후 켜면 브라보/찰리/델타가 알파를 순차적으로 뒤따라갑니다 (단축키: F6)">
+                        <span id="following-toggle-text">Following Mode: OFF [F6]</span>
+                    </button>
+                    <button class="btn btn-primary" id="btn-snapshot">고해상도 캡처</button>
+                </div>
+            </div>
+
+            <!-- Dual Joystick & Action Deck (Placed Directly Under FPV Camera) -->
+            <div class="grid-card joysticks-hero-card">
+                <!-- Speed Rate Mode Selector (LOW / MID / HIGH) -->
+                <div class="speed-rate-toolbar">
+                    <div class="target-drone-indicator">
+                        <span class="indicator-label">조종 대상:</span>
+                        <span class="indicator-tag" id="joystick-drone-tag">ALPHA-01 (Drone 1 / 편대장)</span>
+                    </div>
+                    <div class="rate-buttons-group">
+                        <span class="rate-label">속도 감도:</span>
+                        <button class="btn-rate" data-rate="low" id="btn-rate-low"><span class="rate-key">[1]</span> LOW (30%)</button>
+                        <button class="btn-rate active" data-rate="mid" id="btn-rate-mid"><span class="rate-key">[2]</span> MID (60%)</button>
+                        <button class="btn-rate" data-rate="high" id="btn-rate-high"><span class="rate-key">[3]</span> HIGH (100%)</button>
+                    </div>
+                </div>
+
+                <div class="joysticks-integrated-deck">
+                    <!-- Left Stick: Throttle & Yaw -->
+                    <div class="joystick-container">
+                        <div class="joystick-title">
+                            <span>LEFT STICK</span>
+                            <span class="stick-sub">고도 / 회전 (Throttle & Yaw)</span>
+                        </div>
+                        <div class="joystick-pad" id="stick-left-pad">
+                            <div class="stick-axis-v"></div>
+                            <div class="stick-axis-h"></div>
+                            <div class="stick-dir-label dir-up">▲ 상승 [W]</div>
+                            <div class="stick-dir-label dir-down">▼ 하강 [S]</div>
+                            <div class="stick-dir-label dir-left">◀ 좌회전 [A]</div>
+                            <div class="stick-dir-label dir-right">우회전 [D] ▶</div>
+                            <div class="stick-knob" id="stick-left-knob"></div>
+                        </div>
+                        <div class="stick-indicator" id="stick-left-info">Vz: 0.0 m/s | Yaw: 0°/s</div>
+                    </div>
+
+                    <!-- Center Quick Actions Panel -->
+                    <div class="center-actions-panel">
+                        <div class="action-panel-title">FLIGHT ACTIONS (<span id="action-drone-label">Drone 1</span>)</div>
+                        <div class="quick-actions-grid">
+                            <button class="btn btn-action btn-takeoff" id="btn-takeoff">
+                                <span class="btn-text">수직 이륙</span>
+                            </button>
+
+                            <button class="btn btn-action btn-land" id="btn-land">
+                                <span class="btn-text">안전 착륙</span>
+                            </button>
+
+                            <button class="btn btn-action btn-rth" id="btn-rth" title="안전 고도로 상승 후 홈 원점으로 복귀하여 착륙">
+                                <span class="btn-text">RTH 자동복귀</span>
+                            </button>
+
+                            <button class="btn btn-action" id="btn-rotate">
+                                <span class="btn-text">360° 스캔</span>
+                            </button>
+
+                            <button class="btn btn-action btn-danger" id="btn-emergency">
+                                <span class="btn-text">정지 [Space]</span>
+                            </button>
+
+                            <button class="btn btn-action btn-reset" id="btn-reset" title="충돌 또는 끼임 발생 시 전체 편대 위치 초기화">
+                                <span class="btn-text">위치 리셋</span>
+                            </button>
+                        </div>
+
+                        <!-- Fleet Bulk Control Actions -->
+                        <div class="fleet-bulk-actions">
+                            <button class="btn-bulk btn-bulk-takeoff" id="btn-fleet-all-takeoff" title="편대 4대 전 기체 동시 수직 이륙">
+                                전 기체 동시 이륙
+                            </button>
+                            <button class="btn-bulk btn-bulk-land" id="btn-fleet-all-land" title="편대 4대 전 기체 동시 안전 착륙">
+                                전 기체 동시 착륙
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Stick: Pitch & Roll -->
+                    <div class="joystick-container">
+                        <div class="joystick-title">
+                            <span>RIGHT STICK</span>
+                            <span class="stick-sub">전후 / 좌우 (Pitch & Roll)</span>
+                        </div>
+                        <div class="joystick-pad" id="stick-right-pad">
+                            <div class="stick-axis-v"></div>
+                            <div class="stick-axis-h"></div>
+                            <div class="stick-dir-label dir-up">▲ 전진 [↑]</div>
+                            <div class="stick-dir-label dir-down">▼ 후진 [↓]</div>
+                            <div class="stick-dir-label dir-left">◀ 좌이동 [←]</div>
+                            <div class="stick-dir-label dir-right">우이동 [→] ▶</div>
+                            <div class="stick-knob" id="stick-right-knob"></div>
+                        </div>
+                        <div class="stick-indicator" id="stick-right-info">Vx: 0.0 m/s | Vy: 0.0 m/s</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =========================================================================
+             RIGHT SIDEBAR COLUMN: Compact Telemetry & Mission Diagnostics Console
+             ========================================================================= -->
+        <section class="telemetry-sidebar-column">
+
+            <!-- Compact Telemetry Status Card -->
+            <div class="grid-card compact-telemetry-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2><span id="telemetry-drone-title">Drone 1</span> Flight Telemetry Data</h2>
+                    </div>
+                    <div class="system-status-indicator">
+                        <span class="badge-pill pill-neutral" id="armed-badge">DISARMED</span>
+                        <span class="badge-pill pill-neutral" id="api-badge">API: OFF</span>
+                    </div>
+                </div>
+
+                <div class="compact-metrics-grid">
+                    <!-- Metric 1: Altitude -->
+                    <div class="metric-box highlight-box compact-box">
+                        <div class="metric-label">비행 고도 (Altitude)</div>
+                        <div class="metric-value-group">
+                            <span class="metric-number" id="val-altitude">0.0</span>
+                            <span class="metric-unit">m</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="bar-altitude" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 2: Speed -->
+                    <div class="metric-box compact-box">
+                        <div class="metric-label">비행 속도 (Speed)</div>
+                        <div class="metric-value-group">
+                            <span class="metric-number" id="val-speed">0.0</span>
+                            <span class="metric-unit">m/s</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill fill-cyan" id="bar-speed" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 3: Coordinates -->
+                    <div class="metric-box compact-box span-2">
+                        <div class="metric-label">3D Position Coordinates (<span id="coord-drone-tag">ALPHA-01</span>)</div>
+                        <div class="coord-values compact-coord">
+                            <div class="coord-item"><span class="coord-axis">X:</span> <span class="coord-val" id="val-x">0.00</span></div>
+                            <div class="coord-item"><span class="coord-axis">Y:</span> <span class="coord-val" id="val-y">0.00</span></div>
+                            <div class="coord-item"><span class="coord-axis">Z:</span> <span class="coord-val" id="val-z">0.00</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 4: Attitude Angles -->
+                    <div class="metric-box compact-box span-2">
+                        <div class="metric-label">Attitude (Pitch / Roll / Yaw)</div>
+                        <div class="attitude-values compact-att">
+                            <div class="att-item"><span class="att-name">P:</span> <span class="att-val" id="val-pitch">0.0°</span></div>
+                            <div class="att-item"><span class="att-name">R:</span> <span class="att-val" id="val-roll">0.0°</span></div>
+                            <div class="att-item"><span class="att-name">Y:</span> <span class="att-val" id="val-yaw">0.0°</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 5: GPS -->
+                    <div class="metric-box compact-box span-2">
+                        <div class="metric-label">GPS Geolocation</div>
+                        <div class="gps-text compact-gps" id="val-gps">LAT: 47.641468 | LON: -122.140165</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4-UAV Fleet Overview Comparison Card -->
+            <div class="grid-card fleet-overview-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>4-UAV Fleet Overview (4대 편대 현황)</h2>
+                    </div>
+                </div>
+                <div class="fleet-mini-grid fleet-grid-4">
+                    <!-- Drone 1: Alpha (Leader) -->
+                    <div class="fleet-mini-card active card-alpha" id="fleet-card-drone1" title="클릭하여 알파(1호기) 선택">
+                        <div class="fleet-card-top">
+                            <span class="fleet-drone-id color-alpha">ALPHA-01</span>
+                            <span class="fleet-drone-state" id="fleet-state-drone1">Landed</span>
+                        </div>
+                        <div class="fleet-card-mid">
+                            <span>고도: <strong id="fleet-alt-drone1">0.0m</strong></span>
+                            <span>속도: <strong id="fleet-spd-drone1">0.0m/s</strong></span>
+                        </div>
+                        <div class="fleet-card-bot">
+                            <span>좌표: <span id="fleet-pos-drone1">(0.0, 0.0, 0.0)</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Drone 2: Bravo -->
+                    <div class="fleet-mini-card card-bravo" id="fleet-card-drone2" title="클릭하여 브라보(2호기) 선택">
+                        <div class="fleet-card-top">
+                            <span class="fleet-drone-id color-bravo">BRAVO-02</span>
+                            <span class="fleet-drone-state" id="fleet-state-drone2">Landed</span>
+                        </div>
+                        <div class="fleet-card-mid">
+                            <span>고도: <strong id="fleet-alt-drone2">0.0m</strong></span>
+                            <span>속도: <strong id="fleet-spd-drone2">0.0m/s</strong></span>
+                        </div>
+                        <div class="fleet-card-bot">
+                            <span>좌표: <span id="fleet-pos-drone2">(0.0, 3.5, 0.0)</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Drone 3: Charlie -->
+                    <div class="fleet-mini-card card-charlie" id="fleet-card-drone3" title="클릭하여 찰리(3호기) 선택">
+                        <div class="fleet-card-top">
+                            <span class="fleet-drone-id color-charlie">CHARLIE-03</span>
+                            <span class="fleet-drone-state" id="fleet-state-drone3">Landed</span>
+                        </div>
+                        <div class="fleet-card-mid">
+                            <span>고도: <strong id="fleet-alt-drone3">0.0m</strong></span>
+                            <span>속도: <strong id="fleet-spd-drone3">0.0m/s</strong></span>
+                        </div>
+                        <div class="fleet-card-bot">
+                            <span>좌표: <span id="fleet-pos-drone3">(0.0, 7.0, 0.0)</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Drone 4: Delta -->
+                    <div class="fleet-mini-card card-delta" id="fleet-card-drone4" title="클릭하여 델타(4호기) 선택">
+                        <div class="fleet-card-top">
+                            <span class="fleet-drone-id color-delta">DELTA-04</span>
+                            <span class="fleet-drone-state" id="fleet-state-drone4">Landed</span>
+                        </div>
+                        <div class="fleet-card-mid">
+                            <span>고도: <strong id="fleet-alt-drone4">0.0m</strong></span>
+                            <span>속도: <strong id="fleet-spd-drone4">0.0m/s</strong></span>
+                        </div>
+                        <div class="fleet-card-bot">
+                            <span>좌표: <span id="fleet-pos-drone4">(0.0, 10.5, 0.0)</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Flight Logs Console Card -->
+            <div class="grid-card logs-console-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>Mission Flight Logs</h2>
+                    </div>
+                    <div class="log-actions-group">
+                        <button class="btn-log-action" id="btn-copy-log" title="전체 진단 로그 클립보드 복사">복사</button>
+                        <button class="btn-log-action" id="btn-export-log" title="로그 텍스트 파일 다운로드">내보내기</button>
+                        <button class="btn-log-action" id="btn-clear-log" title="로그 콘솔 비우기">지우기</button>
+                    </div>
+                </div>
+
+                <div class="log-terminal" id="log-terminal">
+                    <div class="log-entry log-info">
+                        <span class="log-time">[System]</span>
+                        <span class="log-msg">AirSim 4-UAV Fleet Command & Trail Formation Deck Online.</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Simulator Environment Selector Modal Dialog -->
+    <div class="modal-backdrop" id="sim-modal" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3>AirSim Simulation Environment Selector (시뮬레이터 맵 선택)</h3>
+                </div>
+                <button class="modal-close-btn" id="btn-close-sim-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    전환하고자 하는 시뮬레이션 환경(맵)을 선택하시면, 기존 시뮬레이터를 안전하게 종료하고 선택한 맵을 창 모드로 실행하여 4대 편대 드론을 자동 연동합니다.
+                </p>
+                <div class="sim-cards-grid" id="sim-cards-container">
+                    <!-- Loaded dynamically via app.js -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span>단축키 가이드: <strong>F1~F4</strong> (드론 선택) | <strong>F5</strong> (편대 집결) | <strong>F6</strong> (Following Mode) | <strong>WASD / 방향키</strong> (조종)</span>
+                <div class="modal-footer-actions">
+                    <button class="btn btn-secondary" id="btn-stop-all-sims">시뮬레이터 완전 종료</button>
+                    <button class="btn btn-action" id="btn-cancel-sim-modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <span>AIRSIM 4-UAV FLEET COMMAND &bull; ALPHA (LEADER), BRAVO, CHARLIE, DELTA &bull; TRAIL FORMATION ASSEMBLY</span>
+        <span>SHORTCUTS: <strong>F1~F4</strong> (기체 선택) | <strong>F5</strong> (편대 집결 호출) | <strong>F6</strong> (Following Mode) | <strong>WASD</strong> (상승/하강/회전) | <strong>방향키</strong> (전진/후진/좌우) | <strong>1/2/3</strong> (속도 감도) | <strong>H</strong> (HUD)</span>
+    </footer>
+
+    <script src="app.js?v=6"></script>
+</body>
+</html>
