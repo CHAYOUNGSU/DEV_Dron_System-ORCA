@@ -27,7 +27,7 @@
 | 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (개정판, 구현 자체는 유효) |
 | 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 승인 보류 (1차·2차 모두 - 검증 방법론 문제) |
 | 21 | `21_work_order_static_obstacle_test_methodology_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
-| 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 대기 |
+| 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 승인 (조건부 - 아래 참고) |
 | 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
 
 다음 작업이 시작되면 24번부터 이어서 번호를 매깁니다.
