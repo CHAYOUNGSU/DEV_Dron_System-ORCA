@@ -150,13 +150,16 @@ def run_test():
             print(f"  - 편대 이륙 완료: {takeoff_res.get('message')}")
             time.sleep(4.0)
 
-            # C. Safe Linear Setup: Position Bravo directly behind Alpha along Y-axis
-            # Alpha at World (0, 0, -3.7) -> local (0, 0, -3.7)
-            # Bravo at World (0, -4.0, -3.7) -> local (0, -7.5, -3.7)
-            print("  - Bravo를 Alpha 후방 Y=-4.0m에 초기 배치 (X=0.0m 정렬)...")
+            # C. Safe Linear Setup: Position Alpha at (0, 0, -4.0) and Bravo directly behind Alpha at (0, -4.0, -4.0)
+            # Alpha at World (0, 0, -4.0) -> local (0, 0, -4.0)
+            # Bravo at World (0, -4.0, -4.0) -> local (0, -7.5, -4.0)
+            print("  - Alpha(Z=-4.0m) 및 Bravo(Y=-4.0m, Z=-4.0m) 정면 위험 경로 초기 정렬 (X=0.0m)...")
             setup_client = airsim.MultirotorClient(timeout_value=5)
             setup_client.confirmConnection()
-            setup_client.moveToPositionAsync(0.0, -7.5, -3.7, 3.0, vehicle_name=bravo_vname).join()
+            f_a = setup_client.moveToPositionAsync(0.0, 0.0, -4.0, 2.0, vehicle_name=alpha_vname)
+            f_b = setup_client.moveToPositionAsync(0.0, -7.5, -4.0, 3.0, vehicle_name=bravo_vname)
+            f_a.join()
+            f_b.join()
             time.sleep(1.0)
 
             # D. Query initial collision timestamp
@@ -237,32 +240,29 @@ def run_test():
             sampler_thread.start()
 
             # G. Pilot Alpha via /api/joystick in a smooth continuous loop
-            # Alpha moves forward along Y while clearing carousel outer roof mesh (X ~ +5.5m) to ensure leader completes full Y=35m traversal
-            print("  - 편대장 Alpha 순항 조종 송신 시작 (/api/joystick 0.2초 주기 반복, X=5.5m 우측 통로 주파)...")
+            # Alpha cruises straight along +Y at X=0.0 - NO lateral steering.
+            # The carousel (X=-0.07, Y=17.92) sits almost exactly on this line by design:
+            # this is what makes it a genuine hazard for Bravo's lagged pursuit target.
+            print("  - 편대장 Alpha 위험 경로 직진 조종 송신 시작 (/api/joystick 0.2초 주기 반복, vx=0.0, vy=3.0)...")
             t_cruise_start = time.time()
             total_cruise_duration = 14.0
 
             while time.time() - t_cruise_start < total_cruise_duration:
-                # Check if Alpha reached destination Y >= 32.0m
                 try:
                     s_alpha_chk = query_client.getMultirotorState(vehicle_name=alpha_vname)
                     p_a_cur = s_alpha_chk.kinematics_estimated.position
                     if p_a_cur.y_val >= 32.0:
-                        print(f"  - Alpha 목표 Y(32m) 도달 확인 (현재: X={p_a_cur.x_val:.1f}m, Y={p_a_cur.y_val:.1f}m, 소요={time.time()-t_cruise_start:.1f}초)")
                         break
-                    # Steer towards X=5.5m corridor then go straight along +Y
-                    vx_cmd = 0.8 if p_a_cur.x_val < 5.0 else 0.0
                 except Exception:
-                    vx_cmd = 0.5
+                    pass
 
-                # Issue continuous velocity command to Alpha via Server API
                 api_post("/api/joystick", {
                     "drone_id": "Drone1",
-                    "vx": vx_cmd,              # Steer to X=5.5m clear corridor
-                    "vy": FOLLOWING_SPEED_MPS, # Forward cruise along +Y
+                    "vx": 0.0,     # no lateral steering - stay on the hazard line
+                    "vy": FOLLOWING_SPEED_MPS,
                     "vz": 0.0,
                     "yaw_rate": 0.0,
-                    "duration": 0.5            # 0.5s duration per tick (sent every 0.2s for seamless smooth motion)
+                    "duration": 0.5
                 })
                 time.sleep(0.2)
 
@@ -311,25 +311,28 @@ def run_test():
         print(f"  - 시험군 (ORCA ON) : 최소 이격={test_res['min_obs_dist']:.2f}m (기준 >= {REQUIRED_MIN_OBSTACLE_DIST_M}m) | 횡방향 편차={test_res['max_lateral_dev']:.2f}m (기준 >= {MIN_AVOIDANCE_LATERAL_DEV_M}m) | 충돌={test_res['collision_count']}회")
         print(f"  - 대조군 (ORCA OFF): 최소 이격={ctrl_res['min_obs_dist']:.2f}m | 횡방향 편차={ctrl_res['max_lateral_dev']:.2f}m | 충돌={ctrl_res['collision_count']}회 (충돌점={ctrl_res['first_col_point']})")
 
-        # Criteria
+        COMBINED_SAFETY_RADIUS_M = 3.8  # ORCA_AGENT_RADIUS_M(1.6) + ORCA_STATIC_OBSTACLE_RADIUS_M(2.2)
+
         pass_test_dev = test_res['max_lateral_dev'] >= MIN_AVOIDANCE_LATERAL_DEV_M
         pass_test_dist = test_res['min_obs_dist'] >= REQUIRED_MIN_OBSTACLE_DIST_M
         pass_test_col = test_res['collision_count'] == 0
 
-        # Control group evaluation: Differential comparison proving ORCA avoidance causality
-        # 1) Physical collision in control group (if any), OR
-        # 2) Control group passes significantly closer to obstacle than test group (min_dist_ctrl < min_dist_test), OR
-        # 3) Test group demonstrates significant extra lateral avoidance maneuver compared to control group (lateral_dev_test >= lateral_dev_ctrl + 1.0m)
-        extra_lateral_avoidance = test_res['max_lateral_dev'] - ctrl_res['max_lateral_dev']
-        pass_ctrl_proof = (ctrl_res['collision_count'] >= 1) or (ctrl_res['min_obs_dist'] < test_res['min_obs_dist']) or (extra_lateral_avoidance >= 1.0)
+        # Control group must prove the hazard was real - no OR-fallback to lateral
+        # deviation or relative distance. Either an actual collision event fired,
+        # or the measured closest approach geometrically penetrated the combined
+        # safety radius. Nothing else counts.
+        pass_ctrl_hazard_real = (
+            ctrl_res['collision_count'] >= 1
+            or ctrl_res['min_obs_dist'] < COMBINED_SAFETY_RADIUS_M
+        )
 
         print(f"\n[항목별 세부 판정]")
         print(f"  1. 시험군 ORCA 횡방향 자율 회피 기동 입증 (max lateral dev >= {MIN_AVOIDANCE_LATERAL_DEV_M}m): {'PASS' if pass_test_dev else 'FAIL'} ({test_res['max_lateral_dev']:.2f}m)")
         print(f"  2. 시험군 정적 장애물 최소 안전 이격 유지 (min dist >= {REQUIRED_MIN_OBSTACLE_DIST_M}m): {'PASS' if pass_test_dist else 'FAIL'} ({test_res['min_obs_dist']:.2f}m)")
         print(f"  3. 시험군 무충돌 달성 (collision == 0): {'PASS' if pass_test_col else 'FAIL'} ({test_res['collision_count']} collisions)")
-        print(f"  4. 대조군 대비 ORCA 회피 인과관계 입증 (A/B 편차/이격차): {'PASS' if pass_ctrl_proof else 'FAIL'} (시험군 이격 {test_res['min_obs_dist']:.2f}m vs 대조군 {ctrl_res['min_obs_dist']:.2f}m, ORCA 추가 횡우회 {extra_lateral_avoidance:.2f}m)")
+        print(f"  4. 대조군이 실제로 위험 반경(<{COMBINED_SAFETY_RADIUS_M}m)을 침범했는가: {'PASS' if pass_ctrl_hazard_real else 'FAIL'} (대조군 최소 이격={ctrl_res['min_obs_dist']:.2f}m, 충돌={ctrl_res['collision_count']}회)")
 
-        final_pass = pass_test_dev and pass_test_dist and pass_test_col and pass_ctrl_proof
+        final_pass = pass_test_dev and pass_test_dist and pass_test_col and pass_ctrl_hazard_real
         print(f"\n=> 최종 테스트 판정: {'[PASS] ALL PASSED (실제 서버 경로 정적 장애물 ORCA 회피 완전 검증 성공)' if final_pass else '[FAIL] FAILED'}")
         print("=" * 80)
 

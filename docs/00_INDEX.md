@@ -29,11 +29,11 @@
 | 21 | `21_work_order_static_obstacle_test_methodology_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
 | 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 (승인 획득) |
 | 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (경로 설계 결함 발견) |
-| 24 | `24_review_result_static_obstacle_test_methodology_fix.md` | 검수결과 (독립검수) | Codex | 승인 보류 (위험 경로 미구성) |
 | 25 | `25_work_order_static_obstacle_test_hazard_geometry_fix.md` | 작업지시서 (3차 재작업 - 설계) | Claude | 완료 |
-| 26 | `26_completion_report_static_obstacle_test_hazard_geometry_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
+| 26 | `26_completion_report_static_obstacle_test_hazard_geometry_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (검수 요청) |
+| 27 | `27_review_result_static_obstacle_test_hazard_geometry_fix.md` | 검수결과 (독립검수) | Codex | 대기 |
 
-다음 작업이 시작되면 27번부터 이어서 번호를 매깁니다.
+다음 작업이 시작되면 28번부터 이어서 번호를 매깁니다.
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
