@@ -1612,26 +1612,10 @@ def _do_rth(target_drone_id: str):
                         print(f"[RTH] ✅ [{target_drone_id}] {leg_name} 완료 (오차={dist_3d:.2f}m, 소요={time.time()-t_start:.1f}초)", flush=True)
                         return True
 
-                    # Obstacle bypass sub-goal navigation: if a static obstacle is between agent and target
-                    target_x_nav = tx
-                    target_y_nav = ty
-                    for obs in get_static_obstacle_neighbors(cur_wpos, max_dist=25.0, max_count=1, max_dz=25.0):
-                        ox, oy, oz = obs["pos"]
-                        # Check if obstacle is ahead along current path
-                        if (cur_wpos[1] > oy > ty or cur_wpos[1] < oy < ty) and abs(ox - cur_wpos[0]) < 4.0:
-                            # Bypass side (+X direction)
-                            target_x_nav = ox + 3.8
-                            target_y_nav = oy - (3.0 if ty < cur_wpos[1] else -3.0)
-                            break
-
-                    dx_nav = target_x_nav - cur_wpos[0]
-                    dy_nav = target_y_nav - cur_wpos[1]
-                    dist_2d_nav = math.sqrt(dx_nav**2 + dy_nav**2)
-
-                    if dist_2d_nav > 0.05:
+                    if dist_2d > 0.05:
                         desired_speed = min(max_speed, dist_2d / 0.8)
-                        pref_vx = (dx_nav / dist_2d_nav) * desired_speed
-                        pref_vy = (dy_nav / dist_2d_nav) * desired_speed
+                        pref_vx = (dx / dist_2d) * desired_speed
+                        pref_vy = (dy / dist_2d) * desired_speed
                     else:
                         pref_vx = 0.0
                         pref_vy = 0.0

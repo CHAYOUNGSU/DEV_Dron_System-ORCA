@@ -43,8 +43,39 @@ Alpha는 Following Mode의 ORCA 제어 대상이 아니므로, 보고된 최소�
 3. 테스트에서 회피 동작을 정량 검증한다. 최소 거리·충돌 0회뿐 아니라 직선 선호 경로 대비 횡방향 편차 또는 회피 속도 성분을 기록하고, 가능하면 정적 장애물 이웃 비활성 비교군을 추가한다.
 4. 수정 뒤 AbandonedPark 실환경 시험과 Blocks 회귀 시험을 재실행하고 원시 리포트를 갱신한다.
 
-## 5. 결론
+## 5. 결론 (1차)
 
 정적 장애물 이웃을 세 ORCA 경로에 연결한 구현 자체는 확인됐다. 그러나 제출된 실측은 수동 회피 경로를 사용해 ORCA의 정적 장애물 회피 효과를 입증하지 못하며, 레지스트리 클라이언트 수명 주기도 작업지시서의 안전 제약과 다르다.
 
 따라서 본 작업은 **승인 보류(Not Approved)** 로 판정한다.
+
+---
+
+## 6. 2차 재검수 (Round 2)
+
+- 검수 일시: 2026-08-18
+- 검수 대상: 개정된 `docs/19_completion_report_static_obstacle_avoidance.md`, `orca_static_obstacle_report.json`, 개정된 `orca.py`/`server.py`/`test_orca_static_obstacle.py`
+- 최종 판정: **승인 보류 (Not Approved)**
+
+### 6.1 개선 확인 사항
+
+- `orca.py`의 정적 장애물 전용 우회 편향(장애물이 전방에 있으면 강제로 큰 횡방향 바이어스를 주던 분기)과 `_do_rth()`의 수동 우회 서브목표(`target_x_nav = ox + 3.8`) 코드가 완전히 제거되고, 순수 van den Berg (2011) 표준 2D ORCA 솔버로 복원됨을 확인.
+- 정적 장애물 레지스트리가 `client_telemetry` 기반으로 전환되어(별도 독립 `airsim.MultirotorClient()` 생성 제거) 1차 검수의 P1(레지스트리 클라이언트 수명 주기) 지적은 해소됨.
+- 정적 이웃 입력 시 `safe_vel`에 횡방향 성분이 실제로 발생하는 원시 샘플을 확인.
+- 구문 검사 및 `test_orca_unit.py` 7건 통과.
+
+### 6.2 승인 보류 사유 (신규/재확인)
+
+1. **대조군이 실제로는 충돌하지 않음**: 제출된 원시 JSON은 `control_group_metrics.total_collisions: 0`, `first_collision_point: null`이다. 그런데 완료보고서 4.1절 표는 대조군 결과를 "정면 물리 교차 충돌 발생"이라고 서술한다 - 원시 데이터와 서술이 직접 모순된다.
+2. **테스트의 판정식 자체가 충돌 없이도 통과되도록 작성됨**: `test_orca_static_obstacle.py:305`의 `pass_ctrl = ctrl_collision_count >= 1 or ctrl_min_obs_dist < 1.0`는 실제 `simGetCollisionInfo` 충돌 이벤트가 0회여도 최소 XY 거리가 1.0m 미만이기만 하면(이번 실측은 0.07m) "대조군 충돌 인과관계 입증"으로 PASS 처리한다. 근접 거리와 실제 물리 충돌 이벤트를 하나의 판정으로 섞은 것이 1번 모순의 원인이다.
+3. **실측이 실제 `server.py` 통합 경로를 검증하지 않음**: `test_orca_static_obstacle.py`는 서버의 정적 장애물 레지스트리(`_build_static_obstacles`)나 `get_static_obstacle_neighbors()`, 또는 `following_worker()`/`_do_formation_assemble()`/`_do_rth()` 중 어느 것도 거치지 않는다. 테스트가 직접 `client.simGetObjectPose()`로 회전목마 좌표를 얻어 자체 `obstacle_dict`를 만들고, 자체 20Hz 루프에서 `orca.compute_safe_velocity()`를 직접 호출한 뒤 `client.moveByVelocityAsync()`로 Bravo에 직접 명령을 보낸다(182~213행). 이는 1차 검수 P1(핵심 테스트가 ORCA 정적 장애물 회피를 검증하지 못함)과 동일한 지적이며, 2차 제출에서도 해소되지 않았다.
+
+### 6.3 재검수 조건
+
+1. 대조군의 "충돌" 판정은 오직 `simGetCollisionInfo().has_collided` 실이벤트로만 내리고, 근접 거리를 대체 판정 기준으로 쓰지 않는다. 실제 충돌이 없었다면 보고서에도 있는 그대로 기록한다.
+2. 시험군/대조군 모두 실제 서버의 `following_worker()`/`_do_formation_assemble()`/`_do_rth()` 중 하나를 HTTP API로 트리거해서 실행하고, 정적 장애물 이웃 주입 여부만 서버 측에서 켜고 끌 수 있어야 한다(테스트 스크립트가 `orca.compute_safe_velocity()`를 직접 호출하거나 드론에 직접 속도 명령을 보내면 안 됨).
+3. 위 두 조건을 만족하는 재작업 지시서(`docs/21_work_order_static_obstacle_test_methodology_fix.md`)를 별도로 발행한다.
+
+### 6.4 결론 (2차)
+
+정적 장애물 회피 구현 자체(레지스트리, 3개 통합 지점, 순수 ORCA 솔버 복원)는 유효하다. 그러나 이를 입증하는 실측 방법론이 실제 통합 경로를 우회하고, 대조군 충돌 여부를 근접 거리로 대체 판정하는 문제가 남아있어 **승인 보류(Not Approved)** 를 유지한다.

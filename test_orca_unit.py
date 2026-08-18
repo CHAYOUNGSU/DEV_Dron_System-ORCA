@@ -180,6 +180,66 @@ def test_reciprocal_head_on_simulation():
     assert dist_b <= 0.3, f"Agent B did not reach target: final dist {dist_b}m"
 
 
+def test_static_obstacle_simulation():
+    """
+    Multi-step forward Euler simulation of an agent avoiding a static obstacle (weight=1.0, vel=0).
+    Agent starts at (-6, 0) and wants to move directly to (+6, 0).
+    A static obstacle is placed at (0, 0) with radius 1.5m.
+    Agent has safety radius 1.0m (combined safety threshold = 2.5m).
+    The agent must autonomously steer around the obstacle and reach the target without colliding.
+    """
+    pos = np.array([-6.0, 0.0, -5.0])
+    vel = np.array([0.0, 0.0, 0.0])
+    target = np.array([6.0, 0.0, -5.0])
+
+    agent_radius = 1.0
+    obs_radius = 1.5
+    combined_thresh = agent_radius + obs_radius  # 2.5m
+    obstacle = {"pos": (0.0, 0.0, -5.0), "vel": (0.0, 0.0, 0.0), "radius": obs_radius, "weight": 1.0}
+
+    dt = 0.1
+    min_dist = float('inf')
+    lateral_devs = []
+
+    for step in range(250):
+        direction = target[:2] - pos[:2]
+        dist_target = float(np.linalg.norm(direction))
+        pref = (direction / max(0.01, dist_target)) * min(3.0, dist_target) if dist_target > 0.1 else np.zeros(2)
+
+        safe_v = compute_safe_velocity(
+            agent_pos=pos,
+            agent_vel=vel,
+            preferred_vel=(pref[0], pref[1], 0.0),
+            neighbors=[obstacle],
+            agent_radius=agent_radius,
+            time_horizon=2.0,
+            max_speed=3.0,
+            time_step=dt
+        )
+
+        vel = np.array(safe_v)
+        pos += vel * dt
+
+        d_obs = float(np.linalg.norm(pos[:2] - np.array([0.0, 0.0])))
+        min_dist = min(min_dist, d_obs)
+        lateral_devs.append(abs(pos[1]))
+
+        if dist_target < 0.2:
+            break
+
+    max_lateral_dev = max(lateral_devs)
+    print(f"\n[Static Obstacle Unit Test] Min obstacle distance: {min_dist:.2f}m (Threshold: {combined_thresh}m)")
+    print(f"[Static Obstacle Unit Test] Max lateral deviation: {max_lateral_dev:.2f}m")
+    print(f"[Static Obstacle Unit Test] Final distance to target: {dist_target:.2f}m")
+
+    # Assert separation never dropped below combined radii
+    assert min_dist >= combined_thresh - 0.1, f"Obstacle collision! Min dist {min_dist} < {combined_thresh}"
+    # Assert meaningful lateral avoidance deviation
+    assert max_lateral_dev >= 1.0, f"Insufficient lateral avoidance! Max dev {max_lateral_dev} < 1.0m"
+    # Assert agent reached destination
+    assert dist_target <= 0.3, f"Agent did not reach target: final dist {dist_target}m"
+
+
 if __name__ == "__main__":
     test_linear_program_2d_unconstrained()
     test_linear_program_2d_speed_clamp()
@@ -187,4 +247,5 @@ if __name__ == "__main__":
     test_three_way_crossing()
     test_altitude_z_control()
     test_reciprocal_head_on_simulation()
+    test_static_obstacle_simulation()
     print("All unit tests passed successfully!")

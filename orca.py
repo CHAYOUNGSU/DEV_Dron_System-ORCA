@@ -201,8 +201,6 @@ def compute_orca_halfplanes_2d(
         n_pos_2d = np.array(neighbor["pos"][:2], dtype=float)
         n_vel_2d = np.array(neighbor.get("vel", (0.0, 0.0))[:2], dtype=float)
         n_radius = float(neighbor.get("radius", agent_radius))
-        is_static = float(neighbor.get("weight", 0.5)) >= 0.9
-        cur_inv_th = (1.0 / 0.8) if is_static else inv_time_horizon
 
         rel_pos = n_pos_2d - agent_pos_2d
         rel_vel = agent_vel_2d - n_vel_2d
@@ -212,17 +210,17 @@ def compute_orca_halfplanes_2d(
 
         if dist_sq > combined_radius_sq:
             # No collision yet
-            w = rel_vel - cur_inv_th * rel_pos
+            w = rel_vel - inv_time_horizon * rel_pos
             w_len_sq = float(np.dot(w, w))
             dot_prod_1 = float(np.dot(w, rel_pos))
 
-            if not is_static and dot_prod_1 < 0.0 and dot_prod_1 ** 2 > combined_radius_sq * w_len_sq:
-                # Project on cutoff circle (reciprocal agents only)
+            if dot_prod_1 < 0.0 and dot_prod_1 ** 2 > combined_radius_sq * w_len_sq:
+                # Project on cutoff circle
                 w_len = float(np.sqrt(max(0.0, w_len_sq)))
                 if w_len > EPSILON:
                     unit_w = w / w_len
                     direction = np.array([unit_w[1], -unit_w[0]])
-                    u = (combined_radius * cur_inv_th - w_len) * unit_w
+                    u = (combined_radius * inv_time_horizon - w_len) * unit_w
                 else:
                     direction = np.array([0.0, 1.0])
                     u = np.zeros(2)
@@ -256,8 +254,8 @@ def compute_orca_halfplanes_2d(
                 direction = np.array([0.0, 1.0])
                 u = np.zeros(2)
 
-        # 50:50 reciprocal responsibility: point = agent_vel + 0.5 * u
-        # (If neighbor is an obstacle with weight 1.0, agent takes 1.0 * u)
+        # Reciprocal responsibility: point = agent_vel + weight * u
+        # (For reciprocal agent weight=0.5, for static obstacle weight=1.0)
         weight = float(neighbor.get("weight", 0.5))
         line_point = agent_vel_2d + weight * u
         orca_lines.append(Line(point=line_point, direction=direction))
@@ -308,31 +306,13 @@ def compute_safe_velocity(
         time_step=time_step
     )
 
-    # 2. Add proactive bypass bias for static obstacles directly in the path
+    # 2. Add subtle right-hand rule tie-breaker bias to break collinear deadlocks
     opt_2d = pref_2d.copy()
     if len(neighbors) > 0 and float(np.linalg.norm(pref_2d)) > EPSILON:
         pref_speed = float(np.linalg.norm(pref_2d))
         unit_pref = pref_2d / pref_speed
-        
-        # Check if there is a static obstacle directly ahead (dot product > 0.5 within 12m)
-        has_obstacle_ahead = False
-        for n in neighbors:
-            if float(n.get("weight", 0.5)) >= 0.9:  # Static obstacle (weight=1.0)
-                rel = np.array(n["pos"][:2], dtype=float) - pos_2d
-                d_rel = float(np.linalg.norm(rel))
-                if 0.5 < d_rel < 12.0:
-                    unit_rel = rel / d_rel
-                    if float(np.dot(unit_pref, unit_rel)) > 0.4:  # Obstacle is in forward cone
-                        has_obstacle_ahead = True
-                        break
-
-        if has_obstacle_ahead:
-            # Strong lateral component (+X direction) to actively navigate around the obstacle
-            bypass_vec = np.array([-unit_pref[1], unit_pref[0]]) * (pref_speed * 0.8)
-            opt_2d = pref_2d + bypass_vec
-        else:
-            right_bias = np.array([-unit_pref[1], unit_pref[0]]) * (pref_speed * 0.15)
-            opt_2d = pref_2d + right_bias
+        right_bias = np.array([unit_pref[1], -unit_pref[0]]) * (pref_speed * 0.05)
+        opt_2d = pref_2d + right_bias
 
     # 3. Solve 2D Linear Program
     failed_line, result_2d = linear_program_2d(

@@ -24,10 +24,13 @@
 | 16 | `16_review_result_rth_concurrency_fix.md` | 검수결과 (독립검수) | Codex | 승인 완료 |
 | 17 | `17_work_order_static_obstacle_avoidance.md` | 작업지시서 (설계) | Claude | 완료 |
 | 18 | `18_implementation_plan_static_obstacle_avoidance.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 (개정판, 승인) |
-| 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (개정판 제출, 검수 요청) |
-| 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 승인 보류 (피드백 반영 완료) |
+| 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (개정판, 구현 자체는 유효) |
+| 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 승인 보류 (1차·2차 모두 - 검증 방법론 문제) |
+| 21 | `21_work_order_static_obstacle_test_methodology_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
+| 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 대기 |
+| 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
 
-다음 작업이 시작되면 21번부터 이어서 번호를 매깁니다.
+다음 작업이 시작되면 24번부터 이어서 번호를 매깁니다.
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -70,7 +73,23 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 `static_obstacles_lock`을 통한 원자적 캐시 교체로 `control_lock`과
 텔레메트리 루프 어느 쪽도 블로킹하지 않도록 재설계했고, CityEnviron급
 대형 건물에는 "단일 좌표점 + 고정 반경" 모델의 한계가 있음을 명시적으로
-문서화함. **개정판 승인 완료. 구현 진행 대기.**
+문서화함. **개정판 승인 완료.**
+
+**구현(#19) 자체는 두 차례 검수(#20)를 거치며 실제로 개선됨** - 1차
+지적사항(레지스트리 독립 클라이언트 사용, 테스트가 실제 통합 경로를
+안 거침)에 대해 2차 제출에서 레지스트리 클라이언트 문제와 `orca.py`/
+`_do_rth()`에 남아있던 수동 우회 하드코딩은 제대로 제거됐음. 다만
+**"테스트가 실제 서버 통합 경로를 거치지 않는다"는 1차 지적이 2차
+제출에서도 그대로 남아있었고**, 여기에 더해 대조군 충돌 여부를 실제
+`simGetCollisionInfo` 이벤트가 아니라 근접 거리(OR 조건)로 대체
+판정해서 완료보고서 서술("정면 물리 충돌 발생")이 원시 데이터
+(`total_collisions: 0`)와 모순되는 문제가 새로 발견되어 **2차 연속
+승인 보류**. 구현 자체를 다시 만드는 게 아니라 **검증 방법론만**
+다시 지시하는 재작업지시서 `docs/21_work_order_static_obstacle_test_methodology_fix.md`
+발행 - 테스트를 실제 HTTP API로 서버를 조종하고 읽기 전용으로만
+샘플링하는 방식(기존 `test_orca_rth.py` 패턴과 동일)으로 전면
+재작성하고, 시험군/대조군 A/B 비교용 서버 측 토글
+(`static_obstacles_enabled`, 기본값 `True`)을 추가하도록 지시함.
 
 ## 최초 조사자료 대비 미착수 항목 (참고용)
 
