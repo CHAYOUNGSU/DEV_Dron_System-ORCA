@@ -169,11 +169,15 @@ ORCA_MAX_VZ_MPS = 2.0        # Default maximum climb/descent speed
 ORCA_STATIC_OBSTACLE_RADIUS_M = 2.2  # Safety collision radius per static obstacle
 cached_static_obstacles = []         # [{'name': str, 'pos': (x, y, z), 'radius': float}, ...]
 static_obstacles_lock = threading.Lock()
+static_obstacles_enabled = True       # Test/Debug toggle: default True
 
 def get_static_obstacle_neighbors(agent_wpos, max_dist: float = 12.0, max_count: int = 3, max_dz: float = 8.0) -> list:
     """
     Returns non-reciprocal (weight=1.0, vel=(0,0,0)) ORCA neighbors for static obstacles near the agent.
     """
+    if not static_obstacles_enabled:
+        return []
+
     with static_obstacles_lock:
         obstacles = list(cached_static_obstacles)
 
@@ -1278,6 +1282,13 @@ def get_following_status():
         "velocity": following_velocity,
         "chain": FOLLOW_CHAIN
     }
+
+@app.post("/api/debug/static_obstacles_toggle")
+async def debug_static_obstacles_toggle(req: dict):
+    global static_obstacles_enabled
+    static_obstacles_enabled = bool(req.get("enabled", True))
+    print(f"[OBSTACLES] 🔄 정적 장애물 회피 토글 상태 변경: {static_obstacles_enabled}", flush=True)
+    return {"status": "success", "enabled": static_obstacles_enabled}
 
 # =========================================================================
 # Fleet All Takeoff & All Land APIs

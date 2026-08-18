@@ -27,10 +27,13 @@
 | 19 | `19_completion_report_static_obstacle_avoidance.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (개정판, 구현 자체는 유효) |
 | 20 | `20_review_result_static_obstacle_avoidance.md` | 검수결과 (독립검수) | Codex | 승인 보류 (1차·2차 모두 - 검증 방법론 문제) |
 | 21 | `21_work_order_static_obstacle_test_methodology_fix.md` | 작업지시서 (재작업 - 설계) | Claude | 완료 |
-| 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 승인 (조건부 - 아래 참고) |
-| 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
+| 22 | `22_implementation_plan_static_obstacle_test_methodology_fix.md` | 작업계획서 (구현 착수 전) | Antigravity | 완료 (승인 획득) |
+| 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (경로 설계 결함 발견) |
+| 24 | `24_review_result_static_obstacle_test_methodology_fix.md` | 검수결과 (독립검수) | Codex | 승인 보류 (위험 경로 미구성) |
+| 25 | `25_work_order_static_obstacle_test_hazard_geometry_fix.md` | 작업지시서 (3차 재작업 - 설계) | Claude | 완료 |
+| 26 | `26_completion_report_static_obstacle_test_hazard_geometry_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 대기 |
 
-다음 작업이 시작되면 24번부터 이어서 번호를 매깁니다.
+다음 작업이 시작되면 27번부터 이어서 번호를 매깁니다.
 
 ## 작업 #2: 편대 집결(Formation Assemble) ORCA 적용
 
@@ -90,6 +93,23 @@ RTH 비행 경로(상승/수평복귀/하강)에 대한 ORCA 적용을 함께 �
 샘플링하는 방식(기존 `test_orca_rth.py` 패턴과 동일)으로 전면
 재작성하고, 시험군/대조군 A/B 비교용 서버 측 토글
 (`static_obstacles_enabled`, 기본값 `True`)을 추가하도록 지시함.
+
+**작업계획서(#22) 조건부 승인 후 제출된 완료보고서(#23)도 3차 승인
+보류(#24)** - 검증 아키텍처(서버 API로만 조종, `orca.py` 직접 호출/
+Bravo 직접 제어 없음, 토글 정상 동작) 자체는 이번엔 정확히
+구현됐지만, 실제 비행 경로가 장애물을 피해 X=+5.5m 통로로 우회하도록
+짜여 있어서 대조군조차 결합 안전반경(1.6m+2.2m=3.8m) 안에 들어간
+적이 없었음(실측 최소 거리 5.00m) - 즉 "위험한 상황을 실제로
+만들었는지"를 증명하지 못했고, 판정식도 이 사실을 가릴 수 있는
+OR 조건(근접 거리 차이 또는 횡방향 편차 차이만으로 합격)을 쓰고
+있었음. 이 두 문제 다 이전 문서(#21 3.4절, #22 조건부 승인 시
+재확인)에서 이미 명시적으로 금지했던 것과 같은 유형이라, 이번엔
+재해석 여지를 없애기 위해 경로 코드와 판정식 코드를 거의 그대로
+제공하는 `docs/25_work_order_static_obstacle_test_hazard_geometry_fix.md`를
+발행 - Alpha의 우회 통로 로직을 완전히 삭제하고 X=0.0 직진으로
+고정(장애물이 그 경로상에 있다는 것 자체가 위험 요소), 판정식에서
+OR로 묶인 대체 증거(횡방향 편차 차이 등)를 전부 제거하고 "충돌 또는
+3.8m 미만 근접" 둘 중 하나만 대조군의 위험성 증거로 인정하도록 지시.
 
 ## 최초 조사자료 대비 미착수 항목 (참고용)
 

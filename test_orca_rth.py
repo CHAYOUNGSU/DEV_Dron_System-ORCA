@@ -108,7 +108,7 @@ def wait_for_connected(timeout: float = 60.0) -> bool:
     t_start = time.time()
     while time.time() - t_start < timeout:
         try:
-            res = api_get("/api/simulators")
+            res = api_get("/api/status")
             if res.get("connected", False):
                 return True
         except Exception:
@@ -127,17 +127,24 @@ def main():
     res = api_post("/api/simulators/launch", {"id": "blocks", "resolution": "1280x720"})
     print(f"  - {res.get('status')}: {res.get('message')}", flush=True)
     assert wait_for_port(41451, 60.0), "AirSim RPC 포트 오픈 대기 타임아웃"
-    time.sleep(4.0)
+    time.sleep(3.0)
 
     client_ctrl = None
     for attempt in range(15):
         try:
             c = airsim.MultirotorClient(timeout_value=5)
             c.confirmConnection()
+            vl = c.listVehicles()
+            for d_id, off in [("Drone2", (0.0, 3.5, 0.0)), ("Drone3", (0.0, 7.0, 0.0)), ("Drone4", (0.0, 10.5, 0.0))]:
+                if d_id not in vl:
+                    try:
+                        c.simAddVehicle(d_id, "SimpleFlight", airsim.Pose(airsim.Vector3r(off[0], off[1], off[2]), airsim.to_quaternion(0, 0, 0)))
+                    except Exception:
+                        pass
             if len(c.listVehicles()) >= 4:
                 client_ctrl = c
                 break
-        except Exception as e:
+        except Exception:
             pass
         time.sleep(1.0)
     if client_ctrl is None:
