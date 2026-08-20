@@ -31,7 +31,15 @@
 | 23 | `23_completion_report_static_obstacle_test_methodology_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (경로 설계 결함 발견) |
 | 25 | `25_work_order_static_obstacle_test_hazard_geometry_fix.md` | 작업지시서 (3차 재작업 - 설계) | Claude | 완료 |
 | 26 | `26_completion_report_static_obstacle_test_hazard_geometry_fix.md` | 작업완료 보고서 (구현 후) | Antigravity | 완료 (검수 요청) |
-| 27 | `27_review_result_static_obstacle_test_hazard_geometry_fix.md` | 검수결과 (독립검수) | Codex | 대기 |
+| 27 | (문서 미작성) | 검수결과 (독립검수) | Codex | **사용자 직접 승인** (정식 Codex 검수결과 문서 없이, 사용자가 완료보고서 #26의 실측 내용을 직접 검토하고 진행을 승인함, 2026-08-19) |
+
+**정적 장애물 회피 작업(#17~26) 최종 승인 및 main 저장소 병합
+완료.** 완료보고서 #26이 작업지시서 #25의 요구사항(X=0.0 직진 위험
+경로, OR 조건 없는 단일 판정식, 결합 안전반경 3.8m 실측)을 충족하는
+것을 Claude가 직접 코드로 재확인했고, 정식 Codex 검수결과 문서 작성
+없이 사용자가 최종 승인해서 `DEV_Dron_System`(main) 저장소로
+`git merge`(커밋 `797ef0b`)했습니다. 이후 작업은 이 레포가 아니라
+main 저장소의 `docs/00_INDEX.md`(Flight Plan 로드맵)에서 이어집니다.
 
 다음 작업이 시작되면 28번부터 이어서 번호를 매깁니다.
 
